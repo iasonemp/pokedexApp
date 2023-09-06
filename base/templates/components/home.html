@@ -1,13 +1,8 @@
 {% extends 'main.html' %} {% block content %}
 <h1>this is the home page</h1>
-<h1>Pokemon List</h1>
-<div>{{ response.results.19.name }}</div>
-<ul>
-  {% for pokemon in response.results %}
-  <li>
-    <div>{{ pokemon.name }}</div>
-  </li>
-  {% endfor %}
-</ul>
-<!-- <div>response</div> -->
-{% endblock %}
+<h1>Bulbasaur's Stats</h1>
+<div>{{ pokemonName }}</div>
+<hr />
+{% for i in pokemonTypes %}
+<div>{{ i }}</div>
+{% endfor %} {% endblock %}
