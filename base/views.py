@@ -6,15 +6,17 @@ import requests
 
 def home(request):
     response=requests.get('https://pokeapi.co/api/v2/pokemon/1').json()
-    pokemonDict = {}
-    pokemonDict['id'] = response['id']
-    pokemonDict['name'] = response['name']
     pokemonTypes = []
     for item in response['types']:
         typeName = item['type']['name']
         pokemonTypes.append(typeName)
-    pokemonDict['types'] = pokemonTypes
-    context = {'pokemonName': pokemonDict['name'], 'pokemonTypes': pokemonDict['types']}
+    pokemonDict = {
+    'id': response['id'],
+    'sprite': response['sprites']['other']['dream_world']['front_default'],
+    'name': response['name'],
+    'types': pokemonTypes,
+    }
+    context = {'pokemonDict': pokemonDict}
     return render(request, 'components/home.html', context)
 
 def login(request):
