@@ -1,9 +1,10 @@
 {% extends 'main.html' %} {% block content %}
 <h1>this is the home page</h1>
 <!-- <h1>Bulbasaur's Stats</h1> -->
+{% for pokemonDict in pokemonList %}
 <img src="{{ pokemonDict.sprite }}" />
 <h3>{{ pokemonDict.name }}</h3>
 <hr />
 {% for i in pokemonDict.types %}
 <div>{{ i }}</div>
-{% endfor %} {% endblock %}
+{% endfor %} {% endfor %} {% endblock %}
