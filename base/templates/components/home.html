@@ -4,7 +4,7 @@
   <div class="pokemon-container">
     {% for pokemonDict in pokemonList %}
     <div>
-      <img src="{{ pokemonDict.sprite }}" />
+      <img src="{{ pokemonDict.sprite }}" class="image-size" />
       <h3>{{ pokemonDict.name }}</h3>
       <hr />
       {% for i in pokemonDict.types %}

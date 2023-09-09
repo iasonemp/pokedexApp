@@ -7,3 +7,8 @@ body {
   grid-template-columns: 1fr 1fr 1fr; /* Two equ  al-width columns */
   grid-gap: 10px; /* Adjust the gap between the Pokemon */
 }
+
+.image-size {
+  width: 200px; /* Set your desired width */
+  height: 150px; /* Set your desired height */
+}
