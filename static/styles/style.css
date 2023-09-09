@@ -1,3 +1,9 @@
 body {
   background-color: darkgoldenrod;
 }
+
+.pokemon-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Two equ  al-width columns */
+  grid-gap: 10px; /* Adjust the gap between the Pokemon */
+}

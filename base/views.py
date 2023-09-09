@@ -6,7 +6,7 @@ import requests
 
 def home(request):
     pokemonList = []
-    for i in range(1, 3):
+    for i in range(1, 4):
         response=requests.get(f'https://pokeapi.co/api/v2/pokemon/{i}').json()
         pokemonTypes = []
         for item in response['types']:
