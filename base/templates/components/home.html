@@ -4,8 +4,24 @@
   <div class="pokemon-container">
     {% for pokemonDict in pokemonList %}
     <div>
-      <img src="{{ pokemonDict.sprite }}" class="image-size" />
+      <img
+        src="{{ pokemonDict.sprite }}"
+        class="pokemon-image"
+        onclick="openModal('{{ pokemonDict.name }}')"
+      />
+
+      <!-- Modal container -->
+      <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <h2>hi</h2>
+          <!-- Add more details here -->
+        </div>
+      </div>
+
       <h3>{{ pokemonDict.name }}</h3>
+
       <hr />
       {% for i in pokemonDict.types %}
       <div>{{ i }}</div>
