@@ -9,7 +9,8 @@
         class="pokemon-image"
         onclick="openModal('{{ pokemonDict.name }}')"
       />
-
+      <div>Evolutions</div>
+      <div>{% for evo in pokemonDict.evolutions %} {{evo}} {% endfor %}</div>
       <!-- Modal container -->
       <div id="myModal" class="modal">
         <!-- Modal content -->
