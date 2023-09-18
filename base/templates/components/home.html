@@ -7,16 +7,25 @@
       <img
         src="{{ pokemonDict.sprite }}"
         class="pokemon-image"
-        onclick="openModal('{{ pokemonDict.name }}')"
+        onclick="openModal()"
       />
       <div>Evolutions</div>
-      <div>{% for evo in pokemonDict.evolutions %} {{evo}} {% endfor %}</div>
+      <div>
+        {% for evo in pokemonDict.evolutions %}
+        <p>{{ evo }}</p>
+        {% endfor %}
+      </div>
       <!-- Modal container -->
       <div id="myModal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
           <span class="close" onclick="closeModal()">&times;</span>
-          <h2>hi</h2>
+
+          <div>
+            {% for evo in pokemonDict.evolutions %}
+            <p>{{ evo }}</p>
+            {% endfor %}
+          </div>
           <!-- Add more details here -->
         </div>
       </div>

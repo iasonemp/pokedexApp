@@ -1,5 +1,5 @@
 // Function to open the modal
-function openModal(pokemonName) {
+function openModal() {
   const modal = document.getElementById("myModal");
   modal.style.display = "block";
   // Fetch additional Pokémon information using AJAX and update the modal content
