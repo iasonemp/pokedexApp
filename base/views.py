@@ -12,7 +12,7 @@ def home(request):
     # each index has the info of 1 pokemon
     pokemonList = []
     # bulbasaur, charmander, squirtle
-    for i in range(133, 136):
+    for i in range(1, 4):
         response=requests.get(f'https://pokeapi.co/api/v2/pokemon/{i}').json()
 
         ########## EVOLUTIONS ##########
