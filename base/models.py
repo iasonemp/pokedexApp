@@ -6,32 +6,24 @@ class Pokemon(models.Model):
 
     starter_form = models.CharField(max_length=50)
     # string
-    tier_1_evolution = 
+    tier_1_evolution = models.CharField(max_length=255)
     # string:string, nullable
-    tier_2_evolution = 
+    tier_2_evolution = models.CharField(max_length=255)
     # string:string, nullable
-    
-    # ForeignKey
-    types = 
-    # string:string, foreign key
+    types = models.CharField(max_length=255)
+    # string:string
     
     # ImageField
-    sprite = models.ImageField
+    sprite = models.ImageField(upload_to='static/images/', null=True)
     # models.ImageField(null=True, default="avatar.svg")
     
     # IntegerField
-    pokedex_id = 
-    height = 
-    weight = 
-    hp = 
-    attack = 
-    defense =
-    speed = 
-    special_attack = 
-    special_defense = 
-    
-    
-
-    class Type(models.Model):
-        name = 
-        color = 
+    pokedex_number = models.IntegerField(unique=True)
+    height = models.IntegerField
+    weight = models.IntegerField
+    hp = models.IntegerField
+    attack = models.IntegerField
+    defense = models.IntegerField
+    speed = models.IntegerField
+    special_attack = models.IntegerField
+    special_defense = models.IntegerField

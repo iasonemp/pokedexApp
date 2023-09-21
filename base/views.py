@@ -61,8 +61,8 @@ def home(request):
         'name': response['name'],
         'id': response['id'],
         'sprite': response['sprites']['other']['dream_world']['front_default'],
-        'height' : response['height'],
-        'weight' : response['weight'],
+        'height' : response['height'], # dm, /10 = m
+        'weight' : response['weight'], # dag, /10 = kg
         'evolutions': pokemonEvolutions,
         'types': pokemonTypes,
         'stats': statList,
