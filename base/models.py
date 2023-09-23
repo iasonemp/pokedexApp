@@ -1,20 +1,24 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+    
+class User(AbstractUser):
+    pass
 
 class Pokemon(models.Model):
     # CharField
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=100)
 
-    starter_form = models.CharField(max_length=50)
+    starter_form = models.CharField(max_length=100)
     # string
-    tier_1_evolution = models.CharField(max_length=255)
+    tier_1_evolution = models.CharField(max_length=255, blank=True, null=True, default=None)
     # string:string, nullable
-    tier_2_evolution = models.CharField(max_length=255)
+    tier_2_evolution = models.CharField(max_length=255, blank=True, null=True, default=None)
     # string:string, nullable
     types = models.CharField(max_length=255)
     # string:string
     
     # ImageField
-    sprite = models.ImageField(upload_to='static/images/', null=True)
+    sprite = models.ImageField(upload_to='static/images/', blank=True, null=True, default=None)
     # models.ImageField(null=True, default="avatar.svg")
     
     # IntegerField
