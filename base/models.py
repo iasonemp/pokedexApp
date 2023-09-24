@@ -23,11 +23,11 @@ class Pokemon(models.Model):
     
     # IntegerField
     pokedex_number = models.IntegerField(unique=True)
-    height = models.IntegerField
-    weight = models.IntegerField
-    hp = models.IntegerField
-    attack = models.IntegerField
-    defense = models.IntegerField
-    speed = models.IntegerField
-    special_attack = models.IntegerField
-    special_defense = models.IntegerField
+    height = models.IntegerField(blank=True, null=True, default=None)
+    weight = models.IntegerField(blank=True, null=True, default=None)
+    hp = models.IntegerField(blank=True, null=True, default=None)
+    attack = models.IntegerField(blank=True, null=True, default=None)
+    defense = models.IntegerField(blank=True, null=True, default=None)
+    speed = models.IntegerField(blank=True, null=True, default=None)
+    special_attack = models.IntegerField(blank=True, null=True, default=None)
+    special_defense = models.IntegerField(blank=True, null=True, default=None)
