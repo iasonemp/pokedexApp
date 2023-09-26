@@ -31,3 +31,6 @@ class Pokemon(models.Model):
     speed = models.IntegerField(blank=True, null=True, default=None)
     special_attack = models.IntegerField(blank=True, null=True, default=None)
     special_defense = models.IntegerField(blank=True, null=True, default=None)
+    
+    def __str__(self):
+        return self.name

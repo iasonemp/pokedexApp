@@ -2,18 +2,18 @@
 <!-- <h1>Bulbasaur's Stats</h1> -->
 <div>
   <div class="pokemon-container">
-    {% for pokemonDict in pokemonList %}
+    {% for pokemon in pokemons %}
     <div>
       <img
-        src="{{ pokemonDict.sprite }}"
+        src="{{ pokemon.sprite }}"
         class="pokemon-image"
         onclick="openModal()"
       />
-      <div>Evolutions</div>
+      <!-- <div>Evolutions</div> -->
       <div>
-        {% for evo in pokemonDict.evolutions %}
+        {% for evo in pokemon.evolutions %}
         <p>{{ evo }}</p>
-        <img src="{{ evo.sprite }}" />
+        <!-- <img src="{{ evo.sprite }}" /> -->
         {% endfor %}
       </div>
       <!-- Modal container -->
@@ -23,20 +23,31 @@
           <span class="close" onclick="closeModal()">&times;</span>
 
           <div>
-            {% for evo in pokemonDict.evolutions %}
-            <p>{{ evo }}</p>
-            {% endfor %}
+            <h3>Starter: {{pokemon.starter_form}}</h3>
+            <h3>First evo: {{ pokemon.tier_1_evolution }}</h3>
+            <h3>Second evo: {{ pokemon.tier_2_evolution }}</h3>
+            <!-- {% for evo in pokemon.evolutions %}
+              <p>{{ evo }}</p>
+              {% endfor %} -->
           </div>
           <!-- Add more details here -->
         </div>
       </div>
 
-      <h3>{{ pokemonDict.name }}</h3>
+      <h3>{{ pokemon.name }}</h3>
+      <!-- <h3>
+        Evolutions: {{pokemon.starter_form}}, {{ pokemon.tier_1_evolution }}, {{
+        pokemon.tier_2_evolution }}
+      </h3> -->
+      <h3>Starter: {{pokemon.starter_form}}</h3>
+      <h3>First evo: {{ pokemon.tier_1_evolution }}</h3>
+      <h3>Second evo: {{ pokemon.tier_2_evolution }}</h3>
 
       <hr />
-      {% for i in pokemonDict.types %}
+      <!-- ΕΔΩ ΘΕΛΕΙ ΝΑ split(':') -->
+      <!-- {% for i in pokemon.types %}
       <div>{{ i }}</div>
-      {% endfor %}
+      {% endfor %} -->
     </div>
     {% endfor %}
   </div>
