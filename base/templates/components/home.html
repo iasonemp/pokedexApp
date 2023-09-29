@@ -4,41 +4,25 @@
   <div class="pokemon-container">
     {% for pokemon in pokemons %}
     <div>
-      <img
-        src="{{ pokemon.sprite }}"
-        class="pokemon-image"
-        onclick="openModal()"
-      />
-      <!-- <div>Evolutions</div> -->
-      <div>
-        {% for evo in pokemon.evolutions %}
-        <p>{{ evo }}</p>
-        <!-- <img src="{{ evo.sprite }}" /> -->
-        {% endfor %}
+      <div class="pokemon">
+        <img
+          src="{{ pokemon.sprite }}"
+          class="pokemon-image"
+          data-pokemon-name="{{ pokemon.name }}"
+          onclick="openModal()"
+        />
       </div>
       <!-- Modal container -->
-      <div id="myModal" class="modal">
+      <div id="pokemon-modal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
           <span class="close" onclick="closeModal()">&times;</span>
 
-          <div>
-            <h3>Starter: {{pokemon.starter_form}}</h3>
-            <h3>First evo: {{ pokemon.tier_1_evolution }}</h3>
-            <h3>Second evo: {{ pokemon.tier_2_evolution }}</h3>
-            <!-- {% for evo in pokemon.evolutions %}
-              <p>{{ evo }}</p>
-              {% endfor %} -->
-          </div>
-          <!-- Add more details here -->
+          <div id="pokemon-info"></div>
         </div>
       </div>
-
+      <!-- OUTSIDE THE MODAL -->
       <h3>{{ pokemon.name }}</h3>
-      <!-- <h3>
-        Evolutions: {{pokemon.starter_form}}, {{ pokemon.tier_1_evolution }}, {{
-        pokemon.tier_2_evolution }}
-      </h3> -->
       <h3>Starter: {{pokemon.starter_form}}</h3>
       <h3>First evo: {{ pokemon.tier_1_evolution }}</h3>
       <h3>Second evo: {{ pokemon.tier_2_evolution }}</h3>

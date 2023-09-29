@@ -5,4 +5,5 @@ urlpatterns = [
     path('', views.home, name="home"),
     path('login/', views.login, name="login"),
     path('populate/', views.populatePokemonDatabase, name="populate"),
+    path('detail/<str:pokemon_name>', views.detail, name="detail"),
 ]
