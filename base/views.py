@@ -7,7 +7,15 @@ def detail(request, pokemon_name):
     pokemon = Pokemon.objects.get(name=pokemon_name)
     context = {'starter_form': pokemon.starter_form, 
                'tier_1_evolution' : pokemon.tier_1_evolution, 
-               'tier_2_evolution' : pokemon.tier_2_evolution}
+               'tier_2_evolution' : pokemon.tier_2_evolution,
+               'height' : pokemon.height,
+               'weight' : pokemon.weight,
+               'hp' : pokemon.hp,
+               'attack' : pokemon.attack,
+               'defense' : pokemon.defense,
+               'speed' : pokemon.speed,
+               'special_attack' : pokemon.special_attack,
+               'special_defense' : pokemon.special_defense,}
     return JsonResponse(context)
 
 # Create your views here.

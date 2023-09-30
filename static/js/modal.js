@@ -15,9 +15,18 @@ document.addEventListener("DOMContentLoaded", function () {
           const data = JSON.parse(xhr.responseText);
           const modalContent = document.createElement("div");
           modalContent.innerHTML = `
-            <h2>${data.starter_form}</h2>
+          <!-- <p>Starter form: ${data.starter_form}</p>
             <p>Tier 1 Evolution: ${data.tier_1_evolution}</p>
-            <p>Tier 2 Evolution: ${data.tier_2_evolution}</p>
+            <p>Tier 2 Evolution: ${data.tier_2_evolution}</p> -->
+            <p>${data.starter_form} > ${data.tier_1_evolution} > ${data.tier_2_evolution}</p>
+            <p>Height: ${data.height}</p>
+            <p>Weight: ${data.weight}</p>
+            <li>HP: ${data.hp}</li>
+            <li>Attack: ${data.attack}</li>
+            <li>Defense: ${data.defense}</li>
+            <li>Special Attack: ${data.special_attack}</li>
+            <li>Special Defense: ${data.special_defense}</li>
+            <li>Speed: ${data.speed}</li>
             <!-- Add more HTML elements as needed -->
         `;
 
