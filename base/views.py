@@ -20,17 +20,33 @@ def detail(request, pokemon_name):
                'speed' : pokemon.speed,
                'special_attack' : pokemon.special_attack,
                'special_defense' : pokemon.special_defense,}
+    # if pokemon.tier_1_evolution:
+    #     pokemon.tier_1_evolution = Pokemon.objects.get(name=pokemon.tier_1_evolution)
+    #     context['t1sprite'] = str(pokemon.tier_1_evolution.sprite)
     if pokemon.tier_1_evolution:
-        t1 = Pokemon.objects.get(name=pokemon.tier_1_evolution)
-        context['t1sprite'] = str(t1.sprite)
+        t1sprite = []
+        split_evos = pokemon.tier_1_evolution.split(':')
+        for evo in range(len(split_evos)):
+            split_evos[evo] = Pokemon.objects.get(name=split_evos[evo])
+            t1sprite.append(str(split_evos[evo].sprite))
+        t1sprite = ':'.join(t1sprite)
+        context['t1sprite'] = t1sprite
+    # if pokemon.tier_2_evolution:
+    #     pokemon.tier_2_evolution = Pokemon.objects.get(name=pokemon.tier_2_evolution)
+    #     context['t2sprite'] = str(pokemon.tier_2_evolution.sprite)    
     if pokemon.tier_2_evolution:
-        t2 = Pokemon.objects.get(name=pokemon.tier_2_evolution)
-        context['t2sprite'] = str(t2.sprite)    
+        t2sprite = []
+        split_evos = pokemon.tier_2_evolution.split(':')
+        for evo in range(len(split_evos)):
+            split_evos[evo] = Pokemon.objects.get(name=split_evos[evo])
+            t2sprite.append(str(split_evos[evo].sprite))
+        t2sprite = ':'.join(t2sprite)
+        context['t2sprite'] = t2sprite
     return JsonResponse(context)
 
 # Create your views here.
 def populatePokemonDatabase(request):
-    for i in range(145, 148):
+    for i in range(186, 187):
         response=requests.get(f'https://pokeapi.co/api/v2/pokemon/{i}').json()
                 ########## EVOLUTIONS ##########
         species_link = requests.get(f'https://pokeapi.co/api/v2/pokemon-species/{i}').json()
