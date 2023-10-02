@@ -18,8 +18,16 @@ document.addEventListener("DOMContentLoaded", function () {
           <!-- <p>Starter form: ${data.starter_form}</p>
             <p>Tier 1 Evolution: ${data.tier_1_evolution}</p>
             <p>Tier 2 Evolution: ${data.tier_2_evolution}</p> -->
+            
             <p>${data.starter_form} > ${data.tier_1_evolution} > ${data.tier_2_evolution}</p>
             <p>Height: ${data.height}</p>
+            <span class="inline-images">
+                <img src="${data.starter_sprite}" alt="Pokemon Sprite" class="pokemon-image" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Arrow_right_font_awesome.svg/1200px-Arrow_right_font_awesome.svg.png" class="right-arrow" />
+                <img src="${data.t1sprite}" alt="Pokemon Sprite" class="pokemon-image" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Arrow_right_font_awesome.svg/1200px-Arrow_right_font_awesome.svg.png" class="right-arrow" />
+                <img src="${data.t2sprite}" alt="Pokemon Sprite" class="pokemon-image" />
+            </span>
             <p>Weight: ${data.weight}</p>
             <li>HP: ${data.hp}</li>
             <li>Attack: ${data.attack}</li>

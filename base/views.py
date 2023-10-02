@@ -5,9 +5,13 @@ import requests
 
 def detail(request, pokemon_name):
     pokemon = Pokemon.objects.get(name=pokemon_name)
+    starter = Pokemon.objects.get(name=pokemon.starter_form)
+    
     context = {'starter_form': pokemon.starter_form, 
                'tier_1_evolution' : pokemon.tier_1_evolution, 
                'tier_2_evolution' : pokemon.tier_2_evolution,
+               'starter_sprite' : str(starter.sprite),
+            #    't1sprite' : str(t1.sprite.url),
                'height' : pokemon.height,
                'weight' : pokemon.weight,
                'hp' : pokemon.hp,
@@ -16,11 +20,17 @@ def detail(request, pokemon_name):
                'speed' : pokemon.speed,
                'special_attack' : pokemon.special_attack,
                'special_defense' : pokemon.special_defense,}
+    if pokemon.tier_1_evolution:
+        t1 = Pokemon.objects.get(name=pokemon.tier_1_evolution)
+        context['t1sprite'] = str(t1.sprite)
+    if pokemon.tier_2_evolution:
+        t2 = Pokemon.objects.get(name=pokemon.tier_2_evolution)
+        context['t2sprite'] = str(t2.sprite)    
     return JsonResponse(context)
 
 # Create your views here.
 def populatePokemonDatabase(request):
-    for i in range(10,11):
+    for i in range(145, 148):
         response=requests.get(f'https://pokeapi.co/api/v2/pokemon/{i}').json()
                 ########## EVOLUTIONS ##########
         species_link = requests.get(f'https://pokeapi.co/api/v2/pokemon-species/{i}').json()
@@ -38,15 +48,21 @@ def populatePokemonDatabase(request):
             for evo in range(len(first_evo)):
                 tier_1_evolution.append(first_evo[evo]['species']['name'])
             tier_1_evolution = ':'.join(tier_1_evolution)
-        
-        
-        ## SECOND EVOLUTION
+            ## SECOND EVOLUTION
             second_evo = first_evo[0]['evolves_to']
             if second_evo:
                 tier_2_evolution = []
                 for evo in range(len(second_evo)):
                     tier_2_evolution.append(second_evo[evo]['species']['name'])
                 tier_2_evolution = ':'.join(tier_2_evolution)
+            else:
+                tier_2_evolution = 'No_evolution'  
+        
+        else:
+            tier_1_evolution = None
+            tier_2_evolution = None
+        
+        
                 
         ########## TYPES ##########
         types = []
