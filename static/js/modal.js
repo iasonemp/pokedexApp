@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const data = JSON.parse(xhr.responseText);
           // CREATE THE DIV
           let modalContent = document.createElement("div");
+          // --- SPRITES ---
           // STARTER FORM
           modalContent.innerHTML += `
           <span class="inline-images" id="inline-images">
@@ -42,7 +43,8 @@ document.addEventListener("DOMContentLoaded", function () {
           }
           modalContent.innerHTML += `
            </span><hr>`;
-          // STARTER TYPES
+          // --- TYPES ---
+          // STARTER FORM
           var StarterTypeSplit = data.types.split(":");
           console.log(StarterTypeSplit);
           modalContent.innerHTML += `
@@ -97,6 +99,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.addEventListener("click", function (event) {
     if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+  window.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" || event.key === "Esc") {
       modal.style.display = "none";
     }
   });
