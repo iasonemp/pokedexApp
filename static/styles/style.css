@@ -12,7 +12,9 @@ body {
   width: 12em; /* Set your desired width */
   height: 8em; /* Set your desired height */
 }
-
+.pokemon-image:hover {
+  cursor: pointer; /* Change the cursor to a pointer hand */
+}
 .right-arrow {
   vertical-align: top;
   line-height: 100em;

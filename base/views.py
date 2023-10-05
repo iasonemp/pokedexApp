@@ -11,7 +11,7 @@ def detail(request, pokemon_name):
                'tier_1_evolution' : pokemon.tier_1_evolution, 
                'tier_2_evolution' : pokemon.tier_2_evolution,
                'starter_sprite' : str(starter.sprite),
-            #    't1sprite' : str(t1.sprite.url),
+               'types' : pokemon.types,
                'height' : pokemon.height,
                'weight' : pokemon.weight,
                'hp' : pokemon.hp,
@@ -29,8 +29,10 @@ def detail(request, pokemon_name):
         for evo in range(len(split_evos)):
             split_evos[evo] = Pokemon.objects.get(name=split_evos[evo])
             t1sprite.append(str(split_evos[evo].sprite))
-        t1sprite = ':'.join(t1sprite)
+        t1sprite = 'delimiter'.join(t1sprite)
         context['t1sprite'] = t1sprite
+    else:
+        context['t1sprite'] = ''
     # if pokemon.tier_2_evolution:
     #     pokemon.tier_2_evolution = Pokemon.objects.get(name=pokemon.tier_2_evolution)
     #     context['t2sprite'] = str(pokemon.tier_2_evolution.sprite)    
@@ -40,8 +42,10 @@ def detail(request, pokemon_name):
         for evo in range(len(split_evos)):
             split_evos[evo] = Pokemon.objects.get(name=split_evos[evo])
             t2sprite.append(str(split_evos[evo].sprite))
-        t2sprite = ':'.join(t2sprite)
+        t2sprite = 'delimiter'.join(t2sprite)
         context['t2sprite'] = t2sprite
+    else:
+        context['t2sprite'] = ''
     return JsonResponse(context)
 
 # Create your views here.
@@ -85,7 +89,7 @@ def populatePokemonDatabase(request):
         for item in response['types']:
             typeName = item['type']['name']
             types.append(typeName)
-        types = ':'.join(types)
+        types = 'delimiter'.join(types)
 
         response['name'] = Pokemon.objects.create(
             name = response['name'],
