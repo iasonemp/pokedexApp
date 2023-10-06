@@ -20,32 +20,58 @@ def detail(request, pokemon_name):
                'speed' : pokemon.speed,
                'special_attack' : pokemon.special_attack,
                'special_defense' : pokemon.special_defense,}
-    # if pokemon.tier_1_evolution:
-    #     pokemon.tier_1_evolution = Pokemon.objects.get(name=pokemon.tier_1_evolution)
-    #     context['t1sprite'] = str(pokemon.tier_1_evolution.sprite)
+    # GET sprite, type, name, id FOR FIRST EVOLUTIONS
     if pokemon.tier_1_evolution:
-        t1sprite = []
         split_evos = pokemon.tier_1_evolution.split(':')
+        t1sprite = []
+        t1type = []
+        t1name = []
+        t1id = []
         for evo in range(len(split_evos)):
             split_evos[evo] = Pokemon.objects.get(name=split_evos[evo])
             t1sprite.append(str(split_evos[evo].sprite))
+            t1type.append(split_evos[evo].types)
+            t1name.append(split_evos[evo].name)
+            t1id.append(str(split_evos[evo].pokedex_number))
         t1sprite = 'delimiter'.join(t1sprite)
+        t1type = 'delimiter'.join(t1type)
+        t1name = 'delimiter'.join(t1name)
+        t1id = 'delimiter'.join(t1id)
         context['t1sprite'] = t1sprite
+        context['t1type'] = t1type
+        context['t1name'] = t1name
+        context['t1id'] = t1id
     else:
         context['t1sprite'] = ''
-    # if pokemon.tier_2_evolution:
-    #     pokemon.tier_2_evolution = Pokemon.objects.get(name=pokemon.tier_2_evolution)
-    #     context['t2sprite'] = str(pokemon.tier_2_evolution.sprite)    
+        context['t1type'] = ''
+        context['t1name'] = ''
+        context['t1id'] = ''
+        # GET sprite, type, name, id FOR SECOND EVOLUTIONS
     if pokemon.tier_2_evolution:
-        t2sprite = []
         split_evos = pokemon.tier_2_evolution.split(':')
+        t2sprite = []
+        t2type = []
+        t2name = []
+        t2id = []
         for evo in range(len(split_evos)):
             split_evos[evo] = Pokemon.objects.get(name=split_evos[evo])
             t2sprite.append(str(split_evos[evo].sprite))
+            t2type.append(split_evos[evo].types)
+            t2name.append(split_evos[evo].name)
+            t2id.append(str(split_evos[evo].pokedex_number))
         t2sprite = 'delimiter'.join(t2sprite)
+        t2type = 'delimiter'.join(t2type)
+        t2name = 'delimiter'.join(t2name)
+        t2id = 'delimiter'.join(t2id)
         context['t2sprite'] = t2sprite
+        context['t2type'] = t2type
+        context['t2name'] = t2name
+        context['t2id'] = t2id
     else:
         context['t2sprite'] = ''
+        context['t2type'] = ''
+        context['t2name'] = ''
+        context['t2id'] = ''
     return JsonResponse(context)
 
 # Create your views here.
