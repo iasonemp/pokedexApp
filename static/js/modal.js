@@ -22,8 +22,14 @@ document.addEventListener("DOMContentLoaded", function () {
           <img src="${data.starter_sprite}" alt="Pokemon Sprite" class="pokemon-image" />
           <div>${data.starter_id}</div>
           <div>${data.starter_form}</div>
-          <div>${data.starter_type}</div>
+          <!-- <div>${data.starter_type}</div> -->
         `;
+          var starterTypesMulti = data.starter_type.split(":");
+          for (var i = 0; i < starterTypesMulti.length; i++) {
+            modalContent.innerHTML += `
+            <div>${starterTypesMulti[i]}</div>
+            `;
+          }
           // FIRST EVOLUTION(S)
           if (data.t1data.t1sprite) {
             var SpriteLinks = data.t1data.t1sprite.split("delimiter");
@@ -34,8 +40,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 <img src="${SpriteLinks[i]}" alt="Pokemon Sprite" class="pokemon-image" />
                 <div>${data.t1data.t1id}</div>
                 <div>${data.t1data.t1name}</div>
-                <div>${data.t1data.t1type}</div>
+                <!-- <div>${data.t1data.t1type}</div> -->
               `;
+              }
+              var t1TypesMulti = data.t1data.t1type.split(":");
+              for (var i = 0; i < t1TypesMulti.length; i++) {
+                modalContent.innerHTML += `
+            <div>${t1TypesMulti[i]}</div>
+            `;
               }
             }
           }
@@ -49,9 +61,15 @@ document.addEventListener("DOMContentLoaded", function () {
             <img src="${SpriteLinks[i]}" alt="Pokemon Sprite" class="pokemon-image" />
             <div>${data.t2data.t2id}</div>
             <div>${data.t2data.t2name}</div>
-            <div>${data.t2data.t2type}</div>
+            <!-- <div>${data.t2data.t2type}</div> -->
           `;
               }
+            }
+            var t2TypesMulti = data.t2data.t2type.split(":");
+            for (var i = 0; i < t2TypesMulti.length; i++) {
+              modalContent.innerHTML += `
+            <div>${t2TypesMulti[i]}</div>
+            `;
             }
           }
           modalContent.innerHTML += `
