@@ -47,7 +47,7 @@ def detail(request, pokemon_name):
     #     context.update({'t1sprite' : '', 't1type' : '', 't1name' : '', 't1id': ''})
         # GET sprite, type, name, id FOR SECOND EVOLUTIONS
     t2data = {}
-    if pokemon.tier_2_evolution:
+    if pokemon.tier_2_evolution and pokemon.tier_2_evolution != 'No_evolution':
         split_evos = pokemon.tier_2_evolution.split(':')
         t2sprite = []
         t2type = []
@@ -71,7 +71,7 @@ def detail(request, pokemon_name):
 
 # Create your views here.
 def populatePokemonDatabase(request):
-    for i in range(186, 187):
+    for i in range(146,148):
         response=requests.get(f'https://pokeapi.co/api/v2/pokemon/{i}').json()
                 ########## EVOLUTIONS ##########
         species_link = requests.get(f'https://pokeapi.co/api/v2/pokemon-species/{i}').json()
@@ -97,11 +97,11 @@ def populatePokemonDatabase(request):
                     tier_2_evolution.append(second_evo[evo]['species']['name'])
                 tier_2_evolution = ':'.join(tier_2_evolution)
             else:
-                tier_2_evolution = 'No_evolution'  
+                tier_2_evolution = ''  
         
         else:
-            tier_1_evolution = None
-            tier_2_evolution = None
+            tier_1_evolution = ''
+            tier_2_evolution = ''
         
         
                 
@@ -110,7 +110,7 @@ def populatePokemonDatabase(request):
         for item in response['types']:
             typeName = item['type']['name']
             types.append(typeName)
-        types = 'delimiter'.join(types)
+        types = ':'.join(types)
 
         response['name'] = Pokemon.objects.create(
             name = response['name'],
