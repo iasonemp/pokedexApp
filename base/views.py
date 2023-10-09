@@ -19,8 +19,12 @@ def detail(request, pokemon_name):
                'defense' : pokemon.defense,
                'speed' : pokemon.speed,
                'special_attack' : pokemon.special_attack,
-               'special_defense' : pokemon.special_defense,}
+               'special_defense' : pokemon.special_defense,
+            #    't1data': {},
+            #    't2data': {},
+            }
     # GET sprite, type, name, id FOR FIRST EVOLUTIONS
+    t1data = {}
     if pokemon.tier_1_evolution:
         split_evos = pokemon.tier_1_evolution.split(':')
         t1sprite = []
@@ -37,16 +41,12 @@ def detail(request, pokemon_name):
         t1type = 'delimiter'.join(t1type)
         t1name = 'delimiter'.join(t1name)
         t1id = 'delimiter'.join(t1id)
-        context['t1sprite'] = t1sprite
-        context['t1type'] = t1type
-        context['t1name'] = t1name
-        context['t1id'] = t1id
-    else:
-        context['t1sprite'] = ''
-        context['t1type'] = ''
-        context['t1name'] = ''
-        context['t1id'] = ''
+        t1data = {'t1sprite' : t1sprite, 't1type' : t1type, 't1name' : t1name, 't1id': t1id}
+    context.update({'t1data' : t1data})
+    # else:
+    #     context.update({'t1sprite' : '', 't1type' : '', 't1name' : '', 't1id': ''})
         # GET sprite, type, name, id FOR SECOND EVOLUTIONS
+    t2data = {}
     if pokemon.tier_2_evolution:
         split_evos = pokemon.tier_2_evolution.split(':')
         t2sprite = []
@@ -63,15 +63,10 @@ def detail(request, pokemon_name):
         t2type = 'delimiter'.join(t2type)
         t2name = 'delimiter'.join(t2name)
         t2id = 'delimiter'.join(t2id)
-        context['t2sprite'] = t2sprite
-        context['t2type'] = t2type
-        context['t2name'] = t2name
-        context['t2id'] = t2id
-    else:
-        context['t2sprite'] = ''
-        context['t2type'] = ''
-        context['t2name'] = ''
-        context['t2id'] = ''
+        t2data = {'t2sprite' : t2sprite, 't2type' : t2type, 't2name' : t2name, 't2id': t2id}
+    context.update({'t2data' : t2data})
+    # else:
+    #     context.update({'t2sprite' : '', 't2type' : '', 't2name' : '', 't2id': ''})
     return JsonResponse(context)
 
 # Create your views here.

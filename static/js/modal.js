@@ -22,27 +22,32 @@ document.addEventListener("DOMContentLoaded", function () {
           <img src="${data.starter_sprite}" alt="Pokemon Sprite" class="pokemon-image" />
         `;
           // FIRST EVOLUTION(S)
-          var SpriteLinks = data.t1sprite.split("delimiter");
-          if (SpriteLinks.length > 0 && SpriteLinks[0] !== "") {
-            for (var i = 0; i < SpriteLinks.length; i++) {
-              modalContent.innerHTML += `
+          if (data.t1data.t1sprite) {
+            var SpriteLinks = data.t1data.t1sprite.split("delimiter");
+            if (SpriteLinks.length > 0 && SpriteLinks[0] !== "") {
+              for (var i = 0; i < SpriteLinks.length; i++) {
+                modalContent.innerHTML += `
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Arrow_right_font_awesome.svg/1200px-Arrow_right_font_awesome.svg.png" class="right-arrow" />
                 <img src="${SpriteLinks[i]}" alt="Pokemon Sprite" class="pokemon-image" />
               `;
+              }
             }
           }
           // SECOND EVOLUTION(S)
-          var SpriteLinks = data.t2sprite.split("delimiter");
-          if (SpriteLinks.length > 0 && SpriteLinks[0] !== "") {
-            for (var i = 0; i < SpriteLinks.length; i++) {
-              modalContent.innerHTML += `
+          if (data.t2data.t2sprite) {
+            var SpriteLinks = data.t2data.t2sprite.split("delimiter");
+            if (SpriteLinks.length > 0 && SpriteLinks[0] !== "") {
+              for (var i = 0; i < SpriteLinks.length; i++) {
+                modalContent.innerHTML += `
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Arrow_right_font_awesome.svg/1200px-Arrow_right_font_awesome.svg.png" class="right-arrow" />
             <img src="${SpriteLinks[i]}" alt="Pokemon Sprite" class="pokemon-image" />
           `;
+              }
             }
           }
           modalContent.innerHTML += `
            </span><hr>`;
+
           // --- TYPES ---
           // STARTER FORM
           var StarterTypeSplit = data.types.split(":");
