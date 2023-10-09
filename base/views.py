@@ -8,6 +8,8 @@ def detail(request, pokemon_name):
     starter = Pokemon.objects.get(name=pokemon.starter_form)
     
     context = {'starter_form': pokemon.starter_form, 
+               'starter_id' : starter.pokedex_number,
+               'starter_type' : starter.types,
                'tier_1_evolution' : pokemon.tier_1_evolution, 
                'tier_2_evolution' : pokemon.tier_2_evolution,
                'starter_sprite' : str(starter.sprite),

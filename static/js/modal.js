@@ -20,6 +20,9 @@ document.addEventListener("DOMContentLoaded", function () {
           modalContent.innerHTML += `
           <span class="inline-images" id="inline-images">
           <img src="${data.starter_sprite}" alt="Pokemon Sprite" class="pokemon-image" />
+          <div>${data.starter_id}</div>
+          <div>${data.starter_form}</div>
+          <div>${data.starter_type}</div>
         `;
           // FIRST EVOLUTION(S)
           if (data.t1data.t1sprite) {
@@ -29,6 +32,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 modalContent.innerHTML += `
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Arrow_right_font_awesome.svg/1200px-Arrow_right_font_awesome.svg.png" class="right-arrow" />
                 <img src="${SpriteLinks[i]}" alt="Pokemon Sprite" class="pokemon-image" />
+                <div>${data.t1data.t1id}</div>
+                <div>${data.t1data.t1name}</div>
+                <div>${data.t1data.t1type}</div>
               `;
               }
             }
@@ -41,6 +47,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 modalContent.innerHTML += `
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Arrow_right_font_awesome.svg/1200px-Arrow_right_font_awesome.svg.png" class="right-arrow" />
             <img src="${SpriteLinks[i]}" alt="Pokemon Sprite" class="pokemon-image" />
+            <div>${data.t2data.t2id}</div>
+            <div>${data.t2data.t2name}</div>
+            <div>${data.t2data.t2type}</div>
           `;
               }
             }
