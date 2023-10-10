@@ -34,11 +34,14 @@ def detail(request, pokemon_name):
         t1name = []
         t1id = []
         for evo in range(len(split_evos)):
-            split_evos[evo] = Pokemon.objects.get(name=split_evos[evo])
-            t1sprite.append(str(split_evos[evo].sprite))
-            t1type.append(split_evos[evo].types)
-            t1name.append(split_evos[evo].name)
-            t1id.append(str(split_evos[evo].pokedex_number))
+            try:
+                split_evos[evo] = Pokemon.objects.get(name=split_evos[evo])
+                t1sprite.append(str(split_evos[evo].sprite))
+                t1type.append(split_evos[evo].types)
+                t1name.append(split_evos[evo].name)
+                t1id.append(str(split_evos[evo].pokedex_number))
+            except:
+                pass
         t1sprite = 'delimiter'.join(t1sprite)
         t1type = 'delimiter'.join(t1type)
         t1name = 'delimiter'.join(t1name)
@@ -49,18 +52,21 @@ def detail(request, pokemon_name):
     #     context.update({'t1sprite' : '', 't1type' : '', 't1name' : '', 't1id': ''})
         # GET sprite, type, name, id FOR SECOND EVOLUTIONS
     t2data = {}
-    if pokemon.tier_2_evolution and pokemon.tier_2_evolution != 'No_evolution':
+    if pokemon.tier_2_evolution:
         split_evos = pokemon.tier_2_evolution.split(':')
         t2sprite = []
         t2type = []
         t2name = []
         t2id = []
         for evo in range(len(split_evos)):
-            split_evos[evo] = Pokemon.objects.get(name=split_evos[evo])
-            t2sprite.append(str(split_evos[evo].sprite))
-            t2type.append(split_evos[evo].types)
-            t2name.append(split_evos[evo].name)
-            t2id.append(str(split_evos[evo].pokedex_number))
+            try:
+                split_evos[evo] = Pokemon.objects.get(name=split_evos[evo])
+                t2sprite.append(str(split_evos[evo].sprite))
+                t2type.append(split_evos[evo].types)
+                t2name.append(split_evos[evo].name)
+                t2id.append(str(split_evos[evo].pokedex_number))
+            except:
+                pass
         t2sprite = 'delimiter'.join(t2sprite)
         t2type = 'delimiter'.join(t2type)
         t2name = 'delimiter'.join(t2name)
@@ -73,7 +79,7 @@ def detail(request, pokemon_name):
 
 # Create your views here.
 def populatePokemonDatabase(request):
-    for i in range(146,148):
+    for i in range(62,63):
         response=requests.get(f'https://pokeapi.co/api/v2/pokemon/{i}').json()
                 ########## EVOLUTIONS ##########
         species_link = requests.get(f'https://pokeapi.co/api/v2/pokemon-species/{i}').json()
