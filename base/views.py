@@ -6,7 +6,6 @@ import requests
 def detail(request, pokemon_name):
     pokemon = Pokemon.objects.get(name=pokemon_name)
     starter = Pokemon.objects.get(name=pokemon.starter_form)
-    
     context = {'starter_form': pokemon.starter_form, 
                'starter_id' : starter.pokedex_number,
                'starter_type' : starter.types,
@@ -22,60 +21,107 @@ def detail(request, pokemon_name):
                'speed' : pokemon.speed,
                'special_attack' : pokemon.special_attack,
                'special_defense' : pokemon.special_defense,
-            #    't1data': {},
-            #    't2data': {},
             }
-    # GET sprite, type, name, id FOR FIRST EVOLUTIONS
-    t1data = {}
+    evo_data = {}
     if pokemon.tier_1_evolution:
-        split_evos = pokemon.tier_1_evolution.split(':')
-        t1sprite = []
-        t1type = []
-        t1name = []
-        t1id = []
+        all_evos = pokemon.tier_1_evolution + ':' + pokemon.tier_2_evolution
+        split_evos = all_evos.split(':')
+        evo_sprite = []
+        evo_type = []
+        evo_name = []
+        evo_id = []
+        evo_status = []
         for evo in range(len(split_evos)):
             try:
                 split_evos[evo] = Pokemon.objects.get(name=split_evos[evo])
-                t1sprite.append(str(split_evos[evo].sprite))
-                t1type.append(split_evos[evo].types)
-                t1name.append(split_evos[evo].name)
-                t1id.append(str(split_evos[evo].pokedex_number))
+                evo_sprite.append(str(split_evos[evo].sprite))
+                evo_type.append(split_evos[evo].types)
+                evo_name.append(split_evos[evo].name)
+                evo_id.append(str(split_evos[evo].pokedex_number))
+                if split_evos[evo].name in pokemon.tier_1_evolution:
+                    evo_status.append('tier_1')
+                else:
+                    evo_status.append('tier_2')
             except:
                 pass
-        t1sprite = 'delimiter'.join(t1sprite)
-        t1type = 'delimiter'.join(t1type)
-        t1name = 'delimiter'.join(t1name)
-        t1id = 'delimiter'.join(t1id)
-        t1data = {'t1sprite' : t1sprite, 't1type' : t1type, 't1name' : t1name, 't1id': t1id}
-    context.update({'t1data' : t1data})
-    # else:
-    #     context.update({'t1sprite' : '', 't1type' : '', 't1name' : '', 't1id': ''})
-        # GET sprite, type, name, id FOR SECOND EVOLUTIONS
-    t2data = {}
-    if pokemon.tier_2_evolution:
-        split_evos = pokemon.tier_2_evolution.split(':')
-        t2sprite = []
-        t2type = []
-        t2name = []
-        t2id = []
-        for evo in range(len(split_evos)):
-            try:
-                split_evos[evo] = Pokemon.objects.get(name=split_evos[evo])
-                t2sprite.append(str(split_evos[evo].sprite))
-                t2type.append(split_evos[evo].types)
-                t2name.append(split_evos[evo].name)
-                t2id.append(str(split_evos[evo].pokedex_number))
-            except:
-                pass
-        t2sprite = 'delimiter'.join(t2sprite)
-        t2type = 'delimiter'.join(t2type)
-        t2name = 'delimiter'.join(t2name)
-        t2id = 'delimiter'.join(t2id)
-        t2data = {'t2sprite' : t2sprite, 't2type' : t2type, 't2name' : t2name, 't2id': t2id}
-    context.update({'t2data' : t2data})
-    # else:
-    #     context.update({'t2sprite' : '', 't2type' : '', 't2name' : '', 't2id': ''})
+        evo_sprite = 'delimiter'.join(evo_sprite)
+        evo_type = 'delimiter'.join(evo_type)
+        evo_name = 'delimiter'.join(evo_name)
+        evo_id = 'delimiter'.join(evo_id)
+        evo_status = 'delimiter'.join(evo_status)
+        evo_data = {'evo_sprite' : evo_sprite, 'evo_type' : evo_type, 'evo_name' : evo_name, 'evo_id': evo_id,
+                    'evo_status' : evo_status}
+    context.update({'evo_data' : evo_data})
     return JsonResponse(context)
+
+####################################################################################
+# def detail_old(request, pokemon_name): 
+#     pokemon = Pokemon.objects.get(name=pokemon_name)
+#     starter = Pokemon.objects.get(name=pokemon.starter_form)
+    
+#     context = {'starter_form': pokemon.starter_form, 
+#                'starter_id' : starter.pokedex_number,
+#                'starter_type' : starter.types,
+#                'tier_1_evolution' : pokemon.tier_1_evolution, 
+#                'tier_2_evolution' : pokemon.tier_2_evolution,
+#                'starter_sprite' : str(starter.sprite),
+#                'types' : pokemon.types,
+#                'height' : pokemon.height,
+#                'weight' : pokemon.weight,
+#                'hp' : pokemon.hp,
+#                'attack' : pokemon.attack,
+#                'defense' : pokemon.defense,
+#                'speed' : pokemon.speed,
+#                'special_attack' : pokemon.special_attack,
+#                'special_defense' : pokemon.special_defense,
+#             }
+#     # GET sprite, type, name, id FOR FIRST EVOLUTIONS
+#     t1data = {}
+#     if pokemon.tier_1_evolution:
+#         split_evos = pokemon.tier_1_evolution.split(':')
+#         t1sprite = []
+#         t1type = []
+#         t1name = []
+#         t1id = []
+#         for evo in range(len(split_evos)):
+#             try:
+#                 split_evos[evo] = Pokemon.objects.get(name=split_evos[evo])
+#                 t1sprite.append(str(split_evos[evo].sprite))
+#                 t1type.append(split_evos[evo].types)
+#                 t1name.append(split_evos[evo].name)
+#                 t1id.append(str(split_evos[evo].pokedex_number))
+#             except:
+#                 pass
+#         t1sprite = 'delimiter'.join(t1sprite)
+#         t1type = 'delimiter'.join(t1type)
+#         t1name = 'delimiter'.join(t1name)
+#         t1id = 'delimiter'.join(t1id)
+#         t1data = {'t1sprite' : t1sprite, 't1type' : t1type, 't1name' : t1name, 't1id': t1id}
+#     context.update({'t1data' : t1data})
+#     # GET sprite, type, name, id FOR SECOND EVOLUTIONS
+#     t2data = {}
+#     if pokemon.tier_2_evolution:
+#         split_evos = pokemon.tier_2_evolution.split(':')
+#         t2sprite = []
+#         t2type = []
+#         t2name = []
+#         t2id = []
+#         for evo in range(len(split_evos)):
+#             try:
+#                 split_evos[evo] = Pokemon.objects.get(name=split_evos[evo])
+#                 t2sprite.append(str(split_evos[evo].sprite))
+#                 t2type.append(split_evos[evo].types)
+#                 t2name.append(split_evos[evo].name)
+#                 t2id.append(str(split_evos[evo].pokedex_number))
+#             except:
+#                 pass
+#         t2sprite = 'delimiter'.join(t2sprite)
+#         t2type = 'delimiter'.join(t2type)
+#         t2name = 'delimiter'.join(t2name)
+#         t2id = 'delimiter'.join(t2id)
+#         t2data = {'t2sprite' : t2sprite, 't2type' : t2type, 't2name' : t2name, 't2id': t2id}
+#     context.update({'t2data' : t2data})
+#     return JsonResponse(context)
 
 # Create your views here.
 def populatePokemonDatabase(request):
