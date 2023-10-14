@@ -45,38 +45,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div>${TypeSplit[i]}</div>
                 <div>${NameSplit[i]}</div>
                 <div>${IdSplit[i]}</div>
-                <!-- <div>${data.evo_data.evo_type}</div> -->
               `;
               }
-              //   var evo_TypesMulti = data.evo_data.evo_type.split("delimiter");
-              //   for (var i = 0; i < evo_TypesMulti.length; i++) {
-              //     modalContent.innerHTML += `
-              // <div>${evo_TypesMulti[i]}</div>
-              // `;
-              //   }
             }
           }
-          // // SECOND EVOLUTION(S)
-          // if (data.t2data.t2sprite) {
-          //   var SpriteLinks = data.t2data.t2sprite.split("delimiter");
-          //   if (SpriteLinks.length > 0 && SpriteLinks[0] !== "") {
-          //     for (var i = 0; i < SpriteLinks.length; i++) {
-          //       modalContent.innerHTML += `
-          //   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Arrow_right_font_awesome.svg/1200px-Arrow_right_font_awesome.svg.png" class="right-arrow" />
-          //   <img src="${SpriteLinks[i]}" alt="Pokemon Sprite" class="pokemon-image" />
-          //   <div>${data.t2data.t2id}</div>
-          //   <div>${data.t2data.t2name}</div>
-          //   <!-- <div>${data.t2data.t2type}</div> -->
-          // `;
-          //     }
-          //   }
-          //   var t2TypesMulti = data.t2data.t2type.split(":");
-          //   for (var i = 0; i < t2TypesMulti.length; i++) {
-          //     modalContent.innerHTML += `
-          //   <div>${t2TypesMulti[i]}</div>
-          //   `;
-          //   }
-          // }
           modalContent.innerHTML += `
              </span><hr>`;
 
