@@ -3,6 +3,13 @@ from django.http import HttpResponse, JsonResponse
 from .models import Pokemon
 import requests
 
+def search(request):
+    query = request.GET.get('query', '')
+    results = Pokemon.objects.filter(name__icontains=query).values('name')
+    print(list(results))
+    return JsonResponse({'results': list(results)})
+
+
 def detail(request, pokemon_name):
     pokemon = Pokemon.objects.get(name=pokemon_name)
     starter = Pokemon.objects.get(name=pokemon.starter_form)

@@ -1,24 +1,35 @@
-const searchInput = document.getElementById("searchInput");
-const searchButton = document.getElementById("searchButton");
-const searchResults = document.getElementById("searchResults");
+var searchInput = document.getElementById("searchInput");
+var searchButton = document.getElementById("searchButton");
+var searchResults = document.getElementById("searchResults");
+var previousQuery = "";
 
 searchButton.addEventListener("click", function () {
   // Get the user's search query
-  const query = searchInput.value;
-
+  var query = searchInput.value;
   // Call a function to fetch Pokémon data based on the query
   searchPokemon(query);
 });
 
 function searchPokemon(query) {
-  // Use the Fetch API to send a request to your Django backend
-  fetch(`/api/search/?query=${query}`)
-    .then((response) => response.json())
-    .then((data) => {
-      // Display the results in the searchResults element
-      searchResults.innerHTML = JSON.stringify(data);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+  var searchResultsList = document.getElementById("searchResultsList");
+  searchResultsList.innerHTML = ""; // Clear any previous results
+  if (query !== previousQuery) {
+    // Use the Fetch API to send a request to your Django backend
+    fetch(`/api/search/?query=${query}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        // Display the results in the searchResultsList element
+        data.results.forEach((result) => {
+          var listItem = document.createElement("li"); // Create a new list item
+          listItem.textContent = result.name; // Set the text content of the list item
+          searchResultsList.appendChild(listItem); // Add the list item to the list
+        });
+        previousQuery = query; // Update the previousQuery to the current query
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
 }
