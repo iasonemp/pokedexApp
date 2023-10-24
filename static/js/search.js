@@ -3,6 +3,11 @@ var searchButton = document.getElementById("searchButton");
 var searchResults = document.getElementById("searchResults");
 var previousQuery = "";
 
+searchInput.addEventListener("input", function () {
+  var query = searchInput.value; // Get the current input value
+  searchPokemon(query);
+});
+
 searchButton.addEventListener("click", function () {
   // Get the user's search query
   var query = searchInput.value;
