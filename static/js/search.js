@@ -5,12 +5,14 @@ var previousQuery = "";
 
 searchInput.addEventListener("input", function () {
   var query = searchInput.value; // Get the current input value
+  query = query.replace(/[^a-zA-Z]/g, "");
   searchPokemon(query);
 });
 
 searchButton.addEventListener("click", function () {
   // Get the user's search query
   var query = searchInput.value;
+  query = query.replace(/[^a-zA-Z]/g, "");
   // Call a function to fetch Pokémon data based on the query
   searchPokemon(query);
 });
