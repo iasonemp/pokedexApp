@@ -1,7 +1,26 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
+from django.contrib import messages
 from .models import Pokemon
+from .forms import MyUserCreationForm
 import requests
+
+
+def registerPage(request):
+    form = MyUserCreationForm()
+    if request.method == 'POST':
+        form = MyUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, 'An error occurred during registration.')
+
+    return render(request, 'base/login_register.html', {'form': form})
+
 
 def search(request):
     query = request.GET.get('query', '')
