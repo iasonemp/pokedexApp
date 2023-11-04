@@ -58,7 +58,9 @@ ROOT_URLCONF = 'pokedexapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # Add this line
+        'DIRS': [
+            BASE_DIR / 'templates'
+            ],  # Add this line
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

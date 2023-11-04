@@ -9,7 +9,22 @@
   </head>
   <body>
     <div>You should be seeing this in both the home and the login page.</div>
-    {% block content %} {% endblock %}
+    <a href="{% url 'home' %}">Home</a>
+    {% if request.user.is_authenticated %}
+    <p>Hello {{request.user}}</p>
+    <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    <a href="{% url 'register' %}">Register</a>
+    <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+    <a href="http://127.0.0.1:8000/admin/">Admin</a>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% block content %} {% endblock %}
     <script src="{% static 'js/modal.js' %}"></script>
   </body>
 </html>

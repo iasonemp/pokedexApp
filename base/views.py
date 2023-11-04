@@ -1,10 +1,36 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
-from .models import Pokemon
+from django.contrib.auth import authenticate, login, logout
+from .models import Pokemon, User
 from .forms import MyUserCreationForm
 import requests
 
+def logoutUser(request):
+    logout(request)
+    return redirect('home')
+
+def loginPage(request):
+    if request.method == 'POST':
+        username = request.POST.get('username').lower()
+        password = request.POST.get('password')
+        
+        try:
+            user = User.objects.get(username=username)
+        except:
+            messages.error(request, 'User does not exist.')
+
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, 'Username OR password does not exist.')
+
+
+    context = {}
+    return render(request, 'components/loginPage.html', context)
 
 def registerPage(request):
     form = MyUserCreationForm()
@@ -19,7 +45,7 @@ def registerPage(request):
         else:
             messages.error(request, 'An error occurred during registration.')
 
-    return render(request, 'base/login_register.html', {'form': form})
+    return render(request, 'components/register.html', {'form': form})
 
 
 def search(request):
@@ -216,6 +242,3 @@ def home(request):
     pokemons = Pokemon.objects.all()
     context = {'pokemons': pokemons}
     return render(request, 'components/home.html', context)
-
-def login(request):
-    return render(request, 'components/login_register.html')
