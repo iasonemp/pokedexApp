@@ -11,6 +11,9 @@ def logoutUser(request):
     return redirect('home')
 
 def loginPage(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    
     if request.method == 'POST':
         username = request.POST.get('username').lower()
         password = request.POST.get('password')
@@ -33,6 +36,9 @@ def loginPage(request):
     return render(request, 'components/loginPage.html', context)
 
 def registerPage(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    
     form = MyUserCreationForm()
     if request.method == 'POST':
         form = MyUserCreationForm(request.POST)
