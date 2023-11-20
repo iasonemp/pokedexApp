@@ -1,6 +1,10 @@
-{% extends 'main.html' %} {% block content %}
+{% extends 'main.html' %} {% load socialaccount %} {% block content %}
 
 <h1>Register</h1>
+
+<a href="{% provider_login_url 'google' %}?next=/&amp;process=register"
+  >Sign Up with Google</a
+>
 
 <form class="form" method="POST" action="">
   {% csrf_token %}

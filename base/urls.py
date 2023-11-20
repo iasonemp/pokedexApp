@@ -1,4 +1,5 @@
 from django.urls import path
+from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
@@ -8,5 +9,5 @@ urlpatterns = [
     path('register/', views.registerPage, name="register"),
     path('populate/', views.populatePokemonDatabase, name="populate"),
     path('detail/<str:pokemon_name>', views.detail, name="detail"),
-    path('api/search/', views.search, name='search')
+    path('api/search/', views.search, name='search'),
 ]

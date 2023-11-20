@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import Pokemon, User
-from .forms import MyUserCreationForm
+from .models import Pokemon, User, Comment
+from .forms import MyUserCreationForm, CommentForm
 import requests
 
 def logoutUser(request):
@@ -62,9 +62,24 @@ def search(request):
 
 
 def detail(request, pokemon_name):
+
     pokemon = Pokemon.objects.get(name=pokemon_name)
+    comments = Comment.objects.filter(pokemon=pokemon)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user
+            comment.pokemon = pokemon
+            comment.save()
+    else:
+        form = CommentForm()
+
+
     starter = Pokemon.objects.get(name=pokemon.starter_form)
     context = {'starter_form': pokemon.starter_form, 
+                'comments': comments, 
+                'form': form,
                'starter_id' : starter.pokedex_number,
                'starter_type' : starter.types,
                'tier_1_evolution' : pokemon.tier_1_evolution, 
