@@ -1,5 +1,5 @@
-{% extends 'main.html' %} {% block content %} {% include 'searchbar.html' %}
-
+{% extends 'main.html' %} {% load static %}{% block content %} {% include
+'searchbar.html' %}
 <div>
   <div class="pokemon-container">
     {% for pokemon in pokemons %}
@@ -35,4 +35,5 @@
     {% endfor %}
   </div>
 </div>
+<script src="{% static 'js/modal.js' %}"></script>
 {% endblock %}

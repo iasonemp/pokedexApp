@@ -16,8 +16,17 @@ document.addEventListener("DOMContentLoaded", function () {
           // CREATE THE DIV
           let modalContent = document.createElement("div");
           // --- SPRITES ---
+          // COMMENTS
+          var comment_list = data.comment_list;
+          for (var i = 0; i < comment_list.length; i++) {
+            modalContent.innerHTML += `
+            <div>${comment_list[i].user}</div>
+            <div>${comment_list[i].body}</div>
+              `;
+          }
           // STARTER FORM
           modalContent.innerHTML += `
+            <button id="writeCommentButton">Write Comment</button>            
             <span class="inline-images" id="inline-images">
             <img src="${data.starter_sprite}" alt="Pokemon Sprite" class="pokemon-image" />
             <div>${data.starter_id}</div>
@@ -75,6 +84,14 @@ document.addEventListener("DOMContentLoaded", function () {
               <li>Special Defense: ${data.special_defense}</li>
               <li>Speed: ${data.speed}</li>
           `;
+          const writeCommentButton =
+            document.getElementById("writeCommentButton");
+          if (writeCommentButton) {
+            writeCommentButton.addEventListener("click", () => {
+              console.log("working");
+            });
+          }
+
           document.addEventListener("DOMContentLoaded", function () {
             var inlineImagesSpan = document.getElementById("inline-images");
             var divElement = document.createElement("div");

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from .models import Pokemon, User, Comment
 from .forms import MyUserCreationForm, CommentForm
@@ -53,6 +54,24 @@ def registerPage(request):
 
     return render(request, 'components/register.html', {'form': form})
 
+@login_required
+def leave_comment(request, pokemon_name):
+    pokemon = Pokemon.objects.get(name=pokemon_name)
+    
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user
+            comment.pokemon = pokemon
+            comment.body = request.POST.get('body')
+            comment.save()
+    else:
+        form = CommentForm()
+
+    context = {'form': form, 'pokemon': pokemon}
+    return render(request, 'comment_form_modal.html', context)
+
 
 def search(request):
     query = request.GET.get('query', '')
@@ -65,21 +84,19 @@ def detail(request, pokemon_name):
 
     pokemon = Pokemon.objects.get(name=pokemon_name)
     comments = Comment.objects.filter(pokemon=pokemon)
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.user = request.user
-            comment.pokemon = pokemon
-            comment.save()
-    else:
-        form = CommentForm()
-
+    comment_list = []
+    for comment in comments:
+        comment_dict = {
+            'user': comment.user.username,
+            'body': comment.body,
+            # 'created_at': comment.timestamp.strftime('%Y-%m-%d %H:%M:%S'),
+            # 'updated_at': comment.timestamp.strftime('%Y-%m-%d %H:%M:%S'),  # Assuming no update mechanism for now
+        }
+        comment_list.append(comment_dict)
 
     starter = Pokemon.objects.get(name=pokemon.starter_form)
     context = {'starter_form': pokemon.starter_form, 
-                'comments': comments, 
-                'form': form,
+               'comment_list': comment_list,
                'starter_id' : starter.pokedex_number,
                'starter_type' : starter.types,
                'tier_1_evolution' : pokemon.tier_1_evolution, 
