@@ -1,5 +1,6 @@
-{% extends 'main.html' %} {% load static %}{% block content %} {% include
-'searchbar.html' %}
+{% extends 'main.html' %} {% load static %} {% block content %}
+<script src="{% static 'js/modal.js' %}"></script>
+
 <div>
   <div class="pokemon-container">
     {% for pokemon in pokemons %}
@@ -9,14 +10,13 @@
           src="{{ pokemon.sprite }}"
           class="pokemon-image"
           data-pokemon-name="{{ pokemon.name }}"
-          onclick="openModal()"
         />
       </div>
       <!-- Modal container -->
       <div id="pokemon-modal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
-          <span class="close" onclick="closeModal()">&times;</span>
+          <span class="close">&times;</span>
 
           <div id="pokemon-info"></div>
         </div>
@@ -35,5 +35,5 @@
     {% endfor %}
   </div>
 </div>
-<script src="{% static 'js/modal.js' %}"></script>
+
 {% endblock %}

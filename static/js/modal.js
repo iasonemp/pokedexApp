@@ -26,7 +26,9 @@ document.addEventListener("DOMContentLoaded", function () {
           }
           // STARTER FORM
           modalContent.innerHTML += `
-            <button id="writeCommentButton">Write Comment</button>            
+            <h2>${data.name}</h2>
+            <img src="${data.sprite}" alt="Pokemon Sprite" class="pokemon-image" />
+            <button id="writeCommentButton" class="comment-button">Write Comment</button>
             <span class="inline-images" id="inline-images">
             <img src="${data.starter_sprite}" alt="Pokemon Sprite" class="pokemon-image" />
             <div>${data.starter_id}</div>
@@ -50,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
               for (var i = 0; i < SpriteLinks.length; i++) {
                 modalContent.innerHTML += `
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Arrow_right_font_awesome.svg/1200px-Arrow_right_font_awesome.svg.png" class="right-arrow" />
-                <img src="${SpriteLinks[i]}" alt="Pokemon Sprite" class="pokemon-image" />
+                <img src="${SpriteLinks[i]}" alt="Pokemon Sprite" class="pokemon-image  evolution-image" data-evolution-name="${NameSplit[i]}" />
                 <div>${TypeSplit[i]}</div>
                 <div>${NameSplit[i]}</div>
                 <div>${IdSplit[i]}</div>
@@ -64,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
           // --- TYPES ---
           // STARTER FORM
           var StarterTypeSplit = data.types.split(":");
-          console.log(StarterTypeSplit);
+
           modalContent.innerHTML += `
             <span class="inline-types" id="inline-types">`;
           for (var i = 0; i < StarterTypeSplit.length; i++) {
@@ -84,13 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
               <li>Special Defense: ${data.special_defense}</li>
               <li>Speed: ${data.speed}</li>
           `;
-          const writeCommentButton =
-            document.getElementById("writeCommentButton");
-          if (writeCommentButton) {
-            writeCommentButton.addEventListener("click", () => {
-              console.log("working");
-            });
-          }
 
           document.addEventListener("DOMContentLoaded", function () {
             var inlineImagesSpan = document.getElementById("inline-images");
@@ -111,7 +106,18 @@ document.addEventListener("DOMContentLoaded", function () {
     xhr.open("GET", "/detail/" + pokemon_name);
     xhr.send();
   }
+  // ****************************************************************
 
+  // const evolutionImages = document.querySelectorAll(".evolution-image");
+
+  // evolutionImages.forEach(function (evolutionImage) {
+  //   evolutionImage.addEventListener("click", function () {
+  //     const evolutionName = evolutionImage.getAttribute("data-evolution-name");
+  //     openModal(evolutionName);
+  //     console.log("hi");
+  //   });
+  // });
+  // ****************************************************************
   pokemonImages.forEach(function (image) {
     image.addEventListener("click", function () {
       const pokemon_name = image.getAttribute("data-pokemon-name");

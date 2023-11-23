@@ -95,7 +95,9 @@ def detail(request, pokemon_name):
         comment_list.append(comment_dict)
 
     starter = Pokemon.objects.get(name=pokemon.starter_form)
-    context = {'starter_form': pokemon.starter_form, 
+    context = {'name': pokemon.name,
+               'sprite': str(pokemon.sprite),
+                'starter_form': pokemon.starter_form, 
                'comment_list': comment_list,
                'starter_id' : starter.pokedex_number,
                'starter_type' : starter.types,

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-{% load static %}
 <html lang="en">
   <head>
+    {% load static %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
@@ -16,7 +16,7 @@
     {% else %}
     <a href="{% url 'register' %}">Register</a>
     <a href="{% url 'login' %}">Login</a>
-    {% endif %}
+    {% endif %} {% include 'searchbar.html' %}
     <a href="http://127.0.0.1:8000/admin/">Admin</a>
     {% if messages %}
     <ul class="messages">
