@@ -10,4 +10,5 @@ urlpatterns = [
     path('populate/', views.populatePokemonDatabase, name="populate"),
     path('detail/<str:pokemon_name>', views.detail, name="detail"),
     path('api/search/', views.search, name='search'),
+    path('pokemon/<str:pokemon_name>/', views.pokemonPage, name='pokemonPage'),
 ]

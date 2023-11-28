@@ -1,0 +1,16 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+
+<h1>{{ pokemon.name }}</h1>
+<p>Height: {{ pokemon.height }}</p>
+<p>Weight: {{ pokemon.weight }}</p>
+<img src="{{ pokemon.sprite }}" alt="Pokemon Sprite" class="pokemon-image" />
+
+{% if request.user.is_authenticated %}
+<div class="comment-form"></div>
+<form class="form" method="POST" action="">
+  {% csrf_token %} {{ form.as_p }}
+  <input type="submit" value="Submit" />
+</form>
+</div>
+{% endif %}
+{% endblock %}

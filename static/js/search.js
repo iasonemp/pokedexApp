@@ -38,7 +38,9 @@ function searchPokemon(query) {
 
         listItem.addEventListener("click", () => {
           // Handle the click event here
-          alert(`You clicked on ${result.name}`);
+          // alert(`You clicked on ${result.name}`);
+          const pokemonUrl = `http://127.0.0.1:8000/pokemon/${result.name}`;
+          window.location.href = pokemonUrl;
         });
 
         listItem.textContent = result.name; // Set the text content of the list item

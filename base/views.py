@@ -7,6 +7,23 @@ from .models import Pokemon, User, Comment
 from .forms import MyUserCreationForm, CommentForm
 import requests
 
+def pokemonPage(request, pokemon_name):
+    pokemon = Pokemon.objects.get(name=pokemon_name)
+    
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user
+            comment.pokemon = pokemon
+            comment.body = request.POST.get('body')
+            comment.save()
+    else:
+        form = CommentForm()
+
+    context = {'form': form, 'pokemon':pokemon}
+    return render(request, 'components/pokemonPage.html', context)
+
 def logoutUser(request):
     logout(request)
     return redirect('home')
@@ -97,8 +114,10 @@ def detail(request, pokemon_name):
     starter = Pokemon.objects.get(name=pokemon.starter_form)
     context = {'name': pokemon.name,
                'sprite': str(pokemon.sprite),
+               'starter_name': starter.name,
                 'starter_form': pokemon.starter_form, 
                'comment_list': comment_list,
+               'pokemon_id': pokemon.pokedex_number,
                'starter_id' : starter.pokedex_number,
                'starter_type' : starter.types,
                'tier_1_evolution' : pokemon.tier_1_evolution, 
