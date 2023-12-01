@@ -9,6 +9,7 @@ import requests
 
 def pokemonPage(request, pokemon_name):
     pokemon = Pokemon.objects.get(name=pokemon_name)
+    comments = Comment.objects.filter(pokemon=pokemon)
     
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -21,7 +22,7 @@ def pokemonPage(request, pokemon_name):
     else:
         form = CommentForm()
 
-    context = {'form': form, 'pokemon':pokemon}
+    context = {'form': form, 'pokemon':pokemon, 'comments': comments}
     return render(request, 'components/pokemonPage.html', context)
 
 def logoutUser(request):

@@ -13,4 +13,15 @@
 </form>
 </div>
 {% endif %}
+{% for comment in comments %}
+<p>
+  @{{comment.user}}
+  <span>{{comment.created|timesince}} ago</span>
+  <div>{{comment.body}}</div>
+  
+  {% if request.user == comment.user %}
+  <div>this is your comment</div>
+  {% endif %}
+</p>
+{% endfor %}
 {% endblock %}
