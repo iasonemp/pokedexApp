@@ -37,18 +37,33 @@
 <div class="pagination">
   <span class="step-links">
     {% if pokemons.has_previous %}
-    <a href="?page=1">&laquo; first</a>
-    <a href="?page={{ pokemons.previous_page_number }}">previous</a>
-    {% endif %}
+    <a href="?page=1">&laquo; 1</a>
+    <!-- only show left dots when you are on page 4+ -->
+    {% if pokemons.number > 3 %}
+    <span> ... </span>
+    <!-- don't show the first page twice on page 2 -->
+    {% endif %} {% if pokemons.number > 2 %}
+    <a href="?page={{ pokemons.previous_page_number }}">
+      {{ pokemons.previous_page_number }}</a
+    >
+    {% endif %} {% endif %}
 
-    <span class="current">
-      Page {{ pokemons.number }} of {{ pokemons.paginator.num_pages }}.
-    </span>
+    <span class="current"> [{{ pokemons.number }}] </span>
 
     {% if pokemons.has_next %}
-    <a href="?page={{ pokemons.next_page_number }}">next</a>
-    <a href="?page={{ pokemons.paginator.num_pages }}">last &raquo;</a>
+    <a href="?page={{ pokemons.next_page_number }}">
+      {{ pokemons.next_page_number }}
+    </a>
+    <!-- only show left dots when you are on a page lower than the second last -->
+    {% if pokemons.number < pokemons.paginator.num_pages|add:'-2' %}
+    <span> ... </span>
     {% endif %}
+    <!-- don't show the last page twice on page -1 -->
+    {% if pokemons.number < pokemons.paginator.num_pages|add:'-1' %}
+    <a href="?page={{ pokemons.paginator.num_pages }}"
+      >{{ pokemons.paginator.num_pages }} &raquo;</a
+    >
+    {% endif %} {% endif %}
   </span>
 </div>
 <script src="{% static 'js/modal.js' %}"></script>
