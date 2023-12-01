@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from .models import Pokemon, User, Comment
 from .forms import MyUserCreationForm, CommentForm
 import requests
+
 
 def pokemonPage(request, pokemon_name):
     pokemon = Pokemon.objects.get(name=pokemon_name)
@@ -299,6 +301,27 @@ def populatePokemonDatabase(request):
     return render(request, 'components/populate.html', context)
 
 def home(request):
-    pokemons = Pokemon.objects.all()
+    # Retrieve all pokemons
+    all_pokemons = Pokemon.objects.all()
+
+    # Set the number of pokemons to be displayed per page
+    pokemons_per_page = 3
+
+    # Use Django's Paginator to paginate the queryset
+    paginator = Paginator(all_pokemons, pokemons_per_page)
+
+    # Get the current page number from the request's GET parameters
+    page = request.GET.get('page', 1)
+
+    try:
+        # Get the paginated pokemons for the current page
+        pokemons = paginator.page(page)
+    except PageNotAnInteger:
+        # If the page parameter is not an integer, show the first page
+        pokemons = paginator.page(1)
+    except EmptyPage:
+        # If the page is out of range, deliver the last page
+        pokemons = paginator.page(paginator.num_pages)
+
     context = {'pokemons': pokemons}
     return render(request, 'components/home.html', context)

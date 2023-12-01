@@ -1,5 +1,4 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
-<script src="{% static 'js/modal.js' %}"></script>
 
 <div>
   <div class="pokemon-container">
@@ -35,5 +34,24 @@
     {% endfor %}
   </div>
 </div>
+<div class="pagination">
+  <span class="step-links">
+    {% if pokemons.has_previous %}
+    <a href="?page=1">&laquo; first</a>
+    <a href="?page={{ pokemons.previous_page_number }}">previous</a>
+    {% endif %}
+
+    <span class="current">
+      Page {{ pokemons.number }} of {{ pokemons.paginator.num_pages }}.
+    </span>
+
+    {% if pokemons.has_next %}
+    <a href="?page={{ pokemons.next_page_number }}">next</a>
+    <a href="?page={{ pokemons.paginator.num_pages }}">last &raquo;</a>
+    {% endif %}
+  </span>
+</div>
+<script src="{% static 'js/modal.js' %}"></script>
+<script src="{% static 'js/loadMore.js' %}"></script>
 
 {% endblock %}
