@@ -9,6 +9,15 @@ from .forms import MyUserCreationForm, CommentForm
 import requests
 
 
+def userProfile(request, username):
+    # favorites
+    # sets of 6
+    user = User.objects.get(username=username)
+    # comments = user.comment_set.all()
+    context = {'user': user}
+    # , 'comments': comments}
+    return render(request, 'components/userProfile.html', context)
+
 def pokemonPage(request, pokemon_name):
     pokemon = Pokemon.objects.get(name=pokemon_name)
     comments = Comment.objects.filter(pokemon=pokemon)
@@ -73,25 +82,6 @@ def registerPage(request):
             messages.error(request, 'An error occurred during registration.')
 
     return render(request, 'components/register.html', {'form': form})
-
-@login_required
-def leave_comment(request, pokemon_name):
-    pokemon = Pokemon.objects.get(name=pokemon_name)
-    
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.user = request.user
-            comment.pokemon = pokemon
-            comment.body = request.POST.get('body')
-            comment.save()
-    else:
-        form = CommentForm()
-
-    context = {'form': form, 'pokemon': pokemon}
-    return render(request, 'comment_form_modal.html', context)
-
 
 def search(request):
     query = request.GET.get('query', '')
@@ -303,12 +293,22 @@ def populatePokemonDatabase(request):
 def home(request):
     # Retrieve all pokemons
     all_pokemons = Pokemon.objects.all()
-
+    
+    pokemon_list = []
+    for pokemon in all_pokemons:
+        pokemon_dict = {
+        'name': pokemon.name,
+        'sprite': str(pokemon.sprite),
+        'pokemon_id': pokemon.pokedex_number,
+        'pokemon_type' : pokemon.types.split(':')
+        }
+        pokemon_list.append(pokemon_dict)
+    
     # Set the number of pokemons to be displayed per page
     pokemons_per_page = 3
 
     # Use Django's Paginator to paginate the queryset
-    paginator = Paginator(all_pokemons, pokemons_per_page)
+    paginator = Paginator(pokemon_list, pokemons_per_page)
 
     # Get the current page number from the request's GET parameters
     page = request.GET.get('page', 1)

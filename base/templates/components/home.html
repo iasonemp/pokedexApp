@@ -21,15 +21,13 @@
         </div>
       </div>
       <!-- OUTSIDE THE MODAL -->
-      <p>ID: {{ pokemon.pokedex_number }}</p>
+      <p>ID: {{ pokemon.pokemon_id }}</p>
       <h3>{{ pokemon.name }}</h3>
-      <p>{{ pokemon.types }}</p>
+      {% for Type in pokemon.pokemon_type %}
+      <span>{{ Type }}</span>
+      {% endfor %}
 
       <hr />
-      <!-- ΕΔΩ ΘΕΛΕΙ ΝΑ split(':') -->
-      <!-- {% for i in pokemon.types %}
-      <div>{{ i }}</div>
-      {% endfor %} -->
     </div>
     {% endfor %}
   </div>
@@ -54,7 +52,7 @@
     <a href="?page={{ pokemons.next_page_number }}">
       {{ pokemons.next_page_number }}
     </a>
-    <!-- only show left dots when you are on a page lower than the second last -->
+    <!-- only show right dots when you are on a page lower than the second last -->
     {% if pokemons.number < pokemons.paginator.num_pages|add:'-2' %}
     <span> ... </span>
     {% endif %}
@@ -67,6 +65,5 @@
   </span>
 </div>
 <script src="{% static 'js/modal.js' %}"></script>
-<script src="{% static 'js/loadMore.js' %}"></script>
 
 {% endblock %}

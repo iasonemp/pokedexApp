@@ -83,10 +83,6 @@ document.addEventListener("keydown", function (event) {
   if (event.key === "Escape" || event.key === "Esc") {
     searchResultsContainer.style.display = "none";
   }
-  if (event.key === "Enter") {
-    // Trigger a click on the search button
-    searchButton.click();
-  }
 
   if ((event.ctrlKey || event.metaKey) && event.key === "f") {
     // Prevent the browser's built-in Find feature
@@ -94,5 +90,12 @@ document.addEventListener("keydown", function (event) {
 
     // Focus on the search input field
     searchInput.focus();
+  }
+});
+
+searchInput.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    // Trigger a click on the search button
+    searchButton.click();
   }
 });
