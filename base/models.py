@@ -1,10 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
     
-class User(AbstractUser):
-    username = models.CharField(unique=True, max_length=200, null=True)
-    email = models.EmailField(unique=True, null=True)
-    # λογικα εδω θα μπουν αργοτερα και τα sets
 
 class Pokemon(models.Model):
     # CharField
@@ -36,6 +32,13 @@ class Pokemon(models.Model):
     
     def __str__(self):
         return self.name
+    
+class User(AbstractUser):
+    username = models.CharField(unique=True, max_length=200, null=True)
+    email = models.EmailField(unique=True, null=True)
+    favorites = models.ManyToManyField(Pokemon, related_name='favorited_by')
+
+    # λογικα εδω θα μπουν αργοτερα και τα sets
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

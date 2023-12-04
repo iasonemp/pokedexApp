@@ -1,3 +1,7 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
-<div>{{user.username}}</div>
-{% endblock %}
+<div>This is {{user.username}}'s profile.</div>
+{% if user.favorites.all %}
+<div>Favorite pokemons:</div>
+{% endif %} {% for favorite in user.favorites.all %}
+<div>{{favorite}}</div>
+{% endfor %} {% endblock %}

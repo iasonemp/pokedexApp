@@ -8,13 +8,20 @@ from .models import Pokemon, User, Comment
 from .forms import MyUserCreationForm, CommentForm
 import requests
 
+def addFavoritePokemon (request, pokemon_name):
+    pokemon = Pokemon.objects.get(name=pokemon_name)
+    request.user.favorites.add(pokemon)
+    return JsonResponse({'status': 'success'})
 
 def userProfile(request, username):
     # favorites
     # sets of 6
     user = User.objects.get(username=username)
+    # favorites = request.user.favorites.all()
+
     # comments = user.comment_set.all()
     context = {'user': user}
+    # , 'favorites': favorites}
     # , 'comments': comments}
     return render(request, 'components/userProfile.html', context)
 

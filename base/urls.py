@@ -12,4 +12,5 @@ urlpatterns = [
     path('detail/<str:pokemon_name>', views.detail, name="detail"),
     path('api/search/', views.search, name='search'),
     path('pokemon/<str:pokemon_name>/', views.pokemonPage, name='pokemonPage'),
+    path('add_favorite/<str:pokemon_name>/', views.addFavoritePokemon, name='add_favorite'),
 ]

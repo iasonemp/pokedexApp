@@ -4,7 +4,10 @@
 <p>Height: {{ pokemon.height }}</p>
 <p>Weight: {{ pokemon.weight }}</p>
 <img src="{{ pokemon.sprite }}" alt="Pokemon Sprite" class="pokemon-image" />
+{% if request.user.is_authenticated %}
+<button id="addToFavoritesButton" data-pokemon-name="{{ pokemon.name }}">Add to Favorites</button>
 
+{% endif %}
 {% if request.user.is_authenticated %}
 <div class="comment-form"></div>
 <form class="form" method="POST" action="">
@@ -24,5 +27,6 @@
   {% endif %}
 </p>
 {% endfor %}
+<script src="{% static 'js/favorites.js' %}"></script>
 
 {% endblock %}
