@@ -5,8 +5,11 @@
 <p>Weight: {{ pokemon.weight }}</p>
 <img src="{{ pokemon.sprite }}" alt="Pokemon Sprite" class="pokemon-image" />
 {% if request.user.is_authenticated %}
+{% if is_favorited %}
+<button id="removeFavoriteButton" data-pokemon-name="{{ pokemon.name }}">Remove from Favorites</button>
+{% else %}
 <button id="addToFavoritesButton" data-pokemon-name="{{ pokemon.name }}">Add to Favorites</button>
-
+{% endif %}
 {% endif %}
 {% if request.user.is_authenticated %}
 <div class="comment-form"></div>

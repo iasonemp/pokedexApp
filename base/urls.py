@@ -13,4 +13,5 @@ urlpatterns = [
     path('api/search/', views.search, name='search'),
     path('pokemon/<str:pokemon_name>/', views.pokemonPage, name='pokemonPage'),
     path('add_favorite/<str:pokemon_name>/', views.addFavoritePokemon, name='add_favorite'),
+    path('remove_favorite/<str:pokemon_name>/', views.removeFavoritePokemon, name='remove_favorite'),
 ]

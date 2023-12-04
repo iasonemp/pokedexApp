@@ -8,6 +8,11 @@ from .models import Pokemon, User, Comment
 from .forms import MyUserCreationForm, CommentForm
 import requests
 
+def removeFavoritePokemon (request, pokemon_name):
+    pokemon = Pokemon.objects.get(name=pokemon_name)
+    request.user.favorites.remove(pokemon)
+    return JsonResponse({'status': 'success'})
+
 def addFavoritePokemon (request, pokemon_name):
     pokemon = Pokemon.objects.get(name=pokemon_name)
     request.user.favorites.add(pokemon)
@@ -27,6 +32,8 @@ def userProfile(request, username):
 
 def pokemonPage(request, pokemon_name):
     pokemon = Pokemon.objects.get(name=pokemon_name)
+    is_favorited = request.user.favorites.filter(name=pokemon_name).exists()
+    
     comments = Comment.objects.filter(pokemon=pokemon)
     
     if request.method == 'POST':
@@ -40,7 +47,7 @@ def pokemonPage(request, pokemon_name):
     else:
         form = CommentForm()
 
-    context = {'form': form, 'pokemon':pokemon, 'comments': comments}
+    context = {'form': form, 'pokemon':pokemon, 'comments': comments, 'is_favorited': is_favorited}
     return render(request, 'components/pokemonPage.html', context)
 
 def logoutUser(request):

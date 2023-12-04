@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const addToFavoritesButton = document.getElementById("addToFavoritesButton");
+  const removeFavoriteButton = document.getElementById("removeFavoriteButton");
+
   if (addToFavoritesButton) {
     addToFavoritesButton.addEventListener("click", function () {
       const pokemon_name =
@@ -7,6 +9,15 @@ document.addEventListener("DOMContentLoaded", function () {
       addToFavorites(pokemon_name);
     });
   }
+
+  if (removeFavoriteButton) {
+    removeFavoriteButton.addEventListener("click", function () {
+      const pokemon_name =
+        removeFavoriteButton.getAttribute("data-pokemon-name");
+      removeFromFavorites(pokemon_name);
+    });
+  }
+
   function addToFavorites(pokemon_name) {
     fetch(`/add_favorite/${pokemon_name}/`, {
       method: "POST",
@@ -20,6 +31,26 @@ document.addEventListener("DOMContentLoaded", function () {
           alert("Pokémon added to favorites!");
         } else {
           alert("Failed to add Pokémon to favorites. Please try again.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+
+  function removeFromFavorites(pokemon_name) {
+    fetch(`/remove_favorite/${pokemon_name}/`, {
+      method: "POST",
+      headers: {
+        "X-CSRFToken": getCookie("csrftoken"),
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "success") {
+          alert("Pokémon removed from favorites.");
+        } else {
+          alert("Failed to remove Pokémon from favorites. Please try again.");
         }
       })
       .catch((error) => {
