@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from .models import Pokemon, User, Comment
 from .forms import MyUserCreationForm, CommentForm
+from .repeating_views.get_evolution_data import get_evolution_data
+
 import requests
 
 def removeFavoritePokemon (request, pokemon_name):
@@ -46,8 +48,9 @@ def pokemonPage(request, pokemon_name):
             comment.save()
     else:
         form = CommentForm()
-
-    context = {'form': form, 'pokemon':pokemon, 'comments': comments, 'is_favorited': is_favorited}
+    
+    evo_data = get_evolution_data(pokemon_name)
+    context = {'form': form, 'pokemon':pokemon, 'comments': comments, 'is_favorited': is_favorited, 'evo_data': evo_data}
     return render(request, 'components/pokemonPage.html', context)
 
 def logoutUser(request):
@@ -74,8 +77,6 @@ def loginPage(request):
             return redirect('home')
         else:
             messages.error(request, 'Username OR password does not exist.')
-
-
     context = {}
     return render(request, 'components/loginPage.html', context)
 
@@ -140,36 +141,8 @@ def detail(request, pokemon_name):
                'special_attack' : pokemon.special_attack,
                'special_defense' : pokemon.special_defense,
             }
-    evo_data = {}
-    if pokemon.tier_1_evolution:
-        all_evos = pokemon.tier_1_evolution + ':' + pokemon.tier_2_evolution
-        split_evos = all_evos.split(':')
-        evo_sprite = []
-        evo_type = []
-        evo_name = []
-        evo_id = []
-        evo_status = []
-        for evo in range(len(split_evos)):
-            try:
-                split_evos[evo] = Pokemon.objects.get(name=split_evos[evo])
-                evo_sprite.append(str(split_evos[evo].sprite))
-                evo_type.append(split_evos[evo].types)
-                evo_name.append(split_evos[evo].name)
-                evo_id.append(str(split_evos[evo].pokedex_number))
-                if split_evos[evo].name in pokemon.tier_1_evolution:
-                    evo_status.append('tier_1')
-                else:
-                    evo_status.append('tier_2')
-            except:
-                pass
-        evo_sprite = 'delimiter'.join(evo_sprite)
-        evo_type = 'delimiter'.join(evo_type)
-        evo_name = 'delimiter'.join(evo_name)
-        evo_id = 'delimiter'.join(evo_id)
-        evo_status = 'delimiter'.join(evo_status)
-        evo_data = {'evo_sprite' : evo_sprite, 'evo_type' : evo_type, 'evo_name' : evo_name, 'evo_id': evo_id,
-                    'evo_status' : evo_status}
-    context.update({'evo_data' : evo_data})
+    evo_data = get_evolution_data(pokemon_name)
+    context.update({'evo_data': evo_data})
     return JsonResponse(context)
 
 ####################################################################################
