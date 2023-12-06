@@ -12,14 +12,7 @@
         />
       </div>
       <!-- Modal container -->
-      <div id="pokemon-modal" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-          <span class="close">&times;</span>
-
-          <div id="pokemon-info"></div>
-        </div>
-      </div>
+      {% include 'components/modal_window.html' %}
       <!-- OUTSIDE THE MODAL -->
       <p>ID: {{ pokemon.pokemon_id }}</p>
       <h3>{{ pokemon.name }}</h3>
