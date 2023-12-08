@@ -35,9 +35,7 @@ def userProfile(request, username):
 def pokemonPage(request, pokemon_name):
     pokemon = Pokemon.objects.get(name=pokemon_name)
     is_favorited = request.user.favorites.filter(name=pokemon_name).exists()
-    
     comments = Comment.objects.filter(pokemon=pokemon)
-    
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -49,8 +47,9 @@ def pokemonPage(request, pokemon_name):
     else:
         form = CommentForm()
     
-    evo_data = get_evolution_data(pokemon_name)
-    context = {'form': form, 'pokemon':pokemon, 'comments': comments, 'is_favorited': is_favorited, 'evo_data': evo_data}
+    context = {'form': form, 'pokemon':pokemon, 'comments': comments, 
+               'is_favorited': is_favorited}
+    
     return render(request, 'components/pokemonPage.html', context)
 
 def logoutUser(request):
@@ -108,29 +107,13 @@ def search(request):
 def detail(request, pokemon_name):
 
     pokemon = Pokemon.objects.get(name=pokemon_name)
-    comments = Comment.objects.filter(pokemon=pokemon)
-    comment_list = []
-    for comment in comments:
-        comment_dict = {
-            'user': comment.user.username,
-            'body': comment.body,
-            # 'created_at': comment.timestamp.strftime('%Y-%m-%d %H:%M:%S'),
-            # 'updated_at': comment.timestamp.strftime('%Y-%m-%d %H:%M:%S'),  # Assuming no update mechanism for now
-        }
-        comment_list.append(comment_dict)
-
+    
     starter = Pokemon.objects.get(name=pokemon.starter_form)
     context = {'name': pokemon.name,
                'sprite': str(pokemon.sprite),
-               'starter_name': starter.name,
-                'starter_form': pokemon.starter_form, 
-               'comment_list': comment_list,
                'pokemon_id': pokemon.pokedex_number,
-               'starter_id' : starter.pokedex_number,
-               'starter_type' : starter.types,
                'tier_1_evolution' : pokemon.tier_1_evolution, 
                'tier_2_evolution' : pokemon.tier_2_evolution,
-               'starter_sprite' : str(starter.sprite),
                'types' : pokemon.types,
                'height' : pokemon.height,
                'weight' : pokemon.weight,

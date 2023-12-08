@@ -8,7 +8,6 @@
     <title>PokedexApp</title>
   </head>
   <body>
-    <div>You should be seeing this in both the home and the login page.</div>
     <a href="{% url 'home' %}">Home</a>
     {% if request.user.is_authenticated %}
     <p>
@@ -22,13 +21,9 @@
     <a href="{% url 'register' %}">Register</a>
     <a href="{% url 'login' %}">Login</a>
     {% endif %} {% include 'searchbar.html' %}
+
     <a href="http://127.0.0.1:8000/admin/">Admin</a>
-    {% if messages %}
-    <ul class="messages">
-      {% for message in messages %}
-      <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %} {% block content %} {% endblock %}
+    <div>Hint: Click on the pokemon to see the evolution tree!</div>
+    {% block content %} {% endblock %}
   </body>
 </html>

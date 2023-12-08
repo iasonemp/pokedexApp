@@ -1,18 +1,14 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
-
+<div>
+<div class="pokemon">
 <h1>{{ pokemon.name }}</h1>
+
 <p>Height: {{ pokemon.height }}</p>
 <p>Weight: {{ pokemon.weight }}</p>
-<img src="{{ pokemon.sprite }}" alt="Pokemon Sprite" class="pokemon-image" />
-
-<!-- Evolution Line if exists -->
-{% if evo_data %}
-<div>{{ evo_data.evo_name }}</div>
-  
-{% else %}
-<div>0 evolutions </div>
-{% endif %}
-
+<img src="{{ pokemon.sprite }}" alt="Pokemon Sprite" class="pokemon-image" data-pokemon-name="{{ pokemon.name }}"/>
+</div>
+{% include 'components/modal_window.html' %}
+</div>
 {% if request.user.is_authenticated %}
 {% if is_favorited %}
 <button id="removeFavoriteButton" data-pokemon-name="{{ pokemon.name }}">Remove from Favorites</button>
@@ -39,6 +35,7 @@
   {% endif %}
 </p>
 {% endfor %}
+<script src="{% static 'js/modal.js' %}"></script>
 <script src="{% static 'js/favorites.js' %}"></script>
 
 {% endblock %}

@@ -2,8 +2,10 @@ from ..models import Pokemon
 
 def get_evolution_data(pokemon_name):
     pokemon = Pokemon.objects.get(name=pokemon_name)
+    starter = Pokemon.objects.get(name=pokemon.starter_form)
     evo_data = {}
     if pokemon.tier_1_evolution:
+            
         all_evos = pokemon.tier_1_evolution + ':' + pokemon.tier_2_evolution
         split_evos = all_evos.split(':')
         evo_sprite = []
@@ -29,8 +31,12 @@ def get_evolution_data(pokemon_name):
         evo_name = 'delimiter'.join(evo_name)
         evo_id = 'delimiter'.join(evo_id)
         evo_status = 'delimiter'.join(evo_status)
-        evo_data = {'evo_sprite' : evo_sprite, 'evo_type' : evo_type, 'evo_name' : evo_name, 'evo_id': evo_id,
-                    'evo_status' : evo_status}
+        evo_data = {'evo_sprite' : evo_sprite, 'evo_type' : evo_type, 
+                    'evo_name' : evo_name, 'evo_id': evo_id,
+                    'evo_status' : evo_status, 'starter_name': starter.name,
+                    'starter_form': pokemon.starter_form,'starter_id' : starter.pokedex_number,
+                    'starter_type' : starter.types, 'starter_sprite' : str(starter.sprite),
+        }
         
     return evo_data
 

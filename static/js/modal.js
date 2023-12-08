@@ -40,12 +40,12 @@ document.addEventListener("DOMContentLoaded", function () {
             modalContent.innerHTML += `
             <hr>
             <span class="inline-images" id="inline-images">
-            <a href="http://127.0.0.1:8000/pokemon/${data.starter_name}"><img src="${data.starter_sprite}" alt="Pokemon Sprite" class="pokemon-image" /></a>
-            <div>${data.starter_name}</div>
-            <div>${data.starter_id}</div>
+            <a href="http://127.0.0.1:8000/pokemon/${data.evo_data.starter_name}"><img src="${data.evo_data.starter_sprite}" alt="Pokemon Sprite" class="pokemon-image" /></a>
+            <div>${data.evo_data.starter_name}</div>
+            <div>${data.evo_data.starter_id}</div>
           `;
             // STARTER type split in case of multiple types
-            var starterTypesMulti = data.starter_type.split(":");
+            var starterTypesMulti = data.evo_data.starter_type.split(":");
             for (var i = 0; i < starterTypesMulti.length; i++) {
               modalContent.innerHTML += `
               <div>${starterTypesMulti[i]}</div>
