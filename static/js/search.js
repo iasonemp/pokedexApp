@@ -14,7 +14,7 @@ searchButton.addEventListener("click", function () {
   var query = searchInput.value;
   query = query.replace(/[^a-zA-Z]/g, "");
   // Call a function to fetch Pokémon data based on the query
-  searchPokemon(query);
+  window.location.href = `/search/?q=${query}`;
 });
 
 function searchPokemon(query) {

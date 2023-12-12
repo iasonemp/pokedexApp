@@ -7,8 +7,49 @@ from django.contrib.auth import authenticate, login, logout
 from .models import Pokemon, User, Comment
 from .forms import MyUserCreationForm, CommentForm
 from .repeating_views.get_evolution_data import get_evolution_data
-
 import requests
+    
+   
+def searchPage (request):
+    query = request.GET.get('q', '')  # Get the search query from the request parameters
+    if request.user.is_authenticated:
+        user_favorites = request.user.favorites.filter(name__icontains=query)
+        other_pokemons = Pokemon.objects.filter(name__icontains=query).exclude(name__in=user_favorites.values('name'))
+        all_pokemons = list(user_favorites) + list(other_pokemons)
+    else:
+        all_pokemons = Pokemon.objects.filter(name__icontains=query)  # Case-insensitive search
+    
+    pokemon_list = []
+    for pokemon in all_pokemons:
+        pokemon_dict = {
+        'name': pokemon.name,
+        'sprite': str(pokemon.sprite),
+        'pokemon_id': pokemon.pokedex_number,
+        'pokemon_type' : pokemon.types.split(':')
+        }
+        pokemon_list.append(pokemon_dict)
+    
+    # Set the number of pokemons to be displayed per page
+    pokemons_per_page = 3
+
+    # Use Django's Paginator to paginate the queryset
+    paginator = Paginator(pokemon_list, pokemons_per_page)
+
+    # Get the current page number from the request's GET parameters
+    page = request.GET.get('page', 1)
+
+    try:
+        # Get the paginated pokemons for the current page
+        pokemons = paginator.page(page)
+    except PageNotAnInteger:
+        # If the page parameter is not an integer, show the first page
+        pokemons = paginator.page(1)
+    except EmptyPage:
+        # If the page is out of range, deliver the last page
+        pokemons = paginator.page(paginator.num_pages)
+
+    context = {'pokemons': pokemons}
+    return render(request, 'components/searchPage.html', context)
 
 def removeFavoritePokemon (request, pokemon_name):
     pokemon = Pokemon.objects.get(name=pokemon_name)
