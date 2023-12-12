@@ -4,12 +4,17 @@
     {% load static %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/general.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/navbar.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/searchbar.css' %}" />
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
     <title>PokedexApp</title>
   </head>
   <body>
     {% include 'components/reusable/navbar.html' %}    
-    
+
     {% block content %} 
     {% endblock %}
   </body>
