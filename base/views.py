@@ -262,7 +262,11 @@ def populatePokemonDatabase(request):
 
 def home(request):
     # Retrieve all pokemons
-    all_pokemons = Pokemon.objects.all()
+    user_favorites = request.user.favorites.all()
+    other_pokemons = Pokemon.objects.exclude(name__in=user_favorites.values('name'))
+    all_pokemons = list(user_favorites) + list(other_pokemons)
+
+    # all_pokemons = Pokemon.objects.all()
     
     pokemon_list = []
     for pokemon in all_pokemons:
