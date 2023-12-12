@@ -8,22 +8,9 @@
     <title>PokedexApp</title>
   </head>
   <body>
-    <a href="{% url 'home' %}">Home</a>
-    {% if request.user.is_authenticated %}
-    <p>
-      Hello
-      <a href="{% url 'user-profile' username=request.user.username %}"
-        >{{ request.user }}</a
-      >
-    </p>
-    <a href="{% url 'logout' %}">Logout</a>
-    {% else %}
-    <a href="{% url 'register' %}">Register</a>
-    <a href="{% url 'login' %}">Login</a>
-    {% endif %} {% include 'searchbar.html' %}
-
-    <a href="http://127.0.0.1:8000/admin/">Admin</a>
-    <div>Hint: Click on the pokemon to see the evolution tree!</div>
-    {% block content %} {% endblock %}
+    {% include 'components/reusable/navbar.html' %}    
+    
+    {% block content %} 
+    {% endblock %}
   </body>
 </html>
