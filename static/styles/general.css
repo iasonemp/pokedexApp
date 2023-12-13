@@ -1,35 +1,22 @@
 body {
-  background-color: darkgoldenrod;
+  margin: 0;
+  padding: 0;
 }
 
-/* Style the overlay container */
-#searchResultsContainer {
-  position: absolute; /* or "absolute" depending on your layout */
-  top: 3em; /* Adjust the positioning as needed */
-  left: 0.5em;
-  background-color: rgba(
-    173,
-    216,
-    230,
-    0.8
-  ); /* Background color for the overlay */
-  border: 1px solid #ccc; /* Add a border or other styles as desired */
-  z-index: 1000; /* Ensure it appears above other content */
-  max-height: 8.8em; /* Set a max height to make it scrollable if needed */
-  max-width: 18em;
-  min-width: 13em;
-  overflow-y: auto; /* Enable scrolling if content exceeds the max height */
-  display: none; /* Initially hide the container */
+.inputGeneral:focus {
+  outline: none;
 }
+
+.buttonGeneral {
+  cursor: pointer;
+}
+
+.buttonGeneral:focus {
+  outline: none;
+}
+
 #list-item {
   cursor: pointer; /* Set the cursor to a hand on hover */
-}
-/* Style the list within the container */
-#searchResultsList {
-  font-size: 2em;
-  list-style: none;
-  padding: 0;
-  margin: 0;
 }
 
 .pokemon-container {
