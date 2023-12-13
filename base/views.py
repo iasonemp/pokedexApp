@@ -9,7 +9,7 @@ from .forms import MyUserCreationForm, CommentForm
 from .repeating_views.get_evolution_data import get_evolution_data
 import requests
     
-   
+
 def searchPage (request):
     query = request.GET.get('q', '')  # Get the search query from the request parameters
     if request.user.is_authenticated:
@@ -134,11 +134,11 @@ def registerPage(request):
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('home')
         else:
             messages.error(request, 'An error occurred during registration.')
-
+        
     return render(request, 'components/register.html', {'form': form})
 
 def search(request):
