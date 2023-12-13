@@ -1,0 +1,11 @@
+#navbar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#upperNavbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 2rem;
+}

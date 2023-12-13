@@ -1,0 +1,58 @@
+#searchbarWrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+#searchInputAndButton {
+    display: flex;
+}
+
+#searchInputAndButton input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 8px 0 0 8px;
+    border: 1px solid #999999;
+    border-right: none;
+    background-color: transparent;
+}
+
+#searchInputAndButton button {
+    background-color: transparent;
+    border-radius: 0 8px 8px 0;
+    border: 1px solid #999999;
+    border-left: none;
+    padding: 0.7rem;
+}
+
+#searchInputAndButton input:focus {
+    outline: none;
+}
+
+#searchResultsContainer {
+    position: absolute; 
+    top: 3em; 
+    left: 0.5em;
+    background-color: rgba(
+      173,
+      216,
+      230,
+      0.8
+    );
+    border: 1px solid #ccc; /* Add a border or other styles as desired */
+    z-index: 1000; /* Ensure it appears above other content */
+    max-height: 8.8em; /* Set a max height to make it scrollable if needed */
+    max-width: 18em;
+    min-width: 13em;
+    overflow-y: auto; /* Enable scrolling if content exceeds the max height */
+    display: none; /* Initially hide the container */
+  }
+
+#searchResultsList {
+    font-size: 2em;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
