@@ -74,8 +74,11 @@ def userProfile(request, username):
     return render(request, 'components/userProfile.html', context)
 
 def pokemonPage(request, pokemon_name):
-    pokemon = Pokemon.objects.get(name=pokemon_name)
-    is_favorited = request.user.favorites.filter(name=pokemon_name).exists()
+    pokemon = Pokemon.objects.get(name=pokemon_name) 
+    if request.user.is_authenticated:
+        is_favorited = request.user.favorites.filter(name=pokemon_name).exists()
+    else:
+        is_favorited = False
     comments = Comment.objects.filter(pokemon=pokemon)
     if request.method == 'POST':
         form = CommentForm(request.POST)
