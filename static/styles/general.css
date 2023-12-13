@@ -3,16 +3,26 @@ body {
   padding: 0;
 }
 
+.inputGeneral {
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
 .inputGeneral:focus {
   outline: none;
 }
 
 .buttonGeneral {
   cursor: pointer;
+  font-family: 'Trebuchet MS', sans-serif;
 }
 
 .buttonGeneral:focus {
   outline: none;
+}
+
+.linkGeneral {
+  font-family: 'Trebuchet MS', sans-serif;
+  text-decoration: none;
 }
 
 #list-item {

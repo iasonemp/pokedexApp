@@ -7,5 +7,18 @@
 #upperNavbar {
     display: flex;
     justify-content: space-between;
-    padding: 0.5rem 2rem;
+    padding: 2rem;
+}
+
+#homeLink {
+    font-size: 1.2rem;
+}
+
+#navbarUserLinks {
+    display: flex;
+    gap: 2rem;
+}
+
+#navbarUserLinks a {
+    font-size: 1.2rem;
 }
