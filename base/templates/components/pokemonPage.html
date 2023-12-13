@@ -25,17 +25,18 @@
 </div>
 {% endif %}
 {% for comment in comments %}
-<p>
+<div id="comment-{{comment.id}}">
   @{{comment.user}}
   <span>{{comment.created|timesince}} ago</span>
   <div>{{comment.body}}</div>
   
   {% if request.user == comment.user %}
-  <div>this is your comment</div>
+  <button class="delete_comment" data-comment-id="{{ comment.id }}">Delete Comment</button>
   {% endif %}
-</p>
+</div>
 {% endfor %}
 <script src="{% static 'js/modal.js' %}"></script>
 <script src="{% static 'js/favorites.js' %}"></script>
+<script src="{% static 'js/delete_comment.js' %}"></script>
 
 {% endblock %}

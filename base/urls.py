@@ -14,6 +14,6 @@ urlpatterns = [
     path('pokemon/<str:pokemon_name>/', views.pokemonPage, name='pokemonPage'),
     path('add_favorite/<str:pokemon_name>/', views.addFavoritePokemon, name='add_favorite'),
     path('remove_favorite/<str:pokemon_name>/', views.removeFavoritePokemon, name='remove_favorite'),
-    path('search/', views.searchPage, name='search_results'),
-
+    # path('search/', views.searchPage, name='search_results'),
+    path('delete_comment/<str:comment_id>/', views.deleteComment, name="delete_comment"),
 ]
