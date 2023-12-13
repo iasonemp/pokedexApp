@@ -10,11 +10,11 @@
 {% include 'components/modal_window.html' %}
 </div>
 {% if request.user.is_authenticated %}
-{% if is_favorited %}
-<button id="removeFavoriteButton" data-pokemon-name="{{ pokemon.name }}">Remove from Favorites</button>
-{% else %}
-<button id="addToFavoritesButton" data-pokemon-name="{{ pokemon.name }}">Add to Favorites</button>
-{% endif %}
+  {% if is_favorited %}
+    <button id="favoriteButton" data-pokemon-name="{{ pokemon.name }}" data-action="remove">Remove from Favorites</button>
+  {% else %}
+    <button id="favoriteButton" data-pokemon-name="{{ pokemon.name }}" data-action="add">Add to Favorites</button>
+  {% endif %}
 {% endif %}
 {% if request.user.is_authenticated %}
 <div class="comment-form"></div>
