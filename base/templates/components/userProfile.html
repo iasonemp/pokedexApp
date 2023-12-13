@@ -3,7 +3,7 @@
 
 {% if user.favorites.all %}
 <div>Favorite pokemons:</div>
-{% endif %} {% for favorite in user.favorites.all %}
+{% for favorite in user.favorites.all %}
 <div>{{favorite}}</div>
 <div class="pokemon">
   <img
@@ -12,7 +12,9 @@
     data-pokemon-name="{{ favorite.name }}"
   />
 </div>
-{% include 'components/modal_window.html' %} {% endfor %}
+{% include 'components/modal_window.html' %} {% endfor %} {% else %}
+<div>This user has no favorite pokemons.</div>
+{% endif %}
 
 <script src="{% static 'js/modal.js' %}"></script>
 {% endblock %}
