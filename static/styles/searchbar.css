@@ -10,20 +10,21 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    padding: 0 2rem 2rem 2rem;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
     width: 100%;
 }
 
 #hintInSearchbar {
     font-family: 'Trebuchet MS', sans-serif;
     color: rgb(237,231,217, 0.9);
+    margin-left: 1rem;
 }
 
 #searchInputAreaWrapper {
     position: relative;
+    margin-left: 1rem;
 }
 
 #searchInputAndButton {
@@ -84,4 +85,20 @@
     font-family: 'Trebuchet MS', sans-serif;
     margin: 0 0.8rem 0.8rem 0.8rem;
     font-size: 1.2rem;
+}
+
+@media all and (max-width: 716px) {
+    #searchbarWrapper {
+        justify-content: center;
+    }
+
+    #hintInSearchbar {
+        margin-left: 0;
+        text-align: center;
+    }
+    
+    #searchInputAreaWrapper {
+        position: relative;
+        margin-left: 0;
+    }
 }

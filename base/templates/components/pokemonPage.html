@@ -1,13 +1,12 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
-<div>
-<div class="pokemon">
-<h1>{{ pokemon.name }}</h1>
-
-<p>Height: {{ pokemon.height }}</p>
-<p>Weight: {{ pokemon.weight }}</p>
-<img src="{{ pokemon.sprite }}" alt="Pokemon Sprite" class="pokemon-image" data-pokemon-name="{{ pokemon.name }}"/>
-</div>
-{% include 'components/modal_window.html' %}
+<div class="pokemon-container">
+  <div class="pokemon">
+    <h1>{{ pokemon.name }}</h1>
+    <p>Height: {{ pokemon.height }}</p>
+    <p>Weight: {{ pokemon.weight }}</p>
+    <img src="{{ pokemon.sprite }}" alt="Pokemon Sprite" class="pokemon-image" data-pokemon-name="{{ pokemon.name }}"/>
+  </div>
+  {% include 'components/modal_window.html' %}
 </div>
 {% if request.user.is_authenticated %}
   {% if is_favorited %}

@@ -3,12 +3,12 @@
 <div>
   <div class="pokemon-container">
     {% for pokemon in pokemons %}
-    <div>
-      <div class="pokemon">
+    <div class="pokemon">
+      <div class="pokemonImageWrapper">
         <img
-          src="{{ pokemon.sprite }}"
-          class="pokemon-image"
-          data-pokemon-name="{{ pokemon.name }}"
+        src="{{ pokemon.sprite }}"
+        class="pokemon-image"
+        data-pokemon-name="{{ pokemon.name }}"
         />
       </div>
       <!-- Modal container -->
@@ -19,7 +19,6 @@
       {% for Type in pokemon.pokemon_type %}
       <span>{{ Type }}</span>
       {% endfor %}
-
       <hr />
     </div>
     {% endfor %}
