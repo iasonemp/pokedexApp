@@ -1,20 +1,19 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
-<div>
-<div class="pokemon">
-<h1>{{ pokemon.name }}</h1>
-
-<p>Height: {{ pokemon.height }}</p>
-<p>Weight: {{ pokemon.weight }}</p>
-<img src="{{ pokemon.sprite }}" alt="Pokemon Sprite" class="pokemon-image" data-pokemon-name="{{ pokemon.name }}"/>
-</div>
-{% include 'components/modal_window.html' %}
+<div class="pokemon-container">
+  <div class="pokemon">
+    <h1>{{ pokemon.name }}</h1>
+    <p>Height: {{ pokemon.height }}</p>
+    <p>Weight: {{ pokemon.weight }}</p>
+    <img src="{{ pokemon.sprite }}" alt="Pokemon Sprite" class="pokemon-image" data-pokemon-name="{{ pokemon.name }}"/>
+  </div>
+  {% include 'components/modal_window.html' %}
 </div>
 {% if request.user.is_authenticated %}
-{% if is_favorited %}
-<button id="removeFavoriteButton" data-pokemon-name="{{ pokemon.name }}">Remove from Favorites</button>
-{% else %}
-<button id="addToFavoritesButton" data-pokemon-name="{{ pokemon.name }}">Add to Favorites</button>
-{% endif %}
+  {% if is_favorited %}
+    <button id="favoriteButton" data-pokemon-name="{{ pokemon.name }}" data-action="remove">Remove from Favorites</button>
+  {% else %}
+    <button id="favoriteButton" data-pokemon-name="{{ pokemon.name }}" data-action="add">Add to Favorites</button>
+  {% endif %}
 {% endif %}
 {% if request.user.is_authenticated %}
 <div class="comment-form"></div>
@@ -25,17 +24,18 @@
 </div>
 {% endif %}
 {% for comment in comments %}
-<p>
+<div id="comment-{{comment.id}}">
   @{{comment.user}}
   <span>{{comment.created|timesince}} ago</span>
   <div>{{comment.body}}</div>
   
   {% if request.user == comment.user %}
-  <div>this is your comment</div>
+  <button class="delete_comment" data-comment-id="{{ comment.id }}">Delete Comment</button>
   {% endif %}
-</p>
+</div>
 {% endfor %}
 <script src="{% static 'js/modal.js' %}"></script>
 <script src="{% static 'js/favorites.js' %}"></script>
+<script src="{% static 'js/delete_comment.js' %}"></script>
 
 {% endblock %}

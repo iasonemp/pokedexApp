@@ -1,20 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const addToFavoritesButton = document.getElementById("addToFavoritesButton");
-  const removeFavoriteButton = document.getElementById("removeFavoriteButton");
+  const favoriteButton = document.getElementById("favoriteButton");
 
-  if (addToFavoritesButton) {
-    addToFavoritesButton.addEventListener("click", function () {
-      const pokemon_name =
-        addToFavoritesButton.getAttribute("data-pokemon-name");
-      addToFavorites(pokemon_name);
-    });
-  }
+  if (favoriteButton) {
+    favoriteButton.addEventListener("click", function () {
+      const pokemon_name = favoriteButton.getAttribute("data-pokemon-name");
+      const action = favoriteButton.getAttribute("data-action");
 
-  if (removeFavoriteButton) {
-    removeFavoriteButton.addEventListener("click", function () {
-      const pokemon_name =
-        removeFavoriteButton.getAttribute("data-pokemon-name");
-      removeFromFavorites(pokemon_name);
+      if (action === "add") {
+        addToFavorites(pokemon_name);
+      } else {
+        removeFromFavorites(pokemon_name);
+      }
     });
   }
 
@@ -29,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((data) => {
         if (data.status === "success") {
           alert("Pokémon added to favorites!");
+          toggleButton("remove");
         } else {
           alert("Failed to add Pokémon to favorites. Please try again.");
         }
@@ -49,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((data) => {
         if (data.status === "success") {
           alert("Pokémon removed from favorites.");
+          toggleButton("add");
         } else {
           alert("Failed to remove Pokémon from favorites. Please try again.");
         }
@@ -56,6 +54,16 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch((error) => {
         console.error("Error:", error);
       });
+  }
+
+  function toggleButton(action) {
+    if (action === "add") {
+      favoriteButton.textContent = "Add to Favorites";
+      favoriteButton.setAttribute("data-action", "add");
+    } else {
+      favoriteButton.textContent = "Remove from Favorites";
+      favoriteButton.setAttribute("data-action", "remove");
+    }
   }
 
   // Function to get CSRF token from cookie
