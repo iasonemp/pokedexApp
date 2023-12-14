@@ -1,15 +1,25 @@
+/*
+  Color Palette:
+
+  black: #483C32 or rgb(72,60,50)
+  gold: #D5A021 or rgb(213,160,33)
+  white: #EDE7D9 or rgb(237,231,217)
+*/
+
 #searchbarWrapper {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
     gap: 1rem;
     padding: 0 2rem 2rem 2rem;
     align-items: center;
+    justify-content: space-between;
     margin-bottom: 1rem;
+    width: 100%;
 }
 
 #hintInSearchbar {
     font-family: 'Trebuchet MS', sans-serif;
+    color: rgb(237,231,217, 0.9);
 }
 
 #searchInputAreaWrapper {
@@ -24,18 +34,26 @@
     padding: 0.5rem 0.5rem 0.5rem 0.7rem;
     font-size: 1.2rem;
     border-radius: 8px 0 0 8px;
-    border: 1px solid #999999;
+    border: 1px solid rgb(213,160,33);
     border-right: none;
     background-color: transparent;
+    color: rgb(237,231,217, 0.9);
+}
+
+#searchInputAndButton input::placeholder {
+    color: rgb(237,231,217, 0.6);
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 1.2rem;
 }
 
 #searchInputAndButton button {
     background-color: transparent;
     border-radius: 0 8px 8px 0;
-    border: 1px solid #999999;
+    border: 1px solid rgb(213,160,33);
     border-left: none;
     padding: 0.7rem;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    color: rgb(213,160,33);
 }
 
 #searchInputAndButton input:focus {
@@ -43,10 +61,11 @@
 }
 
 #searchResultsContainer {
-    background-color: white;
+    background-color: rgb(72,60,50);
+    color: rgb(237,231,217, 0.9);
     border-radius: 8px;
     position: absolute;
-    border: 1px solid #ccc; /* Add a border or other styles as desired */
+    border: 1px solid rgb(213,160,33);
     max-height: 8.8em; /* Set a max height to make it scrollable if needed */
     width: 100%;
     overflow-y: auto; /* Enable scrolling if content exceeds the max height */

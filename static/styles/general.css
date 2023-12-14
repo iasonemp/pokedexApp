@@ -1,6 +1,15 @@
+/*
+  Color Palette:
+
+  black: #483C32 or rgb(72,60,50)
+  gold: #D5A021 or rgb(213,160,33)
+  white: #EDE7D9 or rgb(237,231,217)
+*/
+
 body {
   margin: 0;
   padding: 0;
+  background-color: rgb(72,60,50);
 }
 
 .inputGeneral {
