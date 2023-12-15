@@ -5,15 +5,14 @@
     {% for pokemon in pokemons %}
     <div>
       <div class="pokemon">
-        <img
-          src="{{ pokemon.sprite }}"
-          class="pokemon-image"
-          data-pokemon-name="{{ pokemon.name }}"
-        />
+        <a href="{% url 'pokemonPage' pokemon_name=pokemon.name %}">
+          <img
+            src="{{ pokemon.sprite }}"
+            class="pokemon-image"
+            data-pokemon-name="{{ pokemon.name }}"
+          />
+        </a>
       </div>
-      <!-- Modal container -->
-      {% include 'components/modal_window.html' %}
-      <!-- OUTSIDE THE MODAL -->
       <p>ID: {{ pokemon.pokemon_id }}</p>
       <h3>{{ pokemon.name }}</h3>
       {% for Type in pokemon.pokemon_type %}
