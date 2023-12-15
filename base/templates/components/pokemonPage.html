@@ -1,20 +1,20 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
 <div>
-<div class="pokemon">
-<h1>{{ pokemon.name }}</h1>
-
-<img src="{{ pokemon.sprite }}" alt="Pokemon Sprite" class="pokemon-image"/>
-</div> 
-{% if pokemon.tier_1_evolution %}
-<button id="evolutionButton" data-pokemon-name="{{ pokemon.name }}"">Evolutions</button>
-{% include 'components/modal_window.html' %}
-{% else %}
-<div>This Pokémon does not evolve.</div>
-{% endif %}
-</div>
-<p>Height: {{ pokemon.height }}</p>
-<p>Weight: {{ pokemon.weight }}</p>
-{% if request.user.is_authenticated %}
+  <div class="pokemon">
+  <h1>{{ pokemon.name }}</h1>
+  
+  <img src="{{ pokemon.sprite }}" alt="Pokemon Sprite" class="pokemon-image"/>
+  </div> 
+  {% if pokemon.tier_1_evolution %}
+  <button id="evolutionButton" data-pokemon-name="{{ pokemon.name }}"">Evolutions</button>
+  {% include 'components/modal_window.html' %}
+  {% else %}
+  <div>This Pokémon does not evolve.</div>
+  {% endif %}
+  </div>
+  <p>Height: {{ pokemon.height }}</p>
+  <p>Weight: {{ pokemon.weight }}</p>
+  {% if request.user.is_authenticated %}
   {% if is_favorited %}
     <button id="favoriteButton" data-pokemon-name="{{ pokemon.name }}" data-action="remove">Remove from Favorites</button>
   {% else %}

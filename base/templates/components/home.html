@@ -5,6 +5,7 @@
     {% for pokemon in pokemons %}
     <div>
       <div class="pokemon">
+        <div class="pokemonImageWrapper"></div>
         <a href="{% url 'pokemonPage' pokemon_name=pokemon.name %}">
           <img
             src="{{ pokemon.sprite }}"
@@ -18,7 +19,6 @@
       {% for Type in pokemon.pokemon_type %}
       <span>{{ Type }}</span>
       {% endfor %}
-
       <hr />
     </div>
     {% endfor %}
