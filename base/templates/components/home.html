@@ -5,14 +5,15 @@
     {% for pokemon in pokemons %}
     <div>
       <div class="pokemon">
-        <div class="pokemonImageWrapper"></div>
-        <a href="{% url 'pokemonPage' pokemon_name=pokemon.name %}">
-          <img
-            src="{{ pokemon.sprite }}"
-            class="pokemon-image"
-            data-pokemon-name="{{ pokemon.name }}"
-          />
-        </a>
+        <div class="pokemonImageWrapper">
+          <a href="{% url 'pokemonPage' pokemon_name=pokemon.name %}">
+            <img
+              src="{{ pokemon.sprite }}"
+              class="pokemon-image"
+              data-pokemon-name="{{ pokemon.name }}"
+            />
+          </a>
+        </div>
       </div>
       <p>ID: {{ pokemon.pokemon_id }}</p>
       <h3>{{ pokemon.name }}</h3>
