@@ -1,0 +1,86 @@
+.pokeTypeWrapper {
+    display: flex;
+    gap: 1rem;
+  }
+  
+.pokeType {
+  padding: 0.3rem 0.7rem;
+  border-radius: 3px;
+}
+
+.pokeType p {
+  margin: 0;
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
+.normalType {
+  background-color: '#A8A77A';
+}
+
+.fireType {
+  background-color: '#EE8130';
+}
+
+.waterType {
+  background-color: '#6390F0';
+}
+
+.electricType {
+  background-color: #F7D02C;
+}
+
+.grassType {
+  background-color: #7AC74C;
+}
+
+.iceType {
+  background-color: #96D9D6;
+}
+
+.fightingType {
+  background-color: #C22E28;
+}
+
+.poisonType {
+  background-color: #A33EA1;
+}
+
+.groundType {
+  background-color: #E2BF65;
+}
+
+.flyingType {
+  background-color: #A98FF3;
+}
+
+.psychicType {
+  background-color: #F95587;
+}
+
+.bugType {
+  background-color: #A6B91A;
+}
+
+.rockType {
+  background-color: #B6A136;
+}
+
+.ghostType {
+  background-color: #735797;
+}
+
+.dragonType {
+  background-color: #6F35FC;
+}
+
+.darkType {
+  background-color: #705746;
+}
+
+.steelType {
+  background-color: #B7B7CE;
+}
+
+.fairyType {
+  background-color: #D685AD;
+}
