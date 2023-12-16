@@ -1,12 +1,11 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
 <div>
-  <div class="pokemon">
+  <div>
   <h1>{{ pokemon.name }}</h1>
-  
   <img src="{{ pokemon.sprite }}" alt="Pokemon Sprite" class="pokemon-image"/>
   </div> 
   {% if pokemon.tier_1_evolution %}
-  <button id="evolutionButton" data-pokemon-name="{{ pokemon.name }}"">Evolutions</button>
+  <button id="evolutionButton" data-pokemon-name="{{ pokemon.name }}">Evolutions</button>
   {% include 'components/modal_window.html' %}
   {% else %}
   <div>This Pokémon does not evolve.</div>

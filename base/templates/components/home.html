@@ -14,13 +14,17 @@
             />
           </a>
         </div>
+        <p class="pokeId">#{{ pokemon.pokemon_id }}</p>
+        <h3 class="pokeName">{{ pokemon.name }}</h3>
+        <div class="pokeTypeWrapper">
+          {% for type in pokemon.pokemon_type %}
+          <div class="pokeType {{type}}Type">
+            <p>{{ type }}</p>
+          </div>
+          {% endfor %}
+        </div>
+        <hr />
       </div>
-      <p>ID: {{ pokemon.pokemon_id }}</p>
-      <h3>{{ pokemon.name }}</h3>
-      {% for Type in pokemon.pokemon_type %}
-      <span>{{ Type }}</span>
-      {% endfor %}
-      <hr />
     </div>
     {% endfor %}
   </div>
