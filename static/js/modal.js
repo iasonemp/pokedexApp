@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const pokemonImages = document.querySelectorAll(".pokemon-image");
+  const evolutionButton = document.getElementById("evolutionButton");
   const modal = document.getElementById("pokemon-modal");
   const pokemonInfo = document.getElementById("pokemon-info");
   const closeBtn = document.querySelector(".close");
@@ -13,32 +13,11 @@ document.addEventListener("DOMContentLoaded", function () {
           const data = JSON.parse(xhr.responseText);
           // CREATE THE DIV THAT WILL CONTAIN THE HTML CODE
           let modalContent = document.createElement("div");
-          // ABOUT THE POKEMON
-          modalContent.innerHTML += `
-            <h2>${data.name}</h2>
-            <a href="http://127.0.0.1:8000/pokemon/${data.name}"><img src="${data.sprite}" alt="Pokemon Sprite" class="pokemon-image" /></a>
-            <div>${data.pokemon_id}</div>
-            
-            `;
-          var TypeSplit = data.types.split(":");
-          for (var i = 0; i < TypeSplit.length; i++) {
-            modalContent.innerHTML += `<div>${TypeSplit[i]}</div>`;
-          }
-          modalContent.innerHTML += `
-            <p>Height: ${data.height}</p>
-            <p>Weight: ${data.weight}</p>
-            <li>HP: ${data.hp}</li>
-            <li>Attack: ${data.attack}</li>
-            <li>Defense: ${data.defense}</li>
-            <li>Special Attack: ${data.special_attack}</li>
-            <li>Special Defense: ${data.special_defense}</li>
-            <li>Speed: ${data.speed}</li>
-            `;
+
           // IF EVOLUTIONS, THEN EVOLUTION TREE
           if (data.evo_data.evo_sprite) {
             // STARTER sprite, name, id
             modalContent.innerHTML += `
-            <hr>
             <span class="inline-images" id="inline-images">
             <a href="http://127.0.0.1:8000/pokemon/${data.evo_data.starter_name}"><img src="${data.evo_data.starter_sprite}" alt="Pokemon Sprite" class="pokemon-image" /></a>
             <div>${data.evo_data.starter_name}</div>
@@ -113,12 +92,10 @@ document.addEventListener("DOMContentLoaded", function () {
   //     console.log("hi");
   //   });
   // });
-  // ****************************************************************
-  pokemonImages.forEach(function (image) {
-    image.addEventListener("click", function () {
-      const pokemon_name = image.getAttribute("data-pokemon-name");
-      openModal(pokemon_name);
-    });
+  // *********************************************
+  evolutionButton.addEventListener("click", function () {
+    const pokemon_name = evolutionButton.getAttribute("data-pokemon-name");
+    openModal(pokemon_name);
   });
 
   closeBtn.addEventListener("click", function () {

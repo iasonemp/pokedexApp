@@ -3,23 +3,28 @@
 <div>
   <div class="pokemon-container">
     {% for pokemon in pokemons %}
-    <div class="pokemon">
-      <div class="pokemonImageWrapper">
-        <img
-        src="{{ pokemon.sprite }}"
-        class="pokemon-image"
-        data-pokemon-name="{{ pokemon.name }}"
-        />
+    <div>
+      <div class="pokemon">
+        <div class="pokemonImageWrapper">
+          <a href="{% url 'pokemonPage' pokemon_name=pokemon.name %}">
+            <img
+              src="{{ pokemon.sprite }}"
+              class="pokemon-image"
+              data-pokemon-name="{{ pokemon.name }}"
+            />
+          </a>
+        </div>
+        <p class="pokeId">#{{ pokemon.pokemon_id }}</p>
+        <h3 class="pokeName">{{ pokemon.name }}</h3>
+        <div class="pokeTypeWrapper">
+          {% for type in pokemon.pokemon_type %}
+          <div class="pokeType {{type}}Type">
+            <p>{{ type }}</p>
+          </div>
+          {% endfor %}
+        </div>
+        <hr />
       </div>
-      <!-- Modal container -->
-      {% include 'components/modal_window.html' %}
-      <!-- OUTSIDE THE MODAL -->
-      <p>ID: {{ pokemon.pokemon_id }}</p>
-      <h3>{{ pokemon.name }}</h3>
-      {% for Type in pokemon.pokemon_type %}
-      <span>{{ Type }}</span>
-      {% endfor %}
-      <hr />
     </div>
     {% endfor %}
   </div>

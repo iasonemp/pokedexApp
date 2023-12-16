@@ -1,10 +1,14 @@
 {% load static %}
 
 <div id="searchbarWrapper">
-  <div id="hintInSearchbar">Hint: Click on the pokemon to see the evolution tree!</div>
   <div id="searchInputAreaWrapper">
     <div id="searchInputAndButton">
-      <input type="text" id="searchInput" placeholder="Search Pokémon" class="inputGeneral" />
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search Pokémon"
+        class="inputGeneral"
+      />
       <button id="searchButton" class="buttonGeneral">
         <i class="fas fa-search"></i>
       </button>
@@ -13,8 +17,6 @@
       <ul id="searchResultsList"></ul>
     </div>
   </div>
-  <div></div>
-  <div></div>
 </div> 
 
 <script src="{% static 'js/search.js' %}"></script>
