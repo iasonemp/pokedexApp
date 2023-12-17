@@ -1,28 +1,41 @@
+/*
+  Color Palette:
+
+  dark goldenrod: rgb(189,148,39)
+  light-gray: rgb(175,179,182)
+  medium-gray: rgb(89,82,71)
+  dark-gray: rgb(45,48,49)
+  black: rgb(13,4,5)
+*/
+
 .pokeTypeWrapper {
     display: flex;
     gap: 1rem;
   }
   
 .pokeType {
-  padding: 0.3rem 0.7rem;
+  padding: 0.2rem 0.7rem;
   border-radius: 3px;
 }
 
 .pokeType p {
   margin: 0;
   font-family: 'Trebuchet MS', sans-serif;
+  font-size: 0.9rem;
 }
 
 .normalType {
-  background-color: '#A8A77A';
+  background-color: #A8A77A;
 }
 
 .fireType {
-  background-color: '#EE8130';
+  background-color: #EE8130;
+  color: white;
 }
 
 .waterType {
-  background-color: '#6390F0';
+  background-color: #6390F0;
+  color: white;
 }
 
 .electricType {
@@ -39,10 +52,12 @@
 
 .fightingType {
   background-color: #C22E28;
+  color: white;
 }
 
 .poisonType {
   background-color: #A33EA1;
+  color: white;
 }
 
 .groundType {
@@ -55,18 +70,22 @@
 
 .psychicType {
   background-color: #F95587;
+  color: white;
 }
 
 .bugType {
   background-color: #A6B91A;
+  color: white;
 }
 
 .rockType {
   background-color: #B6A136;
+  color: white;
 }
 
 .ghostType {
   background-color: #735797;
+  color: white;
 }
 
 .dragonType {

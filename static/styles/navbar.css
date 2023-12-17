@@ -1,9 +1,11 @@
 /*
   Color Palette:
 
-  black: #483C32 or rgb(72,60,50)
-  gold: #D5A021 or rgb(213,160,33)
-  white: #EDE7D9 or rgb(237,231,217)
+  dark goldenrod: rgb(189,148,39)
+  light-gray: rgb(175,179,182)
+  medium-gray: rgb(89,82,71)
+  dark-gray: rgb(45,48,49)
+  black: rgb(13,4,5)
 */
 
 #navbar {
@@ -20,7 +22,7 @@
 
 #homeLink {
     font-size: 1.2rem;
-    color: rgb(213,160,33);
+    color: rgb(189,148,39);
 }
 
 #navbarUserLinks {
@@ -30,5 +32,5 @@
 
 #navbarUserLinks a {
     font-size: 1.2rem;
-    color: rgb(213,160,33);
+    color: rgb(189,148,39);
 }
