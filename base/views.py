@@ -288,16 +288,26 @@ def home(request):
     
     pokemon_list = []
     for pokemon in all_pokemons:
+        pokemon_id = str(pokemon.pokedex_number)
+        if len(pokemon_id) == 1:
+            pokemon_id = '000' + pokemon_id
+        elif len(pokemon_id) == 2:
+            pokemon_id = '00' + pokemon_id
+        elif len(pokemon_id) == 3:
+            pokemon_id = '0' + pokemon_id
+        else:
+            continue
+
         pokemon_dict = {
         'name': pokemon.name,
         'sprite': str(pokemon.sprite),
-        'pokemon_id': pokemon.pokedex_number,
+        'pokemon_id': pokemon_id,
         'pokemon_type' : pokemon.types.split(':')
         }
         pokemon_list.append(pokemon_dict)
     
     # Set the number of pokemons to be displayed per page
-    pokemons_per_page = 16
+    pokemons_per_page = 15
 
     # Use Django's Paginator to paginate the queryset
     paginator = Paginator(pokemon_list, pokemons_per_page)
