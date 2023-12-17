@@ -207,7 +207,7 @@ def detail(request, pokemon_name):
 
 # Create your views here.
 def populatePokemonDatabase(request):
-    for i in range(62,63):
+    for i in range(1013, 1014):
         response=requests.get(f'https://pokeapi.co/api/v2/pokemon/{i}').json()
                 ########## EVOLUTIONS ##########
         species_link = requests.get(f'https://pokeapi.co/api/v2/pokemon-species/{i}').json()
@@ -255,7 +255,10 @@ def populatePokemonDatabase(request):
             tier_2_evolution = tier_2_evolution,
             types = types,
             pokedex_number = response['id'],
-            sprite = response['sprites']['other']['dream_world']['front_default'],
+            ## OLD sprite link, doesn't work past pokemon ID > 600~
+            # sprite = response['sprites']['other']['dream_world']['front_default'],
+            ## NEW sprite link, works on every pokemon
+            sprite = response['sprites']['other']['official-artwork']['front_default'],
             height = response['height'], # dm, /10 = m
             weight = response['weight'], # dag, /10 = kg
             hp = response['stats'][0]['base_stat'],
@@ -294,7 +297,7 @@ def home(request):
         pokemon_list.append(pokemon_dict)
     
     # Set the number of pokemons to be displayed per page
-    pokemons_per_page = 3
+    pokemons_per_page = 16
 
     # Use Django's Paginator to paginate the queryset
     paginator = Paginator(pokemon_list, pokemons_per_page)
