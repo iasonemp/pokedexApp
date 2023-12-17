@@ -11,8 +11,14 @@
   <div>This Pokémon does not evolve.</div>
   {% endif %}
   </div>
-  <p>Height: {{ pokemon.height }}</p>
-  <p>Weight: {{ pokemon.weight }}</p>
+  <div>Height: {{ pokemon.height }}</div>
+  <div>Weight: {{ pokemon.weight }}</div>
+  <div>HP: {{ pokemon.hp }}</div>
+  <div>Attack: {{ pokemon.attack }}</div>
+  <div>Defense: {{ pokemon.defense }}</div>
+  <div>Special Attack: {{ pokemon.special_attack }}</div>
+  <div>Special Defense: {{ pokemon.special_defense }}</div>
+  <div>Speed: {{ pokemon.speed }}</div>
   {% if request.user.is_authenticated %}
   {% if is_favorited %}
     <button id="favoriteButton" data-pokemon-name="{{ pokemon.name }}" data-action="remove">Remove from Favorites</button>

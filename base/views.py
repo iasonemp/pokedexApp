@@ -39,6 +39,12 @@ def userProfile(request, username):
 
 def pokemonPage(request, pokemon_name):
     pokemon = Pokemon.objects.get(name=pokemon_name) 
+    # height from dm to cm
+    pokemon.height *= 10
+    pokemon.height = str(pokemon.height) + 'cm'
+    # weight from dg to kg
+    pokemon.weight /= 10
+    pokemon.weight = str(pokemon.weight) + 'kg'
     if request.user.is_authenticated:
         is_favorited = request.user.favorites.filter(name=pokemon_name).exists()
     else:
