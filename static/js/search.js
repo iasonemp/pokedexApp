@@ -2,22 +2,99 @@ var searchInput = document.getElementById("searchInput");
 var searchButton = document.getElementById("searchButton");
 var searchResults = document.getElementById("searchResults");
 var previousQuery = "";
+var nameSearchRadio = document.getElementById("nameSearch");
+var typeSearchRadio = document.getElementById("typeSearch");
 
 searchInput.addEventListener("input", function () {
-  var query = searchInput.value; // Get the current input value
+  // get user's query and clean it
+  var query = searchInput.value;
   query = query.replace(/[^a-zA-Z]/g, "");
-  searchPokemon(query);
+
+  if (nameSearchRadio.checked) {
+    nameSearchPokemon(query);
+  } else if (typeSearchRadio.checked) {
+    typeSearchPokemon(query);
+  }
 });
 
 searchButton.addEventListener("click", function () {
-  // Get the user's search query
+  // get user's query and clean it
   var query = searchInput.value;
   query = query.replace(/[^a-zA-Z]/g, "");
-  // Call a function to fetch Pokémon data based on the query
-  window.location.href = `/?q=${query}`;
+
+  // change url based on button checked
+  if (nameSearchRadio.checked) {
+    window.location.href = `/?name=${query}`;
+  } else if (typeSearchRadio.checked) {
+    window.location.href = `/?type=${query}`;
+  }
 });
 
-function searchPokemon(query) {
+function typeSearchPokemon(query) {
+  var searchResultsContainer = document.getElementById(
+    "searchResultsContainer"
+  );
+  var searchResultsList = document.getElementById("searchResultsList");
+  searchResultsList.innerHTML = ""; // Clear any previous results
+  // if (query !== previousQuery) {
+  // Use the Fetch API to send a request to your Django backend
+  fetch(`/api/type_search/?query=${query}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRFToken": getCookie("csrftoken"), // Make sure to include the CSRF token
+    },
+    body: JSON.stringify({ pokemonType: query }),
+  })
+    .then((response) => {
+      // Check if the response status is OK (200)
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      let data = response.json();
+      // Parse the JSON from the response
+      return data;
+    })
+    .then((data) => {
+      // Display the results in the searchResultsList element
+
+      data.results.forEach((result) => {
+        var listItem = document.createElement("li"); // Create a new list item
+        listItem.classList.add("list-item"); // Add a CSS class to the list item
+
+        listItem.addEventListener("click", () => {
+          //   // Handle the click event here
+          //   // alert(`You clicked on ${result.name}`);
+          // http://127.0.0.1:8000/pokemon/${result.name}
+          const typeUrl = ``;
+          window.location.href = typeUrl;
+        });
+
+        listItem.textContent = result; // Set the text content of the list item
+        searchResultsList.appendChild(listItem); // Add the list item to the list
+      });
+
+      // Update the visibility of the search results container
+      if (data.results.length > 0) {
+        searchResultsContainer.style.display = "block";
+      } else {
+        searchResultsContainer.style.display = "none";
+      }
+
+      previousQuery = query; // Update the previousQuery to the current query
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+  // }
+}
+function getCookie(name) {
+  var value = "; " + document.cookie;
+  var parts = value.split("; " + name + "=");
+  if (parts.length == 2) return parts.pop().split(";").shift();
+}
+
+function nameSearchPokemon(query) {
   var searchResultsContainer = document.getElementById(
     "searchResultsContainer"
   );
@@ -26,9 +103,10 @@ function searchPokemon(query) {
   searchResultsList.innerHTML = ""; // Clear any previous results
   // if (query !== previousQuery) {
   // Use the Fetch API to send a request to your Django backend
-  fetch(`/api/search/?query=${query}`)
+  fetch(`/api/name_search/?query=${query}`)
     .then((response) => {
-      return response.json();
+      let data = response.json();
+      return data;
     })
     .then((data) => {
       // Display the results in the searchResultsList element

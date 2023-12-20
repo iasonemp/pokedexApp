@@ -7,6 +7,8 @@ from django.contrib.auth import authenticate, login, logout
 from .models import Pokemon, User, Comment
 from .forms import MyUserCreationForm, CommentForm
 from .repeating_views.get_evolution_data import get_evolution_data
+from .enums import PokemonTypes
+import json
 import requests
     
 @login_required
@@ -111,17 +113,29 @@ def registerPage(request):
         
     return render(request, 'components/register.html', {'form': form})
 
-def search(request):
+
+# pokemon type search
+def type_search(request):
+    body = json.loads(request.body)
+    pokemon_type_search_input = body['pokemonType']
+    pokemon_types = list(map(lambda x: x.value, PokemonTypes))
+    type_search_results = []
+    for pokemon_type in pokemon_types:
+        if pokemon_type_search_input.lower() in pokemon_type.lower():
+            type_search_results.append(pokemon_type)
+    print(type_search_results)
+    return JsonResponse({'results': type_search_results})
+
+# pokemon name search
+def name_search(request):
     query = request.GET.get('query', '')
     results = Pokemon.objects.filter(name__icontains=query).values('name')
-    print(list(results))
+    # print(list(results))
     return JsonResponse({'results': list(results)})
 
 
 def detail(request, pokemon_name):
-
     pokemon = Pokemon.objects.get(name=pokemon_name)
-    
     starter = Pokemon.objects.get(name=pokemon.starter_form)
     context = {'name': pokemon.name,
                'sprite': str(pokemon.sprite),
@@ -278,16 +292,25 @@ def populatePokemonDatabase(request):
     return render(request, 'components/populate.html', context)
 
 def home(request):
-    search_query = request.GET.get('q', '')
+    # search_query = request.GET.get('q', '')
+    search_query = request.GET
     
     # Retrieve all pokemons
     if request.user.is_authenticated:
-        if search_query:  # Get the search query from the request parameters
-            user_favorites = request.user.favorites.filter(name__icontains=search_query)
-            other_pokemons = Pokemon.objects.filter(name__icontains=search_query).exclude(name__in=user_favorites.values('name'))
+        # if search_query:  # Get the search query from the request parameters
+        #     user_favorites = request.user.favorites.filter(name__icontains=search_query)
+        #     other_pokemons = Pokemon.objects.filter(name__icontains=search_query).exclude(name__in=user_favorites.values('name'))
+        if 'name' in search_query.keys() and 'type' not in search_query.keys():
+            name_search_query = search_query.get('name')
+            user_favorites = request.user.favorites.filter(name__icontains=name_search_query)
+            other_pokemons = Pokemon.objects.filter(name__icontains=name_search_query).exclude(name__in=user_favorites.values('name'))
+        elif 'type' in search_query.keys() and 'name' not in search_query.keys():
+            type_search_query = search_query.get('type')
+            user_favorites = request.user.favorites.filter(types__icontains=type_search_query)
+            other_pokemons = Pokemon.objects.filter(types__icontains=type_search_query).exclude(name__in=user_favorites.values('name'))
         else:
-            user_favorites = request.user.favorites.all()
-            other_pokemons = Pokemon.objects.exclude(name__in=user_favorites.values('name'))
+                user_favorites = request.user.favorites.all()
+                other_pokemons = Pokemon.objects.exclude(name__in=user_favorites.values('name'))
         all_pokemons = list(user_favorites) + list(other_pokemons)
     else: 
         all_pokemons = Pokemon.objects.all()
