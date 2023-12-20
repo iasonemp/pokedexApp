@@ -10,6 +10,7 @@
 
 #pokemon-outer-container {
   display: flex;
+  flex-direction: column;
   padding: 0 10%;
   background-image: repeating-linear-gradient(
   135deg,
@@ -99,8 +100,51 @@
     cursor: pointer;
   }
 
-  @media all and (max-width: 600px) {
-    #pokemon-outer-container {
-      padding: 0;
-    }
+.pagination {
+  background-color: rgb(45,48,49, 0.9);
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  gap: 2rem;
+}
+
+.paginationLink {
+  background-color: rgb(189,148,39);
+  padding: 0.3rem 0.5rem;
+  border-radius: 3px;
+  color: rgb(13,4,5);
+}
+
+.paginationLink p {
+  margin: 0;
+}
+
+.paginationDots {
+  display: flex;
+  align-items: flex-end;
+}
+
+.paginationDots p {
+  margin: 0;
+  font-family: 'Trebuchet MS', sans-serif;
+  font-size: 600;
+  color: rgb(175,179,182);
+}
+
+.currentPaginationLink {
+  background-color: rgb(175,179,182);
+  padding: 0.3rem 0.5rem;
+  border-radius: 3px;
+}
+
+.currentPaginationLink p {
+  margin: 0;
+  font-family: 'Trebuchet MS', sans-serif;
+  color: rgb(13,4,5);
+}
+
+@media all and (max-width: 600px) {
+  #pokemon-outer-container {
+    padding: 0;
   }
+}
