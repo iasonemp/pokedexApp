@@ -9,77 +9,78 @@
 */
 
 .pokeTypeWrapper {
-    display: flex;
-    gap: 1rem;
-  }
-  
+  display: flex;
+  gap: 1rem;
+}
+
 .pokeType {
   padding: 0.2rem 0.7rem;
   border-radius: 3px;
 }
 
 .pokeType p {
+  text-transform: capitalize;
   margin: 0;
-  font-family: 'Trebuchet MS', sans-serif;
+  font-family: "Trebuchet MS", sans-serif;
   font-size: 0.9rem;
 }
 
 .normalType {
-  background-color: #A8A77A;
+  background-color: #a8a77a;
 }
 
 .fireType {
-  background-color: #EE8130;
+  background-color: #ee8130;
   color: white;
 }
 
 .waterType {
-  background-color: #6390F0;
+  background-color: #6390f0;
   color: white;
 }
 
 .electricType {
-  background-color: #F7D02C;
+  background-color: #f7d02c;
 }
 
 .grassType {
-  background-color: #7AC74C;
+  background-color: #7ac74c;
 }
 
 .iceType {
-  background-color: #96D9D6;
+  background-color: #96d9d6;
 }
 
 .fightingType {
-  background-color: #C22E28;
+  background-color: #c22e28;
   color: white;
 }
 
 .poisonType {
-  background-color: #A33EA1;
+  background-color: #a33ea1;
   color: white;
 }
 
 .groundType {
-  background-color: #E2BF65;
+  background-color: #e2bf65;
 }
 
 .flyingType {
-  background-color: #A98FF3;
+  background-color: #a98ff3;
 }
 
 .psychicType {
-  background-color: #F95587;
+  background-color: #f95587;
   color: white;
 }
 
 .bugType {
-  background-color: #A6B91A;
+  background-color: #a6b91a;
   color: white;
 }
 
 .rockType {
-  background-color: #B6A136;
+  background-color: #b6a136;
   color: white;
 }
 
@@ -89,7 +90,7 @@
 }
 
 .dragonType {
-  background-color: #6F35FC;
+  background-color: #6f35fc;
 }
 
 .darkType {
@@ -97,9 +98,9 @@
 }
 
 .steelType {
-  background-color: #B7B7CE;
+  background-color: #b7b7ce;
 }
 
 .fairyType {
-  background-color: #D685AD;
+  background-color: #d685ad;
 }

@@ -47,6 +47,7 @@ def pokemonPage(request, pokemon_name):
     # weight from dg to kg
     pokemon.weight /= 10
     pokemon.weight = str(pokemon.weight) + 'kg'
+    pokemon.types = pokemon.types.split(':')
     if request.user.is_authenticated:
         is_favorited = request.user.favorites.filter(name=pokemon_name).exists()
     else:
@@ -326,7 +327,7 @@ def home(request):
             pokemon_id = '0' + pokemon_id
         else:
             continue
-
+        
         pokemon_dict = {
         'name': pokemon.name,
         'sprite': str(pokemon.sprite),

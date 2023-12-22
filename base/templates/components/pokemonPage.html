@@ -1,81 +1,104 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
 <div id="pokemonPageOuterWrapper">
   <div id="pokemonPageInnerWrapper">
-      <div id="pokemonPageNameAndImage">
-        <h1 >{{ pokemon.name }}</h1>
-        <img src="{{ pokemon.sprite }}" alt="Pokemon Sprite" class="pokemon-image"/>
-      </div>
-      <div class="evolutionsButtonWrapper">
-        {% if pokemon.tier_1_evolution %}
-        <button id="evolutionButton" data-pokemon-name="{{ pokemon.name }}">Evolutions</button>
-        {% include 'components/modal_window.html' %}
-        {% else %}
-        <div>This Pokémon does not evolve.</div>
-        {% endif %}
-      </div>
-      <div class="pokemonStatsWrapper">
-        <div>
-          <span class="pokestatsKey">Height: </span>
-          <span class="pokestatsValue">{{ pokemon.height }}</span>
+    <div id="pokemonPageNameAndImage">
+      <h1 class="pokeName">{{ pokemon.name }}</h1>
+      <img
+        src="{{ pokemon.sprite }}"
+        alt="Pokemon Sprite"
+        class="pokemon-image"
+      />
+    </div>
+    <div class="pokeTypeWrapper">
+      {% for type in pokemon.types %}
+      <a href="{% url 'home' %}?type={{ type }}">
+        <div class="pokeType {{type}}Type">
+          <p>{{ type }}</p>
         </div>
-        <div>
-          <span class="pokestatsKey">Weight: </span>
-          <span class="pokestatsValue">{{ pokemon.weight }}</span>
-        </div>
-        <div>
-          <span class="pokestatsKey">HP: </span>
-          <span class="pokestatsValue">{{ pokemon.hp }}</span>
-        </div>
-        <div>
-          <span class="pokestatsKey">Attack: </span>
-          <span class="pokestatsValue">{{ pokemon.attack }}</span>
-        </div>
-        <div>
-          <span class="pokestatsKey">Defense: </span>
-          <span class="pokestatsValue">{{ pokemon.defense }}</span>
-        </div>
-        <div>
-          <span class="pokestatsKey">Special Attack: </span>
-          <span class="pokestatsValue">{{ pokemon.special_attack }}</span>
-        </div>
-        <div>
-          <span class="pokestatsKey">Special Defense: </span>
-          <span class="pokestatsValue">{{ pokemon.special_defense }}</span>
-        </div>
-        <div>
-          <span class="pokestatsKey">Speed: </span>
-          <span class="pokestatsKey">{{ pokemon.speed }}</span>
-        </div>
-        {% if request.user.is_authenticated %}
-        {% if is_favorited %}
-          <button id="favoriteButton" data-pokemon-name="{{ pokemon.name }}" data-action="remove">Remove from Favorites</button>
-        {% else %}
-          <button id="favoriteButton" data-pokemon-name="{{ pokemon.name }}" data-action="add">Add to Favorites</button>
-        {% endif %}
+      </a>
+      {% endfor %}
+    </div>
+    <div class="evolutionsButtonWrapper">
+      {% if pokemon.tier_1_evolution %}
+      <button id="evolutionButton" data-pokemon-name="{{ pokemon.name }}">
+        Evolutions
+      </button>
+      {% include 'components/modal_window.html' %} {% else %}
+      <div>This Pokémon does not evolve.</div>
       {% endif %}
-      {% if request.user.is_authenticated %}
+    </div>
+    <div class="pokemonStatsWrapper">
+      <div>
+        <span class="pokestatsKey">Height: </span>
+        <span class="pokestatsValue">{{ pokemon.height }}</span>
+      </div>
+      <div>
+        <span class="pokestatsKey">Weight: </span>
+        <span class="pokestatsValue">{{ pokemon.weight }}</span>
+      </div>
+      <div>
+        <span class="pokestatsKey">HP: </span>
+        <span class="pokestatsValue">{{ pokemon.hp }}</span>
+      </div>
+      <div>
+        <span class="pokestatsKey">Attack: </span>
+        <span class="pokestatsValue">{{ pokemon.attack }}</span>
+      </div>
+      <div>
+        <span class="pokestatsKey">Defense: </span>
+        <span class="pokestatsValue">{{ pokemon.defense }}</span>
+      </div>
+      <div>
+        <span class="pokestatsKey">Special Attack: </span>
+        <span class="pokestatsValue">{{ pokemon.special_attack }}</span>
+      </div>
+      <div>
+        <span class="pokestatsKey">Special Defense: </span>
+        <span class="pokestatsValue">{{ pokemon.special_defense }}</span>
+      </div>
+      <div>
+        <span class="pokestatsKey">Speed: </span>
+        <span class="pokestatsKey">{{ pokemon.speed }}</span>
+      </div>
+      {% if request.user.is_authenticated %} {% if is_favorited %}
+      <button
+        id="favoriteButton"
+        data-pokemon-name="{{ pokemon.name }}"
+        data-action="remove"
+      >
+        Remove from Favorites
+      </button>
+      {% else %}
+      <button
+        id="favoriteButton"
+        data-pokemon-name="{{ pokemon.name }}"
+        data-action="add"
+      >
+        Add to Favorites
+      </button>
+
+      {% endif %} {% endif %} {% if request.user.is_authenticated %}
       <div class="comment-form"></div>
       <form class="form" method="POST" action="">
         {% csrf_token %} {{ form.as_p }}
         <input type="submit" value="Submit" />
       </form>
-      </div>
+    </div>
+    {% endif %} {% if comments %} {% for comment in comments %}
+    <div id="comment-{{comment.id}}">
+      @{{comment.user}}
+      <span>{{comment.created|timesince}} ago</span>
+      <div>{{comment.body}}</div>
+
+      {% if request.user == comment.user %}
+      <button class="delete_comment" data-comment-id="{{ comment.id }}">
+        Delete Comment
+      </button>
       {% endif %}
-      {% if comments %}
-      {% for comment in comments %}
-      <div id="comment-{{comment.id}}">
-        @{{comment.user}}
-        <span>{{comment.created|timesince}} ago</span>
-        <div>{{comment.body}}</div>
-        
-        {% if request.user == comment.user %}
-        <button class="delete_comment" data-comment-id="{{ comment.id }}">Delete Comment</button>
-        {% endif %}
-      </div>
-      {% endfor %}
-      {% else %}
-      <div>This pokemon has no comments.</div>
-      {% endif %}
+    </div>
+    {% endfor %} {% else %}
+    <div>This pokemon has no comments.</div>
+    {% endif %}
   </div>
 </div>
 <script src="{% static 'js/modal.js' %}"></script>
