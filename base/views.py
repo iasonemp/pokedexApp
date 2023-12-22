@@ -295,6 +295,8 @@ def populatePokemonDatabase(request):
 def home(request):
     # search_query = request.GET.get('q', '')
     search_query = request.GET
+    name_query = None
+    type_query = None
     
     # Retrieve all pokemons
     if request.user.is_authenticated:
@@ -305,10 +307,12 @@ def home(request):
             name_search_query = search_query.get('name')
             user_favorites = request.user.favorites.filter(name__icontains=name_search_query)
             other_pokemons = Pokemon.objects.filter(name__icontains=name_search_query).exclude(name__in=user_favorites.values('name'))
+            name_query = search_query.get('name')
         elif 'type' in search_query.keys() and 'name' not in search_query.keys():
             type_search_query = search_query.get('type')
             user_favorites = request.user.favorites.filter(types__icontains=type_search_query)
             other_pokemons = Pokemon.objects.filter(types__icontains=type_search_query).exclude(name__in=user_favorites.values('name'))
+            type_query = search_query.get('type')
         else:
                 user_favorites = request.user.favorites.all()
                 other_pokemons = Pokemon.objects.exclude(name__in=user_favorites.values('name'))
@@ -355,5 +359,6 @@ def home(request):
         # If the page is out of range, deliver the last page
         pokemons = paginator.page(paginator.num_pages)
 
-    context = {'pokemons': pokemons}
+    context = {'pokemons': pokemons, 'type_query': type_query, 'name_query': name_query}
+    print(search_query)
     return render(request, 'components/home.html', context)
