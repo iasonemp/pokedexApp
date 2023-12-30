@@ -13,23 +13,49 @@ document.addEventListener("DOMContentLoaded", function () {
           const data = JSON.parse(xhr.responseText);
           // CREATE THE DIV THAT WILL CONTAIN THE HTML CODE
           let modalContent = document.createElement("div");
+          modalContent.classList.add('modal-evolutions-wrapper')
 
           // IF EVOLUTIONS, THEN EVOLUTION TREE
           if (data.evo_data.evo_sprite) {
-            // STARTER sprite, name, id
-            modalContent.innerHTML += `
-            <span class="inline-images" id="inline-images">
-            <a href="http://127.0.0.1:8000/pokemon/${data.evo_data.starter_name}"><img src="${data.evo_data.starter_sprite}" alt="Pokemon Sprite" class="pokemon-image" /></a>
-            <div>${data.evo_data.starter_name}</div>
-            <div>${data.evo_data.starter_id}</div>
-          `;
+            // Create the evolution chain wrapper
+            var evolutionChainWrapper = document.createElement('div');
+            evolutionChainWrapper.classList.add('pokemonInEvolutionChainWrapper');
+            evolutionChainWrapper.classList.add('firstPokemonInEvolutionChain');            
+          
+            // Add content to the evolution chain wrapper
+            evolutionChainWrapper.innerHTML = `
+              <a href="http://127.0.0.1:8000/pokemon/${data.evo_data.starter_name}">
+                <img src="${data.evo_data.starter_sprite}" alt="Pokemon Sprite" class="pokemon-image" />
+              </a>
+              <div>${data.evo_data.starter_name}</div>
+              <div>${data.evo_data.starter_id}</div>
+            `;
+          
+            // Append the evolution chain wrapper to modalContent
+            modalContent.appendChild(evolutionChainWrapper);
+          
+            // Create a typeWrapper for the starter Pokemon
+            var starterTypeWrapper = document.createElement('div');
+            starterTypeWrapper.classList.add('pokemonTypeWrapper');
+          
             // STARTER type split in case of multiple types
             var starterTypesMulti = data.evo_data.starter_type.split(":");
             for (var i = 0; i < starterTypesMulti.length; i++) {
-              modalContent.innerHTML += `
-              <div>${starterTypesMulti[i]}</div>
-              `;
+              // Add types to the type wrapper
+              var typeDiv = document.createElement('div');
+              typeDiv.classList.add('pokeType')
+              typeDiv.classList.add( `${starterTypesMulti[i]}Type`)
+              //We create the <p> element inside the typeDiv and add it
+              var typeName = document.createElement('p');
+              typeName.textContent = starterTypesMulti[i];
+              typeDiv.appendChild(typeName);
+
+              starterTypeWrapper.appendChild(typeDiv);
             }
+          
+            // Append the type wrapper to the current evolution chain wrapper
+            evolutionChainWrapper.appendChild(starterTypeWrapper);
+          
             // EVOLUTION(S) : Sprites, Names, IDs, Types
 
             var SpriteLinks = data.evo_data.evo_sprite.split("delimiter");
@@ -39,26 +65,46 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (SpriteLinks.length > 0 && SpriteLinks[0] !== "") {
               for (var i = 0; i < SpriteLinks.length; i++) {
-                modalContent.innerHTML += `
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Arrow_right_font_awesome.svg/1200px-Arrow_right_font_awesome.svg.png" class="right-arrow" />
-                <a href="http://127.0.0.1:8000/pokemon/${NameSplit[i]}"><img src="${SpriteLinks[i]}" alt="Pokemon Sprite" class="pokemon-image evolution-image" data-evolution-name="${NameSplit[i]}" /></a>
-                <div>${NameSplit[i]}</div>
-                <div>${IdSplit[i]}</div>
-              `;
-                // EVOLUTION type split in case of multiple types
-                var evoTypesMulti = TypeSplit[i].split(":");
-                for (var j = 0; j < evoTypesMulti.length; j++) {
-                  modalContent.innerHTML += `
-                <div>${evoTypesMulti[j]}</div>
+                // Create the evolution chain wrapper
+                var evolutionChainWrapper = document.createElement('div');
+                evolutionChainWrapper.classList.add('pokemonInEvolutionChainWrapper');
+
+                //modalContent.innerHTML += `<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Arrow_right_font_awesome.svg/1200px-Arrow_right_font_awesome.svg.png" class="right-arrow" />`
+                // Add content to the evolution chain wrapper
+                let htmlContentString = `
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Arrow_right_font_awesome.svg/1200px-Arrow_right_font_awesome.svg.png" class="right-arrow" />
+                    <div class="evolutionPokemonDataWrapper">
+                      <a href="http://127.0.0.1:8000/pokemon/${NameSplit[i]}">
+                        <img src="${SpriteLinks[i]}" alt="Pokemon Sprite" class="pokemon-image evolution-image" data-evolution-name="${NameSplit[i]}" />
+                      </a>
+                      <div>${NameSplit[i]}</div>
+                      <div>${IdSplit[i]}</div>
+                      <div class="pokemonTypeWrapper">                  
                 `;
+
+                var evoTypesMulti = TypeSplit[i].split(":");
+
+                for (var j = 0; j <evoTypesMulti.length; j++) {
+                  htmlContentString += `<div class="pokeType ${evoTypesMulti[j]}Type">
+                                          <p>${evoTypesMulti[j]}</p>
+                                        </div>`;
                 }
+
+                htmlContentString += `  </div>
+                                      </div>`;
+
+                evolutionChainWrapper.innerHTML = htmlContentString;
+                // Append the evolution chain wrapper to modalContent
+                modalContent.appendChild(evolutionChainWrapper);
               }
             }
+            
           } else {
             // Handle case when there are no evolutions
             modalContent.innerHTML += `<hr>
             <div>This Pokémon doesn't have any evolutions.</div>`;
           }
+          
           modalContent.innerHTML += `
              </span>`;
 
@@ -72,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
           pokemonInfo.innerHTML = "";
           pokemonInfo.appendChild(modalContent);
 
-          modal.style.display = "block";
+          modal.style.display = "flex";
         } else {
           alert("Error fetching Pokémon data.");
         }
@@ -81,6 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
     xhr.open("GET", "/detail/" + pokemon_name);
     xhr.send();
   }
+
   // ****************************************************************
 
   // const evolutionImages = document.querySelectorAll(".evolution-image");
