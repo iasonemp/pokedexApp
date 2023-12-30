@@ -25,6 +25,7 @@ body {
 .buttonGeneral {
   cursor: pointer;
   font-family: 'Trebuchet MS', sans-serif;
+  border: none;
 }
 
 .buttonGeneral:focus {

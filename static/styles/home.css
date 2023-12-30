@@ -61,7 +61,7 @@
     height: 7rem;
   }
   .pokemon-image:hover {
-    cursor: pointer; /* Change the cursor to a pointer hand */
+    cursor: pointer; 
   }
   .right-arrow {
     vertical-align: top;
@@ -70,35 +70,7 @@
     height: 2em;
   }
   
-  /* CSS for the modal container */
-  .modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-  }
-  
-  /* CSS for the modal content */
-  .modal-content {
-    background-color: #fff;
-    margin: 10% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 60%;
-    max-height: 60vh; /* Adjust as needed */
-    overflow-y: auto;
-  }
-  
-  /* Close button */
-  .close {
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-  }
+
 
 .pagination {
   background-color: rgb(45,48,49, 0.9);
