@@ -11,7 +11,7 @@
 #pokemonPageOuterWrapper {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: auto;
     padding: 0 10%;
     background-image: repeating-linear-gradient(
     135deg,

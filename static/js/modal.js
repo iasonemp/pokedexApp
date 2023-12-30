@@ -43,7 +43,13 @@ document.addEventListener("DOMContentLoaded", function () {
             for (var i = 0; i < starterTypesMulti.length; i++) {
               // Add types to the type wrapper
               var typeDiv = document.createElement('div');
-              typeDiv.textContent = starterTypesMulti[i];
+              typeDiv.classList.add('pokeType')
+              typeDiv.classList.add( `${starterTypesMulti[i]}Type`)
+              //We create the <p> element inside the typeDiv and add it
+              var typeName = document.createElement('p');
+              typeName.textContent = starterTypesMulti[i];
+              typeDiv.appendChild(typeName);
+
               starterTypeWrapper.appendChild(typeDiv);
             }
           
@@ -67,22 +73,25 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Add content to the evolution chain wrapper
                 let htmlContentString = `
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Arrow_right_font_awesome.svg/1200px-Arrow_right_font_awesome.svg.png" class="right-arrow" />
-                    <div id="evolutionPokemonDataWrapper">
+                    <div class="evolutionPokemonDataWrapper">
                       <a href="http://127.0.0.1:8000/pokemon/${NameSplit[i]}">
                         <img src="${SpriteLinks[i]}" alt="Pokemon Sprite" class="pokemon-image evolution-image" data-evolution-name="${NameSplit[i]}" />
                       </a>
                       <div>${NameSplit[i]}</div>
                       <div>${IdSplit[i]}</div>
-                  
+                      <div class="pokemonTypeWrapper">                  
                 `;
 
                 var evoTypesMulti = TypeSplit[i].split(":");
 
                 for (var j = 0; j <evoTypesMulti.length; j++) {
-                  htmlContentString += `<div>${evoTypesMulti[j]}</div>`;
+                  htmlContentString += `<div class="pokeType ${evoTypesMulti[j]}Type">
+                                          <p>${evoTypesMulti[j]}</p>
+                                        </div>`;
                 }
 
-                htmlContentString += `</div>`;
+                htmlContentString += `  </div>
+                                      </div>`;
 
                 evolutionChainWrapper.innerHTML = htmlContentString;
                 // Append the evolution chain wrapper to modalContent
@@ -109,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
           pokemonInfo.innerHTML = "";
           pokemonInfo.appendChild(modalContent);
 
-          modal.style.display = "block";
+          modal.style.display = "flex";
         } else {
           alert("Error fetching Pokémon data.");
         }
