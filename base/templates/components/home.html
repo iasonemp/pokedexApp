@@ -18,9 +18,11 @@
         <h3 class="pokeName">{{ pokemon.name }}</h3>
         <div class="pokeTypeWrapper">
           {% for type in pokemon.pokemon_type %}
-          <div class="pokeType {{type}}Type">
-            <p>{{ type }}</p>
-          </div>
+          <a href="{% url 'home' %}?type={{ type }}">
+            <div class="pokeType {{type}}Type">
+              <p>{{ type }}</p>
+            </div>
+          </a>
           {% endfor %}
         </div>
         <hr />
@@ -29,44 +31,55 @@
     {% endfor %}
   </div>
   <div class="pagination">
-      {% if pokemons.has_previous %}
-      <a href="?page=1" class="linkGeneral paginationLink">
-        <p>1</p>
-      </a>
-      <!-- only show left dots when you are on page 4+ -->
-      {% if pokemons.number > 3 %}
-      <div class="paginationDots">
-        <p>...</p>
-      </div>
-      <!-- don't show the first page twice on page 2 -->
-      {% endif %} {% if pokemons.number > 2 %}
-      <a href="?page={{ pokemons.previous_page_number }}" class="linkGeneral paginationLink">
-        <p>{{ pokemons.previous_page_number }}</p>
-      </a>
-      {% endif %} {% endif %}
-
-      <div class="currentPaginationLink"> 
-        <p>{{ pokemons.number }}</p>
-      </div>
-
-      {% if pokemons.has_next %}
-      <a href="?page={{ pokemons.next_page_number }}" class="linkGeneral paginationLink">
-        <p>{{ pokemons.next_page_number }}</p>
-      </a>
-      <!-- only show right dots when you are on a page lower than the second last -->
-      {% if pokemons.number < pokemons.paginator.num_pages|add:'-2' %}
-      <div class="paginationDots">
-        <p>...</p>
-      </div>
-      {% endif %}
-      <!-- don't show the last page twice on page -1 -->
-      {% if pokemons.number < pokemons.paginator.num_pages|add:'-1' %}
-      <a href="?page={{ pokemons.paginator.num_pages }}" class="linkGeneral paginationLink">
-        <p>{{pokemons.paginator.num_pages}}</p>
-      </a>
-      {% endif %} {% endif %}
+    {% if pokemons.has_previous %}
+    <a
+      href="?page=1{% if type_query %}&type={{ type_query }}{% endif %}{% if name_query %}&name={{ name_query }}{% endif %}"
+      class="linkGeneral paginationLink"
+    >
+      <p>1</p>
+    </a>
+    <!-- only show left dots when you are on page 4+ -->
+    {% if pokemons.number > 3 %}
+    <div class="paginationDots">
+      <p>...</p>
     </div>
-</div>
+    <!-- don't show the first page twice on page 2 -->
+    {% endif %} {% if pokemons.number > 2 %}
+    <a
+      href="?page={{ pokemons.previous_page_number }}{% if type_query %}&type={{ type_query }}{% endif %}{% if name_query %}&name={{ name_query }}{% endif %}"
+      class="linkGeneral paginationLink"
+    >
+      <p>{{ pokemons.previous_page_number }}</p>
+    </a>
+    {% endif %} {% endif %}
 
+    <div class="currentPaginationLink">
+      <p>{{ pokemons.number }}</p>
+    </div>
+
+    {% if pokemons.has_next %}
+    <a
+      href="?page={{ pokemons.next_page_number }}{% if type_query %}&type={{ type_query }}{% endif %}{% if name_query %}&name={{ name_query }}{% endif %}"
+      class="linkGeneral paginationLink"
+    >
+      <p>{{ pokemons.next_page_number }}</p>
+    </a>
+    <!-- only show right dots when you are on a page lower than the second last -->
+    {% if pokemons.number < pokemons.paginator.num_pages|add:'-2' %}
+    <div class="paginationDots">
+      <p>...</p>
+    </div>
+    {% endif %}
+    <!-- don't show the last page twice on page -1 -->
+    {% if pokemons.number < pokemons.paginator.num_pages|add:'-1' %}
+    <a
+      href="?page={{ pokemons.paginator.num_pages }}{% if type_query %}&type={{ type_query }}{% endif %}{% if name_query %}&name={{ name_query }}{% endif %}"
+      class="linkGeneral paginationLink"
+    >
+      <p>{{pokemons.paginator.num_pages}}</p>
+    </a>
+    {% endif %} {% endif %}
+  </div>
+</div>
 
 {% endblock %}

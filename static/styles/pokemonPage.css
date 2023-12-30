@@ -7,94 +7,95 @@
   dark-gray: rgb(45,48,49)
   black: rgb(13,4,5)
 */
-
+.pokeName {
+  text-transform: capitalize;
+}
 #pokemonPageOuterWrapper {
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    padding: 0 10%;
-    background-image: repeating-linear-gradient(
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  padding: 0 10%;
+  background-image: repeating-linear-gradient(
     135deg,
     #595247,
     #595247 10px,
     #2d3031 10px,
     #2d3031 40px
-    );
+  );
 }
 
 #pokemonPageInnerWrapper {
-    background-color:  rgb(45,48,49, 0.9);
-    display: flex;
-    height: 100vh;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    padding-top: 50px;
+  background-color: rgb(45, 48, 49, 0.9);
+  display: flex;
+  height: 100vh;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding-top: 50px;
 }
 
-.pokemonPageNameAndImage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+#pokemonPageNameAndImage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .pokemonPageTitle {
-    font-family: 'Trebuchet MS', sans-serif;
-    color: rgb(175,179,182);
+  font-family: "Trebuchet MS", sans-serif;
+  color: rgb(175, 179, 182);
 }
 
 .pokemonPageImageWrapper {
-    padding: 1.5rem;
-    border-radius: 50%;
-    background-color: rgb(237,231,217, 0.9);
+  padding: 1.5rem;
+  border-radius: 50%;
+  background-color: rgb(237, 231, 217, 0.9);
 }
 
 .pokemonPageImage {
-    width: 15rem;
-    height: 15rem;
+  width: 15rem;
+  height: 15rem;
 }
 
 .evolutionsButtonWrapper {
-    display: flex;
-    padding-top: 30px;
-    align-items: center;
+  display: flex;
+  padding-top: 30px;
+  align-items: center;
 }
 
 #evolutionButton {
-    background-color: rgb(189,148,39);
-    padding: 0.4rem 0.7rem;
-    color: rgb(13,4,5);
-    font-size: 1.2rem;
-    border-radius: 3px;
+  background-color: rgb(189, 148, 39);
+  padding: 0.4rem 0.7rem;
+  color: rgb(13, 4, 5);
+  font-size: 1.2rem;
+  border-radius: 3px;
 }
 
 .pokemonStatsWrapper {
-    display: flex;
-    flex-direction: column;
-    padding-top: 100px;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  padding-top: 100px;
+  gap: 1rem;
 }
 
 .pokestatsKey {
-    font-family: 'Trebuchet MS', sans-serif;
-    color: rgb(175,179,182);
-    font-size: 1.2rem;
+  font-family: "Trebuchet MS", sans-serif;
+  color: rgb(175, 179, 182);
+  font-size: 1.2rem;
 }
 
 .pokestatsValue {
-    font-family: 'Trebuchet MS', sans-serif;
-    color: rgb(189,148,39);
-    font-size: 1.2rem;
+  font-family: "Trebuchet MS", sans-serif;
+  color: rgb(189, 148, 39);
+  font-size: 1.2rem;
 }
-
 .pokemonNoCommentsPhrase {
-    margin: 2rem 0;
-    color: rgb(175,179,182);
-    font-family: 'Trebuchet MS', sans-serif;
+  margin: 2rem 0;
+  color: rgb(175, 179, 182);
+  font-family: "Trebuchet MS", sans-serif;
 }
 
 @media all and (max-width: 600px) {
-    #pokemonPageOuterWrapper {
-        padding: 0;
-    }
+  #pokemonPageOuterWrapper {
+    padding: 0;
+  }
 }

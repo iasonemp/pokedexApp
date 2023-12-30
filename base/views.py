@@ -47,6 +47,7 @@ def pokemonPage(request, pokemon_name):
     # weight from dg to kg
     pokemon.weight /= 10
     pokemon.weight = str(pokemon.weight) + 'kg'
+    pokemon.types = pokemon.types.split(':')
     if request.user.is_authenticated:
         is_favorited = request.user.favorites.filter(name=pokemon_name).exists()
     else:
@@ -294,26 +295,37 @@ def populatePokemonDatabase(request):
 def home(request):
     # search_query = request.GET.get('q', '')
     search_query = request.GET
+    name_query = None
+    type_query = None
     
-    # Retrieve all pokemons
     if request.user.is_authenticated:
-        # if search_query:  # Get the search query from the request parameters
-        #     user_favorites = request.user.favorites.filter(name__icontains=search_query)
-        #     other_pokemons = Pokemon.objects.filter(name__icontains=search_query).exclude(name__in=user_favorites.values('name'))
+        # Authenticated, name search
         if 'name' in search_query.keys() and 'type' not in search_query.keys():
-            name_search_query = search_query.get('name')
-            user_favorites = request.user.favorites.filter(name__icontains=name_search_query)
-            other_pokemons = Pokemon.objects.filter(name__icontains=name_search_query).exclude(name__in=user_favorites.values('name'))
+            name_query = search_query.get('name')
+            user_favorites = request.user.favorites.filter(name__icontains=name_query)
+            other_pokemons = Pokemon.objects.filter(name__icontains=name_query).exclude(name__in=user_favorites.values('name'))
+        # Authenticated, type search
         elif 'type' in search_query.keys() and 'name' not in search_query.keys():
-            type_search_query = search_query.get('type')
-            user_favorites = request.user.favorites.filter(types__icontains=type_search_query)
-            other_pokemons = Pokemon.objects.filter(types__icontains=type_search_query).exclude(name__in=user_favorites.values('name'))
+            type_query = search_query.get('type')
+            user_favorites = request.user.favorites.filter(types__icontains=type_query)
+            other_pokemons = Pokemon.objects.filter(types__icontains=type_query).exclude(name__in=user_favorites.values('name'))
+        # Authenticated, all pokemons
         else:
                 user_favorites = request.user.favorites.all()
                 other_pokemons = Pokemon.objects.exclude(name__in=user_favorites.values('name'))
         all_pokemons = list(user_favorites) + list(other_pokemons)
     else: 
-        all_pokemons = Pokemon.objects.all()
+        # Unauthenticated, name search
+        if 'name' in search_query.keys() and 'type' not in search_query.keys():
+            name_query = search_query.get('name')
+            all_pokemons = Pokemon.objects.filter(types__icontains=name_query)
+        # Unauthenticated, type search
+        elif 'type' in search_query.keys() and 'name' not in search_query.keys():
+            type_query = search_query.get('type')
+            all_pokemons = Pokemon.objects.filter(types__icontains=type_query)
+        # Unauthenticated, all pokemons search
+        else:
+            all_pokemons = Pokemon.objects.all()
     
     pokemon_list = []
     for pokemon in all_pokemons:
@@ -326,7 +338,7 @@ def home(request):
             pokemon_id = '0' + pokemon_id
         else:
             continue
-
+        
         pokemon_dict = {
         'name': pokemon.name,
         'sprite': str(pokemon.sprite),
@@ -354,5 +366,6 @@ def home(request):
         # If the page is out of range, deliver the last page
         pokemons = paginator.page(paginator.num_pages)
 
-    context = {'pokemons': pokemons}
+    context = {'pokemons': pokemons, 'type_query': type_query, 'name_query': name_query}
+    print(search_query)
     return render(request, 'components/home.html', context)

@@ -5,6 +5,15 @@ var previousQuery = "";
 var nameSearchRadio = document.getElementById("nameSearch");
 var typeSearchRadio = document.getElementById("typeSearch");
 
+// Retrieve the last selected radio button state from localStorage
+var lastSelectedRadio = localStorage.getItem("lastSelectedRadio");
+if (lastSelectedRadio) {
+  if (lastSelectedRadio === "name") {
+    nameSearchRadio.checked = true;
+  } else if (lastSelectedRadio === "type") {
+    typeSearchRadio.checked = true;
+  }
+}
 searchInput.addEventListener("input", function () {
   // get user's query and clean it
   var query = searchInput.value;
@@ -15,6 +24,20 @@ searchInput.addEventListener("input", function () {
   } else if (typeSearchRadio.checked) {
     typeSearchPokemon(query);
   }
+});
+
+nameSearchRadio.addEventListener("change", function () {
+  // Save the selected radio button state to localStorage
+  localStorage.setItem("lastSelectedRadio", "name");
+  // change search input placeholder
+  searchInput.placeholder = "Search Pokémon Name";
+});
+
+typeSearchRadio.addEventListener("change", function () {
+  // Save the selected radio button state to localStorage
+  localStorage.setItem("lastSelectedRadio", "type");
+  // change search input placeholder
+  searchInput.placeholder = "Search Pokémon Type";
 });
 
 searchButton.addEventListener("click", function () {
@@ -63,11 +86,7 @@ function typeSearchPokemon(query) {
         listItem.classList.add("list-item"); // Add a CSS class to the list item
 
         listItem.addEventListener("click", () => {
-          //   // Handle the click event here
-          //   // alert(`You clicked on ${result.name}`);
-          // http://127.0.0.1:8000/pokemon/${result.name}
-          const typeUrl = ``;
-          window.location.href = typeUrl;
+          searchInput.value = result;
         });
 
         listItem.textContent = result; // Set the text content of the list item
@@ -115,10 +134,7 @@ function nameSearchPokemon(query) {
         listItem.classList.add("list-item"); // Add a CSS class to the list item
 
         listItem.addEventListener("click", () => {
-          // Handle the click event here
-          // alert(`You clicked on ${result.name}`);
-          const pokemonUrl = `http://127.0.0.1:8000/pokemon/${result.name}`;
-          window.location.href = pokemonUrl;
+          searchInput.value = result.name;
         });
 
         listItem.textContent = result.name; // Set the text content of the list item
