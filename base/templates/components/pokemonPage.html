@@ -12,7 +12,7 @@
       </div>
       <div class="pokeTypeWrapper">
         {% for type in pokemon.types %}
-        <a href="{% url 'home' %}?type={{ type }}">
+        <a href="{% url 'home' %}?type={{ type }}" class="linkGeneral">
           <div class="pokeType {{type}}Type">
             <p>{{ type }}</p>
           </div>
@@ -29,7 +29,7 @@
           Evolutions
         </button>
         {% include 'components/modal_window.html' %} {% else %}
-        <div>This Pokémon does not evolve.</div>
+        <p class="noEvolutionsExist">This Pokémon does not evolve.</p>
         {% endif %}
       </div>
     </div>

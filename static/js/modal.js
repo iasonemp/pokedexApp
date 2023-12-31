@@ -27,8 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
               <a href="http://127.0.0.1:8000/pokemon/${data.evo_data.starter_name}">
                 <img src="${data.evo_data.starter_sprite}" alt="Pokemon Sprite" class="pokemon-image" />
               </a>
-              <div>${data.evo_data.starter_name}</div>
-              <div>${data.evo_data.starter_id}</div>
+              <p class="pokeNameInEvolutionChain">${data.evo_data.starter_name}</p>
+              <p class="pokeIdInEvolutionChain">${formatPokeId(data.evo_data.starter_id)}</p>
             `;
           
             // Append the evolution chain wrapper to modalContent
@@ -72,13 +72,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 //modalContent.innerHTML += `<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Arrow_right_font_awesome.svg/1200px-Arrow_right_font_awesome.svg.png" class="right-arrow" />`
                 // Add content to the evolution chain wrapper
                 let htmlContentString = `
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Arrow_right_font_awesome.svg/1200px-Arrow_right_font_awesome.svg.png" class="right-arrow" />
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Arrow_go_next_beige.svg" class="right-arrow" />
                     <div class="evolutionPokemonDataWrapper">
                       <a href="http://127.0.0.1:8000/pokemon/${NameSplit[i]}">
                         <img src="${SpriteLinks[i]}" alt="Pokemon Sprite" class="pokemon-image evolution-image" data-evolution-name="${NameSplit[i]}" />
                       </a>
-                      <div>${NameSplit[i]}</div>
-                      <div>${IdSplit[i]}</div>
+                      <p class="pokeNameInEvolutionChain">${NameSplit[i]}</p>
+                      <p class="pokeIdInEvolutionChain">${formatPokeId(IdSplit[i])}</p>
                       <div class="pokemonTypeWrapper">                  
                 `;
 
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
           } else {
             // Handle case when there are no evolutions
             modalContent.innerHTML += `<hr>
-            <div>This Pokémon doesn't have any evolutions.</div>`;
+            <p class="noEvolutionsExist">This Pokémon doesn't have any evolutions.</p>`;
           }
           
           modalContent.innerHTML += `
@@ -161,3 +161,23 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+// The function to format the pokemon id like this: #xxxx
+function formatPokeId(id) {
+
+    id = parseInt(id);
+
+    if (id < 10) {
+      return '#000' + id;
+    }
+
+    if (id < 100) {
+      return '#00' + id;
+    }
+
+    if (id < 1000) {
+      return '#0' + id;
+    }
+
+    return '#' + id;
+}
