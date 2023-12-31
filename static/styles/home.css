@@ -42,8 +42,14 @@
     padding: 2rem 1rem;
   }
 
+  .pokeName {
+    font-family: 'Trebuchet MS', sans-serif;
+    color: rgb(13,4,5);
+  }
+
   .pokeId {
     font-family: 'Trebuchet MS', sans-serif;
+    color: rgb(13,4,5);
   }
 
   .pokemonImageWrapper {

@@ -18,7 +18,7 @@
         <h3 class="pokeName">{{ pokemon.name }}</h3>
         <div class="pokeTypeWrapper">
           {% for type in pokemon.pokemon_type %}
-          <a href="{% url 'home' %}?type={{ type }}">
+          <a href="{% url 'home' %}?type={{ type }}" class="linkGeneral {{type}}Type">
             <div class="pokeType {{type}}Type">
               <p>{{ type }}</p>
             </div>
