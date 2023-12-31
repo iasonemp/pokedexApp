@@ -27,9 +27,8 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    background-color: #fff;
+    background: linear-gradient(to bottom, rgb(45,48,49), rgb(13,4,5));
     padding: 3rem;
-    border: 1px solid #888;
     width: 75%;
     max-width: 100%;
     min-width: 75%;
@@ -38,9 +37,10 @@
 
 .close {
     align-self: flex-end;
-    font-size: 2rem;
-    font-weight: bold;
+    font-size: 2.2rem;
+    font-weight: bolder;
     cursor: pointer;
+    color: rgb(189,148,39);
 }
 
 .modal-evolutions-wrapper {
@@ -89,9 +89,32 @@
     gap: 0.3rem;
 }
 
+.pokeNameInEvolutionChain {
+    font-family: 'Trebuchet MS', sans-serif;
+    color: rgb(175,179,182, 0.8);
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.pokeIdInEvolutionChain {
+    font-family: 'Trebuchet MS', sans-serif;
+    color: rgb(175,179,182);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.right-arrow {
+    width: 3rem;
+    height: 3rem;
+}
+
 @media all and (max-width: 500px) {
 
     .pokemonInEvolutionChainWrapper {
         flex-direction: column;
+    }
+
+    .right-arrow {
+        transform: rotate(90deg);
     }
 }

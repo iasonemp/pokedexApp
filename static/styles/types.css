@@ -27,6 +27,7 @@
 
 .normalType {
   background-color: #a8a77a;
+  color: rgb(13,4,5);
 }
 
 .fireType {
@@ -41,14 +42,17 @@
 
 .electricType {
   background-color: #f7d02c;
+  color: rgb(13,4,5);
 }
 
 .grassType {
   background-color: #7ac74c;
+  color: rgb(13,4,5);
 }
 
 .iceType {
   background-color: #96d9d6;
+  color: rgb(13,4,5);
 }
 
 .fightingType {
@@ -63,10 +67,12 @@
 
 .groundType {
   background-color: #e2bf65;
+  color: rgb(13,4,5);
 }
 
 .flyingType {
   background-color: #a98ff3;
+  color: rgb(13,4,5);
 }
 
 .psychicType {
@@ -91,16 +97,20 @@
 
 .dragonType {
   background-color: #6f35fc;
+  color: rgb(13,4,5);
 }
 
 .darkType {
   background-color: #705746;
+  color: rgb(13,4,5);
 }
 
 .steelType {
   background-color: #b7b7ce;
+  color: rgb(13,4,5);
 }
 
 .fairyType {
   background-color: #d685ad;
+  color: rgb(13,4,5);
 }
