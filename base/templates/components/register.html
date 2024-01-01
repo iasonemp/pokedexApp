@@ -1,25 +1,32 @@
 {% extends 'main.html' %} {% load socialaccount %} {% block content %}
+<div id="registerPage">
+  <a href="{% url 'home' %}" class="linkGeneral" id="homeLink">Home</a>
+  
+  <div id="registerFormWrapper">
+    <h1>Register</h1>
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <div class="errorOnRegistrationMessage">{{ message }}</div>
+        {% endif %}
+    {% endfor %}
+    <a href="{% provider_login_url 'google' %}?next=/&amp;process=register" class="googleAuthButton linkGeneral">
+      Sign Up with Google
+    </a>
+    <form class="form registerForm" method="POST" action="">
+      {% csrf_token %}
+      {% for field in form %}
+      <div class="form__group form__group registerFormLabelSAndInput">
+        <label for="room_name">{{field.label}}</label>
+        {{field}}
+      </div>
+      {% endfor %}
+      <!-- {{ form.as_p }} -->
 
-<h1>Register</h1>
-
-<a href="{% provider_login_url 'google' %}?next=/&amp;process=register"
-  >Sign Up with Google</a
->
-
-<form class="form" method="POST" action="">
-  {% csrf_token %}
-  <!-- {% for field in form %}
-  <div class="form__group form__group">
-    <label for="room_name">{{field.label}}</label>
-    {{field}}
+      <button class="btn btn--main registerButton buttonGeneral" type="submit">
+        <!-- <title>lock</title> -->
+        Register
+      </button>
+    </form>
   </div>
-  {% endfor %} -->
-  {{ form.as_p }}
-
-  <button class="btn btn--main" type="submit">
-    <!-- <title>lock</title> -->
-    Register
-  </button>
-</form>
-
+</div>
 {% endblock content %}

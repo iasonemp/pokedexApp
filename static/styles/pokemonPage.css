@@ -2,6 +2,7 @@
   Color Palette:
 
   dark goldenrod: rgb(189,148,39)
+  byzantine-blue: rgb(32, 85, 218)
   light-gray: rgb(175,179,182)
   medium-gray: rgb(89,82,71)
   dark-gray: rgb(45,48,49)
@@ -27,11 +28,11 @@
 #pokemonPageInnerWrapper {
   background-color: rgb(45, 48, 49, 0.9);
   display: flex;
-  height: 100vh;
   justify-content: space-evenly;
   flex-wrap: wrap;
   align-items: flex-start;
   padding-top: 50px;
+  padding-bottom: 3rem;
 }
 
 .pokemonPageNameAndImage {
@@ -99,6 +100,80 @@
   margin: 0;    
   color: rgb(175, 179, 182);
   font-family: "Trebuchet MS", sans-serif;
+}
+
+#favoriteButton {
+  background-color: rgb(32, 85, 218);
+  padding: 0.4rem 0.6rem;
+  border-radius: 3px;
+  color: rgb(175, 179, 182);
+  font-size: 1rem;
+  align-self: flex-start;
+}
+
+.commentForm {
+    padding-bottom: 3rem;
+
+    p {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 0 0 2rem;
+
+      label {
+        color: rgb(175, 179, 182);
+        font-family: "Trebuchet MS", sans-serif;
+      }
+
+      textarea {
+        background: rgb(13, 4, 5, 0.1);
+        border: 1px solid rgb(175, 179, 182);
+        color: rgb(175, 179, 182);
+        font-family: "Trebuchet MS", sans-serif;
+        padding: 0.5rem;
+        font-size: 1rem;
+        border-radius: 3px;
+        outline: none;
+        max-width: 90vw;
+      }
+    }  
+}
+
+.submitCommentButton {
+  background-color: rgb(189, 148, 39);
+  padding: 0.3rem 0.5rem;
+  border-radius: 3px;
+  color: rgb(13, 4, 5);
+  font-size: 1rem;
+}
+
+.commentsTitle {
+  font-family: 'Trebuchet MS', sans-serif;
+  color: rgb(189, 148, 39);
+  font-size: 1.8rem;
+}
+
+.commentsUsername {
+  font-family: 'Trebuchet MS', sans-serif;
+  color: rgb(175, 179, 182, 0.7);
+  margin: 0;
+}
+
+.pokemonComment {
+  font-family: 'Trebuchet MS', sans-serif;
+  color: rgb(175, 179, 182);
+  margin: 0.5rem 0;
+  max-width: 200px;
+  word-wrap: break-word;
+  font-size: 1.1rem;
+}
+
+.delete_comment {
+  margin-bottom: 2rem;
+  background-color: rgb(32, 85, 218);
+  color: rgb(175, 179, 182);
+  padding: 0.4rem 0.6rem;
+  border-radius: 3px;
 }
 
 @media all and (max-width: 600px) {

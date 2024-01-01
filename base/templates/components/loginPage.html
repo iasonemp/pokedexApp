@@ -1,20 +1,25 @@
 {% extends 'main.html' %} {% load socialaccount %} {% block content %}
 
-<h2>Google Login</h2>
-<a href="{% provider_login_url 'google' %}?next=/">Login with Google</a>
-
-<h1>Login</h1>
-<div>
-  <form class="form" method="POST" action="">
-    {% csrf_token %}
-
-    <label>Username:</label>
-    <input type="text" name="username" placeholder="Enter Username" />
-
-    <label>Password:</label>
-    <input type="password" name="password" placeholder="Enter Password" />
-
-    <input type="submit" value="Login" />
-  </form>
+<div id="loginPage">
+  <a href="{% url 'home' %}" class="linkGeneral" id="homeLink">Home</a>
+  <div id="loginFormWrapper">
+    <h1>Google Login</h1>
+    <a href="{% provider_login_url 'google' %}?next=/" class="googleAuthButton linkGeneral">
+      Login with Google
+    </a>
+    <h1>Password Login</h1>
+    <form class="form loginForm" method="POST" action="">
+      {% csrf_token %}
+      <div class="loginFormLabelSAndInput">
+        <label>Username:</label>
+        <input type="text" name="username" placeholder="Enter Username" />
+      </div>
+      <div class="loginFormLabelSAndInput">
+        <label>Password:</label>
+        <input type="password" name="password" placeholder="Enter Password" />
+      </div>
+      <input type="submit" value="Login" class="loginButton buttonGeneral"/>
+    </form>
+  </div>
 </div>
 {% endblock content %}

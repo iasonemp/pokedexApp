@@ -11,14 +11,14 @@
     <link rel="stylesheet" href="{% static 'styles/types.css' %}" />
     <link rel="stylesheet" href="{% static 'styles/pokemonPage.css' %}" />
     <link rel="stylesheet" href="{% static 'styles/modal.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/login.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/register.css' %}" />
     <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
     <title>PokedexApp</title>
   </head>
   <body>
-    {% include 'components/reusable/navbar.html' %}    
-
     {% block content %} 
     {% endblock %}
   </body>

@@ -1,0 +1,108 @@
+/*
+  Color Palette:
+
+  dark goldenrod: rgb(189,148,39)
+  byzantine-blue: rgb(32, 85, 218)
+  light-gray: rgb(175,179,182)
+  medium-gray: rgb(89,82,71)
+  dark-gray: rgb(45,48,49)
+  black: rgb(13,4,5)
+  red: #D2122E
+*/
+
+#registerPage {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.errorOnRegistrationMessage {
+    font-family: "Trebuchet MS", sans-serif;
+    color: #D2122E;
+    font-size: 1rem;
+}
+
+#registerFormWrapper {
+    align-self: center;
+    background-color: rgb(13,4,5, 0.3);
+    border-radius: 5px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 30%;
+
+    h1 {
+        font-family: "Trebuchet MS", sans-serif;
+        color: rgb(175,179,182);
+        font-size: 1.6rem;
+    }
+}
+
+.registerForm {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.googleAuthButton {
+    background-color: rgb(32, 85, 218);
+    padding: 0.5rem 0.8rem;
+    color: rgb(175,179,182);
+    border-radius: 5px;
+    margin: 1rem 0;
+}
+
+.registerFormLabelSAndInput {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    width: 100%;
+
+    label {
+        font-family: "Trebuchet MS", sans-serif;
+        color: rgb(175,179,182);
+    }
+
+    input {
+        background: transparent;
+        border: 1px solid rgb(175,179,182);
+        font-family: "Trebuchet MS", sans-serif;
+        color: rgb(175,179,182);
+        font-size: 1rem;
+        padding: 0.6rem;
+        border-radius: 5px;
+        margin-bottom: 0.7rem;
+        width: 400px;
+    }
+
+    input:focus {
+        outline: none;
+        border: 1px solid rgb(189,148,39);
+    }
+}
+
+.registerButton {
+    align-self: flex-end;
+    margin-top: 1rem;
+    background-color: rgb(189,148,39);
+    color: rgb(13,4,5);
+    padding: 0.4rem 0.6rem;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+@media all and (max-width: 400px) {
+    #registerFormWrapper {
+        width: 100%;
+    }
+
+    .registerFormLabelSAndInput {
+
+        input {
+            width: 96%;
+        }
+    }
+}
