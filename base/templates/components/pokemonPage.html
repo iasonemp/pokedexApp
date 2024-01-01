@@ -1,4 +1,7 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
+
+{% include 'components/reusable/navbar.html' %}    
+
 <div id="pokemonPageOuterWrapper">
   <div id="pokemonPageInnerWrapper">
     <div class="pokemonPageNameAndImage">
@@ -71,39 +74,40 @@
         id="favoriteButton"
         data-pokemon-name="{{ pokemon.name }}"
         data-action="remove"
+        class="buttonGeneral"
       >
         Remove from Favorites
       </button>
       {% else %}
-      <button
-        id="favoriteButton"
-        data-pokemon-name="{{ pokemon.name }}"
-        data-action="add"
-      >
+      <button id="favoriteButton" data-pokemon-name="{{ pokemon.name }}" data-action="add" class="buttonGeneral">
         Add to Favorites
       </button>
       {% endif %} {% endif %} {% if request.user.is_authenticated %}
       <div class="comment-form"></div>
-      <form class="form" method="POST" action="">
+      <form class="commentForm" method="POST" action="">
         {% csrf_token %} {{ form.as_p }}
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" class="submitCommentButton buttonGeneral" />
       </form>
     </div>
-    {% endif %} {% if comments %} {% for comment in comments %}
-    <div id="comment-{{comment.id}}">
-      @{{comment.user}}
-      <span>{{comment.created|timesince}} ago</span>
-      <div>{{comment.body}}</div>
-
-      {% if request.user == comment.user %}
-      <button class="delete_comment" data-comment-id="{{ comment.id }}">
-        Delete Comment
-      </button>
-      {% endif %}
-    </div>
-    {% endfor %} {% else %}
-    <p class="pokemonNoCommentsPhrase">This pokemon has no comments.</p>
     {% endif %}
+    <div>
+      {% if comments %} 
+      <h1 class="commentsTitle">Comments</h1>
+      {% for comment in comments %}
+      <div id="comment-{{comment.id}}">        
+        <p class="commentsUsername">@{{comment.user}} {{comment.created|timesince}} ago</p>
+        <p class="pokemonComment">{{comment.body}}</p>
+  
+        {% if request.user == comment.user %}
+        <button class="delete_comment buttonGeneral" data-comment-id="{{ comment.id }}">
+          Delete Comment
+        </button>
+        {% endif %}
+      </div>
+      {% endfor %} {% else %}
+      <p class="pokemonNoCommentsPhrase">This pokemon has no comments.</p>
+      {% endif %}
+    </div>     
   </div>
 </div>
 <script src="{% static 'js/modal.js' %}"></script>

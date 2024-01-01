@@ -34,3 +34,14 @@
     font-size: 1.2rem;
     color: rgb(189,148,39);
 }
+
+.helloUser {
+    font-family: "Trebuchet MS", sans-serif;
+    color: rgb(175,179,182);
+    margin-left: 3rem;
+}
+
+.authenticatedUserName {
+    font-family: "Trebuchet MS", sans-serif;
+    color: rgb(189, 148, 39);
+}

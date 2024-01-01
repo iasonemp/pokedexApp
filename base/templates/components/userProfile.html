@@ -1,4 +1,7 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
+
+{% include 'components/reusable/navbar.html' %}    
+
 <div>This is {{user.username}}'s profile.</div>
 
 {% if user.favorites.all %}
