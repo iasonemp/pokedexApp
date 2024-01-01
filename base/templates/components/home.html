@@ -1,5 +1,7 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
 
+{% include 'components/reusable/navbar.html' %}    
+
 <div id="pokemon-outer-container">
   <div class="pokemon-container">
     {% for pokemon in pokemons %}

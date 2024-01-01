@@ -61,6 +61,7 @@ def pokemonPage(request, pokemon_name):
             comment.pokemon = pokemon
             comment.body = request.POST.get('body')
             comment.save()
+            form = CommentForm()
     else:
         form = CommentForm()
     
@@ -110,7 +111,11 @@ def registerPage(request):
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('home')
         else:
-            messages.error(request, 'An error occurred during registration.')
+            errors = form.errors
+
+            # We return only the first error
+            first_error = next(iter(errors.values()))[0]
+            messages.error(request, first_error)
         
     return render(request, 'components/register.html', {'form': form})
 
