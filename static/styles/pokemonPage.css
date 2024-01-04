@@ -97,7 +97,7 @@
 }
 
 .noEvolutionsExist {
-  margin: 0;    
+  margin: 0;
   color: rgb(175, 179, 182);
   font-family: "Trebuchet MS", sans-serif;
 }
@@ -112,31 +112,31 @@
 }
 
 .commentForm {
-    padding-bottom: 3rem;
+  padding-bottom: 3rem;
 
-    p {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin: 0 0 2rem;
+  p {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0 0 2rem;
 
-      label {
-        color: rgb(175, 179, 182);
-        font-family: "Trebuchet MS", sans-serif;
-      }
+    label {
+      color: rgb(175, 179, 182);
+      font-family: "Trebuchet MS", sans-serif;
+    }
 
-      textarea {
-        background: rgb(13, 4, 5, 0.1);
-        border: 1px solid rgb(175, 179, 182);
-        color: rgb(175, 179, 182);
-        font-family: "Trebuchet MS", sans-serif;
-        padding: 0.5rem;
-        font-size: 1rem;
-        border-radius: 3px;
-        outline: none;
-        max-width: 90vw;
-      }
-    }  
+    textarea {
+      background: rgb(13, 4, 5, 0.1);
+      border: 1px solid rgb(175, 179, 182);
+      color: rgb(175, 179, 182);
+      font-family: "Trebuchet MS", sans-serif;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border-radius: 3px;
+      outline: none;
+      max-width: 90vw;
+    }
+  }
 }
 
 .submitCommentButton {
@@ -148,19 +148,19 @@
 }
 
 .commentsTitle {
-  font-family: 'Trebuchet MS', sans-serif;
+  font-family: "Trebuchet MS", sans-serif;
   color: rgb(189, 148, 39);
   font-size: 1.8rem;
 }
 
 .commentsUsername {
-  font-family: 'Trebuchet MS', sans-serif;
+  font-family: "Trebuchet MS", sans-serif;
   color: rgb(175, 179, 182, 0.7);
   margin: 0;
 }
 
 .pokemonComment {
-  font-family: 'Trebuchet MS', sans-serif;
+  font-family: "Trebuchet MS", sans-serif;
   color: rgb(175, 179, 182);
   margin: 0.5rem 0;
   max-width: 200px;

@@ -10,12 +10,6 @@
             {% endif %}
         </div>
     </div>
-    {% if request.user.is_authenticated %}
-          <p class="helloUser">
-          Hello
-          <a href="{% url 'user-profile' username=request.user.username %}"
-            class="linkGeneral authenticatedUserName"  >{{ request.user }}</a>
-          </p>
-    {% endif %}
+
     {% include 'components/reusable/searchbar.html' %}
 </div>
