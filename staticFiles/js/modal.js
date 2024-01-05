@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const modal = document.getElementById("pokemon-modal");
   const pokemonInfo = document.getElementById("pokemon-info");
   const closeBtn = document.querySelector(".close");
-
+  const hostUrl = 'https://django-pokedexapp.onrender.com/'
   // Function to open the modal
   function openModal(pokemon_name) {
     const xhr = new XMLHttpRequest();
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
           
             // Add content to the evolution chain wrapper
             evolutionChainWrapper.innerHTML = `
-              <a href="http://127.0.0.1:8000/pokemon/${data.evo_data.starter_name}">
+              <a href="${hostUrl}/pokemon/${data.evo_data.starter_name}">
                 <img src="${data.evo_data.starter_sprite}" alt="Pokemon Sprite" class="pokemon-image" />
               </a>
               <p class="pokeNameInEvolutionChain">${data.evo_data.starter_name}</p>
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 let htmlContentString = `
                     <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Arrow_go_next_beige.svg" class="right-arrow" />
                     <div class="evolutionPokemonDataWrapper">
-                      <a href="http://127.0.0.1:8000/pokemon/${NameSplit[i]}">
+                      <a href="${hostUrl}/pokemon/${NameSplit[i]}">
                         <img src="${SpriteLinks[i]}" alt="Pokemon Sprite" class="pokemon-image evolution-image" data-evolution-name="${NameSplit[i]}" />
                       </a>
                       <p class="pokeNameInEvolutionChain">${NameSplit[i]}</p>
