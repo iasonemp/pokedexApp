@@ -94,6 +94,10 @@ DATABASES = {
     }
 }
 
+# We set this to true so that it skips the default django allauth consent screens
+
+SOCIALACCOUNT_LOGIN_ON_GET=True
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
