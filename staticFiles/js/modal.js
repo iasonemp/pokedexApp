@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const modal = document.getElementById("pokemon-modal");
   const pokemonInfo = document.getElementById("pokemon-info");
   const closeBtn = document.querySelector(".close");
-  const hostUrl = 'https://django-pokedexapp.onrender.com/'
+  const hostUrl = 'https://django-pokedexapp.onrender.com'
   // Function to open the modal
   function openModal(pokemon_name) {
     const xhr = new XMLHttpRequest();
