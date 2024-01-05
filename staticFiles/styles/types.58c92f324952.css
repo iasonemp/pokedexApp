@@ -1,0 +1,116 @@
+/*
+  Color Palette:
+
+  dark goldenrod: rgb(189,148,39)
+  light-gray: rgb(175,179,182)
+  medium-gray: rgb(89,82,71)
+  dark-gray: rgb(45,48,49)
+  black: rgb(13,4,5)
+*/
+
+.pokeTypeWrapper {
+  display: flex;
+  gap: 1rem;
+}
+
+.pokeType {
+  padding: 0.2rem 0.7rem;
+  border-radius: 3px;
+}
+
+.pokeType p {
+  text-transform: capitalize;
+  margin: 0;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 0.9rem;
+}
+
+.normalType {
+  background-color: #a8a77a;
+  color: rgb(13,4,5);
+}
+
+.fireType {
+  background-color: #ee8130;
+  color: white;
+}
+
+.waterType {
+  background-color: #6390f0;
+  color: white;
+}
+
+.electricType {
+  background-color: #f7d02c;
+  color: rgb(13,4,5);
+}
+
+.grassType {
+  background-color: #7ac74c;
+  color: rgb(13,4,5);
+}
+
+.iceType {
+  background-color: #96d9d6;
+  color: rgb(13,4,5);
+}
+
+.fightingType {
+  background-color: #c22e28;
+  color: white;
+}
+
+.poisonType {
+  background-color: #a33ea1;
+  color: white;
+}
+
+.groundType {
+  background-color: #e2bf65;
+  color: rgb(13,4,5);
+}
+
+.flyingType {
+  background-color: #a98ff3;
+  color: rgb(13,4,5);
+}
+
+.psychicType {
+  background-color: #f95587;
+  color: white;
+}
+
+.bugType {
+  background-color: #a6b91a;
+  color: white;
+}
+
+.rockType {
+  background-color: #b6a136;
+  color: white;
+}
+
+.ghostType {
+  background-color: #735797;
+  color: white;
+}
+
+.dragonType {
+  background-color: #6f35fc;
+  color: rgb(13,4,5);
+}
+
+.darkType {
+  background-color: #705746;
+  color: rgb(13,4,5);
+}
+
+.steelType {
+  background-color: #b7b7ce;
+  color: rgb(13,4,5);
+}
+
+.fairyType {
+  background-color: #d685ad;
+  color: rgb(13,4,5);
+}

@@ -1,0 +1,121 @@
+/*
+  Color Palette:
+
+  dark goldenrod: rgb(189,148,39)
+  light-gray: rgb(175,179,182)
+  medium-gray: rgb(89,82,71)
+  dark-gray: rgb(45,48,49)
+  black: rgb(13,4,5)
+*/
+
+#searchbarWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+    width: 100%;
+}
+
+#hintInSearchbar {
+    font-family: 'Trebuchet MS', sans-serif;
+    color: rgb(237,231,217, 0.9);
+    margin-left: 1rem;
+}
+
+#searchInputAreaWrapper {
+    position: relative;
+    margin-left: 1rem;
+}
+
+#searchInputAndButton {
+    display: flex;
+}
+
+#searchInputAndButton input {
+    padding: 0.5rem 0.5rem 0.5rem 0.7rem;
+    font-size: 1.2rem;
+    border-radius: 8px 0 0 8px;
+    border: 1px solid rgb(213,160,33);
+    border-right: none;
+    background-color: transparent;
+    color: rgb(237,231,217, 0.9);
+}
+
+#searchInputAndButton input::placeholder {
+    color: rgb(237,231,217, 0.6);
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 1.2rem;
+}
+
+#searchInputAndButton button {
+    background-color: transparent;
+    border-radius: 0 8px 8px 0;
+    border: 1px solid rgb(189,148,39);
+    border-left: none;
+    padding: 0.7rem;
+    font-size: 1.3rem;
+    color: rgb(189,148,39);
+}
+
+#searchInputAndButton input:focus {
+    outline: none;
+}
+
+#searchResultsContainer {
+    background-color: rgb(45,48,49);
+    color: rgb(237,231,217, 0.9);
+    border-radius: 8px;
+    position: absolute;
+    top: 2.9rem;
+    border: 1px solid rgb(213,160,33);
+    max-height: 8.8em; /* Set a max height to make it scrollable if needed */
+    width: 100%;
+    overflow-y: auto; /* Enable scrolling if content exceeds the max height */
+    display: none; /* Initially hide the container */
+    padding-top: 0.8rem
+  }
+
+#searchResultsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+#searchResultsList li {
+    cursor: pointer;
+    font-family: 'Trebuchet MS', sans-serif;
+    margin: 0 0.8rem 0.8rem 0.8rem;
+    font-size: 1.2rem;
+}
+
+.chooseNameOrTypeWrapper {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    div {
+        label {
+            font-family: 'Trebuchet MS', sans-serif;
+            color: rgb(175,179,182);
+        }
+    }
+}
+
+@media all and (max-width: 716px) {
+    #searchbarWrapper {
+        justify-content: center;
+    }
+
+    #hintInSearchbar {
+        margin-left: 0;
+        text-align: center;
+    }
+    
+    #searchInputAreaWrapper {
+        position: relative;
+        margin-left: 0;
+    }
+}

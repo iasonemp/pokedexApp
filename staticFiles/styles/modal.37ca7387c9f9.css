@@ -1,0 +1,120 @@
+/*
+  Color Palette:
+
+  dark goldenrod: rgb(189,148,39)
+  light-gray: rgb(175,179,182)
+  medium-gray: rgb(89,82,71)
+  dark-gray: rgb(45,48,49)
+  black: rgb(13,4,5)
+*/
+
+.modal {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    min-height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding-bottom: 250px;
+}
+
+.modal-content {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background: linear-gradient(to bottom, rgb(45,48,49), rgb(13,4,5));
+    padding: 3rem;
+    width: 75%;
+    max-width: 100%;
+    min-width: 75%;
+    margin-top: 50px;
+}
+
+.close {
+    align-self: flex-end;
+    font-size: 2.2rem;
+    font-weight: bolder;
+    cursor: pointer;
+    color: rgb(189,148,39);
+}
+
+.modal-evolutions-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 5rem 0 5rem 0;
+}
+
+.pokemonInEvolutionChainWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.firstPokemonInEvolutionChain {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    width: 200px;
+    border-radius: 50%;
+    padding: 1.3rem;
+    border: 5px solid rgb(189,148,39);
+}
+
+.evolutionPokemonWrapper {
+    display: flex;
+}
+
+.evolutionPokemonDataWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    width: 200px;
+    border-radius: 50%;
+    padding: 1.3rem;
+    border: 5px solid rgb(189,148,39);
+}
+
+.pokemonTypeWrapper {
+    display: flex;
+    gap: 0.3rem;
+}
+
+.pokeNameInEvolutionChain {
+    font-family: 'Trebuchet MS', sans-serif;
+    color: rgb(175,179,182, 0.8);
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.pokeIdInEvolutionChain {
+    font-family: 'Trebuchet MS', sans-serif;
+    color: rgb(175,179,182);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.right-arrow {
+    width: 3rem;
+    height: 3rem;
+}
+
+@media all and (max-width: 500px) {
+
+    .pokemonInEvolutionChainWrapper {
+        flex-direction: column;
+    }
+
+    .right-arrow {
+        transform: rotate(90deg);
+    }
+}

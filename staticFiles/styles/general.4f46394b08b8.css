@@ -1,0 +1,42 @@
+/*
+  Color Palette:
+
+  dark goldenrod: rgb(189,148,39)
+  light-gray: rgb(175,179,182)
+  medium-gray: rgb(89,82,71)
+  dark-gray: rgb(45,48,49)
+  black: rgb(13,4,5)
+*/
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(45,48,49);
+}
+
+.inputGeneral {
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
+.inputGeneral:focus {
+  outline: none;
+}
+
+.buttonGeneral {
+  cursor: pointer;
+  font-family: 'Trebuchet MS', sans-serif;
+  border: none;
+}
+
+.buttonGeneral:focus {
+  outline: none;
+}
+
+.linkGeneral {
+  font-family: 'Trebuchet MS', sans-serif;
+  text-decoration: none;
+}
+
+#list-item {
+  cursor: pointer; /* Set the cursor to a hand on hover */
+}
